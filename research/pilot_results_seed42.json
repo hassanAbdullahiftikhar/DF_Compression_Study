@@ -1,0 +1,2981 @@
+{
+  "status": "pilot_validation_only",
+  "scope": "Additional JPEG compression of already H.264 C23-derived crops",
+  "dataset_assembly": {
+    "audit": {
+      "rows": 8000,
+      "samples": 8000,
+      "videos": 1000,
+      "groups": 100,
+      "splits": {
+        "train": 5760,
+        "val": 1120,
+        "test": 1120
+      }
+    },
+    "source_manifests": [
+      {
+        "path": "experiments\\data\\c23_smoke\\reference.csv",
+        "sha256": "48f4091bba41e51f2d37b571112959d790bd5a1c944e9fc8822cb35973c85db6"
+      },
+      {
+        "path": "experiments\\data\\c23_remaining\\reference.csv",
+        "sha256": "4203c9a2319a9b4eb2877f7c745c19a1b860db22d041d34920788ab0461dc90e"
+      }
+    ],
+    "cached_pyav": "19.0.1",
+    "new_pyav": "18.1.0",
+    "decoder_comparison": {
+      "cached_pyav": "19.0.1",
+      "current_pyav": "18.1.0",
+      "tested_crops": 80,
+      "missing_cached_matches": 0,
+      "pixel_mismatches": 0,
+      "scope": "One training provenance group; observed comparison passed"
+    },
+    "images_copied": 0,
+    "reference_origin": "Already H.264 C23-compressed video",
+    "crop_counts": {
+      "train": {
+        "Deepfakes": 1152,
+        "Face2Face": 1152,
+        "FaceSwap": 1152,
+        "NeuralTextures": 1152,
+        "real": 1152
+      },
+      "val": {
+        "Deepfakes": 224,
+        "Face2Face": 224,
+        "FaceSwap": 224,
+        "NeuralTextures": 224,
+        "real": 224
+      },
+      "test": {
+        "Deepfakes": 224,
+        "Face2Face": 224,
+        "FaceSwap": 224,
+        "NeuralTextures": 224,
+        "real": 224
+      }
+    }
+  },
+  "threshold_rule": {
+    "rule": "Maximize mean video detection BA across validation ref/Q80/Q40",
+    "ties": "Closest to 0.5, then smaller threshold; tolerance 1e-12",
+    "prediction_rule": "Fake when p_fake >= threshold",
+    "checkpoint_selection": "Original selection at threshold 0.5 retained"
+  },
+  "rgb_runs": {
+    "c23_reference_seed42": {
+      "selected_epoch": 16,
+      "original_selection_score": 0.8645833333333334,
+      "frozen_threshold_record": {
+        "threshold": 0.24983928084839135,
+        "checkpoint_sha256": "894d117207da4c7d97a154f855f22026b0bf1c6420401efde48fe6829fd33ae0",
+        "validation_predictions_sha256": "ae07555f3e788eb9cc4cfc13e727c9541b8f9454555a7fbd0066860d9ef3c95a",
+        "validation_groups": 14,
+        "mean_validation_detection_ba": 0.84375,
+        "detection_ba": {
+          "ref": {
+            "threshold_0_5": 0.9196428571428572,
+            "selected_threshold": 0.8839285714285714
+          },
+          "jpeg_q80": {
+            "threshold_0_5": 0.9017857142857143,
+            "selected_threshold": 0.875
+          },
+          "jpeg_q40": {
+            "threshold_0_5": 0.6785714285714286,
+            "selected_threshold": 0.7723214285714286
+          }
+        }
+      },
+      "run_metadata": {
+        "torch": "2.7.1+cu128",
+        "cuda_runtime": "12.8",
+        "device": "cuda",
+        "arguments": {
+          "manifest": "experiments/data/c23_pilot/reference.csv",
+          "output": "experiments/runs/c23_reference_seed42",
+          "config": "experiments/configs/pilot.json",
+          "official_splits": "experiments/data/splits",
+          "pair_weight": 0.0,
+          "pretrained": true,
+          "reference_only": true
+        },
+        "config": {
+          "schema_version": 1,
+          "seed": 42,
+          "task": "ffpp_closed_set_manipulation_attribution",
+          "input_size": 224,
+          "frames_per_video": 8,
+          "source_classes": [
+            "Deepfakes",
+            "Face2Face",
+            "FaceSwap",
+            "NeuralTextures"
+          ],
+          "jpeg": {
+            "subsampling": 2,
+            "evaluation_qualities": [
+              95,
+              80,
+              60,
+              40,
+              20
+            ],
+            "mixed_train_qualities": [
+              80,
+              40
+            ],
+            "held_out_qualities": [
+              95,
+              60,
+              20
+            ],
+            "history_sequences": [
+              [
+                80,
+                80
+              ],
+              [
+                80,
+                40
+              ],
+              [
+                40,
+                80
+              ]
+            ]
+          },
+          "video": {
+            "encoder": "libx264",
+            "held_out_encoder": "libx265",
+            "crf_values": [
+              18,
+              23,
+              32,
+              40
+            ],
+            "preset": "medium",
+            "pixel_format": "yuv420p",
+            "gop": 48,
+            "b_frames": 3,
+            "encoder_threads": 4,
+            "note": "Equal CRF across codecs is not equal distortion. Keep full videos before extraction."
+          },
+          "training": {
+            "backbone": "resnet18",
+            "microbatch_pairs": 8,
+            "epochs": 20,
+            "learning_rate": 0.0003,
+            "weight_decay": 0.0001,
+            "workers": 0,
+            "lambda_source": 1.0,
+            "lambda_pair_validation_grid": [
+              0.0,
+              0.1,
+              1.0
+            ]
+          },
+          "analysis": {
+            "primary_unit": "video",
+            "bootstrap_unit": "lineage_group",
+            "bootstrap_draws": 2000,
+            "final_seeds": [
+              42,
+              43,
+              44
+            ],
+            "retention_reference_margin": 0.05
+          }
+        },
+        "note": "0.5 validation threshold is illustrative; choose/freeze before final test."
+      }
+    },
+    "c23_augmented_seed42": {
+      "selected_epoch": 4,
+      "original_selection_score": 0.8988095238095237,
+      "frozen_threshold_record": {
+        "threshold": 0.25035032257437706,
+        "checkpoint_sha256": "1f896d0f8a4f4c7606c6556c2f2ba603c83c41b8e38945f836cf72bf9d0e2acd",
+        "validation_predictions_sha256": "b2423f335e3f12172e3b08ec47c23bd25a1d4f9c4f4bd95932f1b8121a0e91db",
+        "validation_groups": 14,
+        "mean_validation_detection_ba": 0.8779761904761906,
+        "detection_ba": {
+          "ref": {
+            "threshold_0_5": 0.9017857142857143,
+            "selected_threshold": 0.9017857142857143
+          },
+          "jpeg_q80": {
+            "threshold_0_5": 0.8616071428571428,
+            "selected_threshold": 0.8571428571428572
+          },
+          "jpeg_q40": {
+            "threshold_0_5": 0.7991071428571428,
+            "selected_threshold": 0.875
+          }
+        }
+      },
+      "run_metadata": {
+        "torch": "2.7.1+cu128",
+        "cuda_runtime": "12.8",
+        "device": "cuda",
+        "arguments": {
+          "manifest": "experiments/data/c23_pilot/reference.csv",
+          "output": "experiments/runs/c23_augmented_seed42",
+          "config": "experiments/configs/pilot.json",
+          "official_splits": "experiments/data/splits",
+          "pair_weight": 0.0,
+          "pretrained": true,
+          "reference_only": false
+        },
+        "config": {
+          "schema_version": 1,
+          "seed": 42,
+          "task": "ffpp_closed_set_manipulation_attribution",
+          "input_size": 224,
+          "frames_per_video": 8,
+          "source_classes": [
+            "Deepfakes",
+            "Face2Face",
+            "FaceSwap",
+            "NeuralTextures"
+          ],
+          "jpeg": {
+            "subsampling": 2,
+            "evaluation_qualities": [
+              95,
+              80,
+              60,
+              40,
+              20
+            ],
+            "mixed_train_qualities": [
+              80,
+              40
+            ],
+            "held_out_qualities": [
+              95,
+              60,
+              20
+            ],
+            "history_sequences": [
+              [
+                80,
+                80
+              ],
+              [
+                80,
+                40
+              ],
+              [
+                40,
+                80
+              ]
+            ]
+          },
+          "video": {
+            "encoder": "libx264",
+            "held_out_encoder": "libx265",
+            "crf_values": [
+              18,
+              23,
+              32,
+              40
+            ],
+            "preset": "medium",
+            "pixel_format": "yuv420p",
+            "gop": 48,
+            "b_frames": 3,
+            "encoder_threads": 4,
+            "note": "Equal CRF across codecs is not equal distortion. Keep full videos before extraction."
+          },
+          "training": {
+            "backbone": "resnet18",
+            "microbatch_pairs": 8,
+            "epochs": 20,
+            "learning_rate": 0.0003,
+            "weight_decay": 0.0001,
+            "workers": 0,
+            "lambda_source": 1.0,
+            "lambda_pair_validation_grid": [
+              0.0,
+              0.1,
+              1.0
+            ]
+          },
+          "analysis": {
+            "primary_unit": "video",
+            "bootstrap_unit": "lineage_group",
+            "bootstrap_draws": 2000,
+            "final_seeds": [
+              42,
+              43,
+              44
+            ],
+            "retention_reference_margin": 0.05
+          }
+        },
+        "note": "0.5 validation threshold is illustrative; choose/freeze before final test."
+      }
+    },
+    "c23_paired_w0p1_seed42": {
+      "selected_epoch": 6,
+      "original_selection_score": 0.8928571428571429,
+      "frozen_threshold_record": {
+        "threshold": 0.6822689035907388,
+        "checkpoint_sha256": "9f5415398116e3df40d7611de317f7bf81ff913b58411d9b075171f1535e7bcb",
+        "validation_predictions_sha256": "50dbeab3e4005a696d759dbeaf14708982c700b2c14c95d214880acdc7b20ed7",
+        "validation_groups": 14,
+        "mean_validation_detection_ba": 0.9151785714285715,
+        "detection_ba": {
+          "ref": {
+            "threshold_0_5": 0.9196428571428572,
+            "selected_threshold": 0.9107142857142857
+          },
+          "jpeg_q80": {
+            "threshold_0_5": 0.8169642857142858,
+            "selected_threshold": 0.9419642857142857
+          },
+          "jpeg_q40": {
+            "threshold_0_5": 0.8169642857142858,
+            "selected_threshold": 0.8928571428571428
+          }
+        }
+      },
+      "run_metadata": {
+        "torch": "2.7.1+cu128",
+        "cuda_runtime": "12.8",
+        "device": "cuda",
+        "arguments": {
+          "manifest": "experiments/data/c23_pilot/reference.csv",
+          "output": "experiments/runs/c23_paired_w0p1_seed42",
+          "config": "experiments/configs/pilot.json",
+          "official_splits": "experiments/data/splits",
+          "pair_weight": 0.1,
+          "pretrained": true,
+          "reference_only": false
+        },
+        "config": {
+          "schema_version": 1,
+          "seed": 42,
+          "task": "ffpp_closed_set_manipulation_attribution",
+          "input_size": 224,
+          "frames_per_video": 8,
+          "source_classes": [
+            "Deepfakes",
+            "Face2Face",
+            "FaceSwap",
+            "NeuralTextures"
+          ],
+          "jpeg": {
+            "subsampling": 2,
+            "evaluation_qualities": [
+              95,
+              80,
+              60,
+              40,
+              20
+            ],
+            "mixed_train_qualities": [
+              80,
+              40
+            ],
+            "held_out_qualities": [
+              95,
+              60,
+              20
+            ],
+            "history_sequences": [
+              [
+                80,
+                80
+              ],
+              [
+                80,
+                40
+              ],
+              [
+                40,
+                80
+              ]
+            ]
+          },
+          "video": {
+            "encoder": "libx264",
+            "held_out_encoder": "libx265",
+            "crf_values": [
+              18,
+              23,
+              32,
+              40
+            ],
+            "preset": "medium",
+            "pixel_format": "yuv420p",
+            "gop": 48,
+            "b_frames": 3,
+            "encoder_threads": 4,
+            "note": "Equal CRF across codecs is not equal distortion. Keep full videos before extraction."
+          },
+          "training": {
+            "backbone": "resnet18",
+            "microbatch_pairs": 8,
+            "epochs": 20,
+            "learning_rate": 0.0003,
+            "weight_decay": 0.0001,
+            "workers": 0,
+            "lambda_source": 1.0,
+            "lambda_pair_validation_grid": [
+              0.0,
+              0.1,
+              1.0
+            ]
+          },
+          "analysis": {
+            "primary_unit": "video",
+            "bootstrap_unit": "lineage_group",
+            "bootstrap_draws": 2000,
+            "final_seeds": [
+              42,
+              43,
+              44
+            ],
+            "retention_reference_margin": 0.05
+          }
+        },
+        "note": "0.5 validation threshold is illustrative; choose/freeze before final test."
+      }
+    },
+    "c23_paired_w1_seed42": {
+      "selected_epoch": 20,
+      "original_selection_score": 0.8965773809523809,
+      "frozen_threshold_record": {
+        "threshold": 0.6111315044690855,
+        "checkpoint_sha256": "751e3445f0d866073825bcef9062cf2ade7fa6e71112aa7b05ead17a777c20b8",
+        "validation_predictions_sha256": "1f3bccc58a9b84a65d0614df79c487a1dd8c06f72b2f008426f38320780e62a4",
+        "validation_groups": 14,
+        "mean_validation_detection_ba": 0.869047619047619,
+        "detection_ba": {
+          "ref": {
+            "threshold_0_5": 0.8883928571428572,
+            "selected_threshold": 0.9107142857142857
+          },
+          "jpeg_q80": {
+            "threshold_0_5": 0.8482142857142857,
+            "selected_threshold": 0.84375
+          },
+          "jpeg_q40": {
+            "threshold_0_5": 0.8482142857142857,
+            "selected_threshold": 0.8526785714285714
+          }
+        }
+      },
+      "run_metadata": {
+        "torch": "2.7.1+cu128",
+        "cuda_runtime": "12.8",
+        "device": "cuda",
+        "arguments": {
+          "manifest": "experiments/data/c23_pilot/reference.csv",
+          "output": "experiments/runs/c23_paired_w1_seed42",
+          "config": "experiments/configs/pilot.json",
+          "official_splits": "experiments/data/splits",
+          "pair_weight": 1.0,
+          "pretrained": true,
+          "reference_only": false
+        },
+        "config": {
+          "schema_version": 1,
+          "seed": 42,
+          "task": "ffpp_closed_set_manipulation_attribution",
+          "input_size": 224,
+          "frames_per_video": 8,
+          "source_classes": [
+            "Deepfakes",
+            "Face2Face",
+            "FaceSwap",
+            "NeuralTextures"
+          ],
+          "jpeg": {
+            "subsampling": 2,
+            "evaluation_qualities": [
+              95,
+              80,
+              60,
+              40,
+              20
+            ],
+            "mixed_train_qualities": [
+              80,
+              40
+            ],
+            "held_out_qualities": [
+              95,
+              60,
+              20
+            ],
+            "history_sequences": [
+              [
+                80,
+                80
+              ],
+              [
+                80,
+                40
+              ],
+              [
+                40,
+                80
+              ]
+            ]
+          },
+          "video": {
+            "encoder": "libx264",
+            "held_out_encoder": "libx265",
+            "crf_values": [
+              18,
+              23,
+              32,
+              40
+            ],
+            "preset": "medium",
+            "pixel_format": "yuv420p",
+            "gop": 48,
+            "b_frames": 3,
+            "encoder_threads": 4,
+            "note": "Equal CRF across codecs is not equal distortion. Keep full videos before extraction."
+          },
+          "training": {
+            "backbone": "resnet18",
+            "microbatch_pairs": 8,
+            "epochs": 20,
+            "learning_rate": 0.0003,
+            "weight_decay": 0.0001,
+            "workers": 0,
+            "lambda_source": 1.0,
+            "lambda_pair_validation_grid": [
+              0.0,
+              0.1,
+              1.0
+            ]
+          },
+          "analysis": {
+            "primary_unit": "video",
+            "bootstrap_unit": "lineage_group",
+            "bootstrap_draws": 2000,
+            "final_seeds": [
+              42,
+              43,
+              44
+            ],
+            "retention_reference_margin": 0.05
+          }
+        },
+        "note": "0.5 validation threshold is illustrative; choose/freeze before final test."
+      }
+    }
+  },
+  "validation_analysis": {
+    "status": "exploratory_validation_analysis",
+    "qualification": "Conditional on selected checkpoints and thresholds; excludes selection uncertainty and training-seed variability",
+    "bootstrap": {
+      "unit": "provenance_group",
+      "groups": 14,
+      "videos_per_condition": 140,
+      "draws": 2000,
+      "seed": 4242,
+      "interval": "95% percentile, linear quantiles",
+      "minimum_valid_draw_fraction": 0.95,
+      "near_chance_reference_margin": 0.05,
+      "paired_across_models_and_conditions": true
+    },
+    "source_order": [
+      "Deepfakes",
+      "Face2Face",
+      "FaceSwap",
+      "NeuralTextures"
+    ],
+    "threshold_record_sha256": "437be85c0ca43a364b9f1ef0673c2cfb83f5b7a5ab5e7028fd416783619515bd",
+    "manifest_sha256": "ecbed1b51a0b93c7826a5a0f032607db0f09285ff89af862f222f1397d2ab9d8",
+    "script_sha256": "08f6297f0c398ac509b97d03ed9e6f864e429f30d680f9b0d8b0190513d51566",
+    "research_metrics_sha256": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+    "numpy": "2.4.6",
+    "point_metrics": {
+      "c23_reference_seed42": {
+        "jpeg_q40": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.8845663265306122,
+          "detection_ba": 0.7723214285714286,
+          "detection_macro_f1": 0.6142833990600183,
+          "attribution_ba": 0.7589285714285715,
+          "attribution_top1": 0.7589285714285714,
+          "attribution_macro_f1": 0.7442551301496401,
+          "detection_eer": 0.2142857142857143,
+          "detection_confusion": [
+            [
+              28,
+              0
+            ],
+            [
+              51,
+              61
+            ]
+          ],
+          "source_confusion": [
+            [
+              28,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              19,
+              9,
+              0
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              4,
+              0,
+              14,
+              10
+            ]
+          ],
+          "source_recall": [
+            1.0,
+            0.6785714285714286,
+            1.0,
+            0.35714285714285715
+          ],
+          "fake_detection_coverage": 0.5446428571428571,
+          "detection_gated_source_accuracy": 0.49107142857142855,
+          "source_accuracy_among_detected_fakes": 0.9016393442622951,
+          "detection_retention": 0.7093023255813955,
+          "attribution_retention": 0.7037037037037038,
+          "attribution_minus_detection_retention": -0.005598621877691667
+        },
+        "jpeg_q80": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9575892857142857,
+          "detection_ba": 0.875,
+          "detection_macro_f1": 0.8852835136020977,
+          "attribution_ba": 0.9553571428571428,
+          "attribution_top1": 0.9553571428571429,
+          "attribution_macro_f1": 0.9549983927997429,
+          "detection_eer": 0.10714285714285712,
+          "detection_confusion": [
+            [
+              22,
+              6
+            ],
+            [
+              4,
+              108
+            ]
+          ],
+          "source_confusion": [
+            [
+              28,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              28,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              0,
+              5,
+              23
+            ]
+          ],
+          "source_recall": [
+            1.0,
+            1.0,
+            1.0,
+            0.8214285714285714
+          ],
+          "fake_detection_coverage": 0.9642857142857143,
+          "detection_gated_source_accuracy": 0.9375,
+          "source_accuracy_among_detected_fakes": 0.9722222222222222,
+          "detection_retention": 0.9767441860465117,
+          "attribution_retention": 0.9753086419753085,
+          "attribution_minus_detection_retention": -0.0014355440712031653
+        },
+        "ref": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9770408163265306,
+          "detection_ba": 0.8839285714285714,
+          "detection_macro_f1": 0.9055330634278003,
+          "attribution_ba": 0.9732142857142857,
+          "attribution_top1": 0.9732142857142857,
+          "attribution_macro_f1": 0.9728424020363204,
+          "detection_eer": 0.07142857142857141,
+          "detection_confusion": [
+            [
+              22,
+              6
+            ],
+            [
+              2,
+              110
+            ]
+          ],
+          "source_confusion": [
+            [
+              28,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              28,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              25
+            ]
+          ],
+          "source_recall": [
+            1.0,
+            1.0,
+            1.0,
+            0.8928571428571429
+          ],
+          "fake_detection_coverage": 0.9821428571428571,
+          "detection_gated_source_accuracy": 0.9642857142857143,
+          "source_accuracy_among_detected_fakes": 0.9818181818181818,
+          "detection_retention": 1.0,
+          "attribution_retention": 1.0,
+          "attribution_minus_detection_retention": 0.0
+        }
+      },
+      "c23_augmented_seed42": {
+        "jpeg_q40": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9212372448979591,
+          "detection_ba": 0.875,
+          "detection_macro_f1": 0.8172951438972457,
+          "attribution_ba": 0.9107142857142857,
+          "attribution_top1": 0.9107142857142857,
+          "attribution_macro_f1": 0.9101318013614145,
+          "detection_eer": 0.14285714285714285,
+          "detection_confusion": [
+            [
+              25,
+              3
+            ],
+            [
+              16,
+              96
+            ]
+          ],
+          "source_confusion": [
+            [
+              24,
+              1,
+              0,
+              3
+            ],
+            [
+              0,
+              26,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              1,
+              1,
+              2,
+              24
+            ]
+          ],
+          "source_recall": [
+            0.8571428571428571,
+            0.9285714285714286,
+            1.0,
+            0.8571428571428571
+          ],
+          "fake_detection_coverage": 0.8571428571428571,
+          "detection_gated_source_accuracy": 0.8035714285714286,
+          "source_accuracy_among_detected_fakes": 0.9375,
+          "detection_retention": 0.9333333333333333,
+          "attribution_retention": 0.9135802469135802,
+          "attribution_minus_detection_retention": -0.019753086419753152
+        },
+        "jpeg_q80": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9461096938775511,
+          "detection_ba": 0.8571428571428572,
+          "detection_macro_f1": 0.8477788132960546,
+          "attribution_ba": 0.9464285714285714,
+          "attribution_top1": 0.9464285714285714,
+          "attribution_macro_f1": 0.9464248953544225,
+          "detection_eer": 0.14285714285714285,
+          "detection_confusion": [
+            [
+              22,
+              6
+            ],
+            [
+              8,
+              104
+            ]
+          ],
+          "source_confusion": [
+            [
+              24,
+              1,
+              0,
+              3
+            ],
+            [
+              0,
+              27,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              27
+            ]
+          ],
+          "source_recall": [
+            0.8571428571428571,
+            0.9642857142857143,
+            1.0,
+            0.9642857142857143
+          ],
+          "fake_detection_coverage": 0.9285714285714286,
+          "detection_gated_source_accuracy": 0.8928571428571429,
+          "source_accuracy_among_detected_fakes": 0.9615384615384616,
+          "detection_retention": 0.8888888888888891,
+          "attribution_retention": 0.9629629629629629,
+          "attribution_minus_detection_retention": 0.07407407407407385
+        },
+        "ref": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9601403061224489,
+          "detection_ba": 0.9017857142857143,
+          "detection_macro_f1": 0.8668714797747056,
+          "attribution_ba": 0.9732142857142857,
+          "attribution_top1": 0.9732142857142857,
+          "attribution_macro_f1": 0.9734834217885066,
+          "detection_eer": 0.10714285714285712,
+          "detection_confusion": [
+            [
+              25,
+              3
+            ],
+            [
+              10,
+              102
+            ]
+          ],
+          "source_confusion": [
+            [
+              26,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              27,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              28
+            ]
+          ],
+          "source_recall": [
+            0.9285714285714286,
+            0.9642857142857143,
+            1.0,
+            1.0
+          ],
+          "fake_detection_coverage": 0.9107142857142857,
+          "detection_gated_source_accuracy": 0.8928571428571429,
+          "source_accuracy_among_detected_fakes": 0.9803921568627451,
+          "detection_retention": 1.0,
+          "attribution_retention": 1.0,
+          "attribution_minus_detection_retention": 0.0
+        }
+      },
+      "c23_paired_w0p1_seed42": {
+        "jpeg_q40": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9371811224489797,
+          "detection_ba": 0.8928571428571428,
+          "detection_macro_f1": 0.8285714285714285,
+          "attribution_ba": 0.9017857142857142,
+          "attribution_top1": 0.9017857142857143,
+          "attribution_macro_f1": 0.9015242033189674,
+          "detection_eer": 0.1428571428571429,
+          "detection_confusion": [
+            [
+              26,
+              2
+            ],
+            [
+              16,
+              96
+            ]
+          ],
+          "source_confusion": [
+            [
+              24,
+              1,
+              0,
+              3
+            ],
+            [
+              0,
+              26,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              1,
+              3,
+              1,
+              23
+            ]
+          ],
+          "source_recall": [
+            0.8571428571428571,
+            0.9285714285714286,
+            1.0,
+            0.8214285714285714
+          ],
+          "fake_detection_coverage": 0.8571428571428571,
+          "detection_gated_source_accuracy": 0.7946428571428571,
+          "source_accuracy_among_detected_fakes": 0.9270833333333334,
+          "detection_retention": 0.9565217391304347,
+          "attribution_retention": 0.9240506329113922,
+          "attribution_minus_detection_retention": -0.03247110621904248
+        },
+        "jpeg_q80": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9646045918367347,
+          "detection_ba": 0.9419642857142857,
+          "detection_macro_f1": 0.8987268518518519,
+          "attribution_ba": 0.9464285714285714,
+          "attribution_top1": 0.9464285714285714,
+          "attribution_macro_f1": 0.9466778527320252,
+          "detection_eer": 0.07142857142857141,
+          "detection_confusion": [
+            [
+              27,
+              1
+            ],
+            [
+              9,
+              103
+            ]
+          ],
+          "source_confusion": [
+            [
+              25,
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              27,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              26
+            ]
+          ],
+          "source_recall": [
+            0.8928571428571429,
+            0.9642857142857143,
+            1.0,
+            0.9285714285714286
+          ],
+          "fake_detection_coverage": 0.9196428571428571,
+          "detection_gated_source_accuracy": 0.8839285714285714,
+          "source_accuracy_among_detected_fakes": 0.9611650485436893,
+          "detection_retention": 1.076086956521739,
+          "attribution_retention": 0.9873417721518987,
+          "attribution_minus_detection_retention": -0.08874518436984036
+        },
+        "ref": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9697066326530612,
+          "detection_ba": 0.9107142857142857,
+          "detection_macro_f1": 0.8194014447884417,
+          "attribution_ba": 0.9553571428571429,
+          "attribution_top1": 0.9553571428571429,
+          "attribution_macro_f1": 0.9554497825565866,
+          "detection_eer": 0.0892857142857143,
+          "detection_confusion": [
+            [
+              28,
+              0
+            ],
+            [
+              20,
+              92
+            ]
+          ],
+          "source_confusion": [
+            [
+              25,
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              27,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              27
+            ]
+          ],
+          "source_recall": [
+            0.8928571428571429,
+            0.9642857142857143,
+            1.0,
+            0.9642857142857143
+          ],
+          "fake_detection_coverage": 0.8214285714285714,
+          "detection_gated_source_accuracy": 0.8035714285714286,
+          "source_accuracy_among_detected_fakes": 0.9782608695652174,
+          "detection_retention": 1.0,
+          "attribution_retention": 1.0,
+          "attribution_minus_detection_retention": 0.0
+        }
+      },
+      "c23_paired_w1_seed42": {
+        "jpeg_q40": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9151785714285714,
+          "detection_ba": 0.8526785714285714,
+          "detection_macro_f1": 0.7619497449461552,
+          "attribution_ba": 0.9107142857142857,
+          "attribution_top1": 0.9107142857142857,
+          "attribution_macro_f1": 0.9119535655545712,
+          "detection_eer": 0.1428571428571429,
+          "detection_confusion": [
+            [
+              26,
+              2
+            ],
+            [
+              25,
+              87
+            ]
+          ],
+          "source_confusion": [
+            [
+              25,
+              0,
+              0,
+              3
+            ],
+            [
+              0,
+              25,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              27,
+              1
+            ],
+            [
+              0,
+              1,
+              2,
+              25
+            ]
+          ],
+          "source_recall": [
+            0.8928571428571429,
+            0.8928571428571429,
+            0.9642857142857143,
+            0.8928571428571429
+          ],
+          "fake_detection_coverage": 0.7767857142857143,
+          "detection_gated_source_accuracy": 0.7589285714285714,
+          "source_accuracy_among_detected_fakes": 0.9770114942528736,
+          "detection_retention": 0.858695652173913,
+          "attribution_retention": 0.9487179487179488,
+          "attribution_minus_detection_retention": 0.09002229654403582
+        },
+        "jpeg_q80": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9381377551020409,
+          "detection_ba": 0.84375,
+          "detection_macro_f1": 0.7830042455691084,
+          "attribution_ba": 0.9375,
+          "attribution_top1": 0.9375,
+          "attribution_macro_f1": 0.9383308967974782,
+          "detection_eer": 0.1517857142857143,
+          "detection_confusion": [
+            [
+              24,
+              4
+            ],
+            [
+              19,
+              93
+            ]
+          ],
+          "source_confusion": [
+            [
+              25,
+              0,
+              0,
+              3
+            ],
+            [
+              0,
+              26,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              26
+            ]
+          ],
+          "source_recall": [
+            0.8928571428571429,
+            0.9285714285714286,
+            1.0,
+            0.9285714285714286
+          ],
+          "fake_detection_coverage": 0.8303571428571429,
+          "detection_gated_source_accuracy": 0.8125,
+          "source_accuracy_among_detected_fakes": 0.978494623655914,
+          "detection_retention": 0.8369565217391305,
+          "attribution_retention": 0.9871794871794872,
+          "attribution_minus_detection_retention": 0.15022296544035674
+        },
+        "ref": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.9544005102040816,
+          "detection_ba": 0.9107142857142857,
+          "detection_macro_f1": 0.8194014447884417,
+          "attribution_ba": 0.9464285714285714,
+          "attribution_top1": 0.9464285714285714,
+          "attribution_macro_f1": 0.9468563432265792,
+          "detection_eer": 0.1428571428571429,
+          "detection_confusion": [
+            [
+              28,
+              0
+            ],
+            [
+              20,
+              92
+            ]
+          ],
+          "source_confusion": [
+            [
+              26,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              26,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              26
+            ]
+          ],
+          "source_recall": [
+            0.9285714285714286,
+            0.9285714285714286,
+            1.0,
+            0.9285714285714286
+          ],
+          "fake_detection_coverage": 0.8214285714285714,
+          "detection_gated_source_accuracy": 0.8125,
+          "source_accuracy_among_detected_fakes": 0.9891304347826086,
+          "detection_retention": 1.0,
+          "attribution_retention": 1.0,
+          "attribution_minus_detection_retention": 0.0
+        }
+      }
+    },
+    "intervals": {
+      "c23_reference_seed42": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.8839285714285714,
+            "ci95": [
+              0.8214285714285714,
+              0.9464285714285714
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9732142857142857,
+            "ci95": [
+              0.9464285714285714,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": 0.875,
+            "ci95": [
+              0.8080357142857143,
+              0.9375
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9553571428571428,
+            "ci95": [
+              0.9196428571428572,
+              0.9821428571428572
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.9767441860465117,
+            "ci95": [
+              0.9397406699970613,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9753086419753085,
+            "ci95": [
+              0.9390055706112617,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.0014355440712031653,
+            "ci95": [
+              -0.0487804878048782,
+              0.04785530123191373
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.7723214285714286,
+            "ci95": [
+              0.7321428571428572,
+              0.8125
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.7589285714285715,
+            "ci95": [
+              0.6785714285714285,
+              0.8392857142857143
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.7093023255813955,
+            "ci95": [
+              0.5683857840477484,
+              0.8846153846153847
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.7037037037037038,
+            "ci95": [
+              0.5975570161545769,
+              0.8148148148148149
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.005598621877691667,
+            "ci95": [
+              -0.25577388211382124,
+              0.20020329310183374
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      },
+      "c23_augmented_seed42": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.9017857142857143,
+            "ci95": [
+              0.8482142857142857,
+              0.9508928571428572
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9732142857142857,
+            "ci95": [
+              0.9464285714285714,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": 0.8571428571428572,
+            "ci95": [
+              0.7901785714285714,
+              0.9241071428571428
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9464285714285714,
+            "ci95": [
+              0.8928571428571429,
+              0.9910714285714286
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.8888888888888891,
+            "ci95": [
+              0.7470593869731801,
+              1.0128571428571427
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9629629629629629,
+            "ci95": [
+              0.9230769230769232,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.07407407407407385,
+            "ci95": [
+              -0.04913368366130016,
+              0.19749181669394414
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.875,
+            "ci95": [
+              0.8213169642857142,
+              0.9241071428571428
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9107142857142857,
+            "ci95": [
+              0.8660714285714286,
+              0.9553571428571429
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.9333333333333333,
+            "ci95": [
+              0.8780487804878048,
+              0.9789473684210527
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9135802469135802,
+            "ci95": [
+              0.8518518518518519,
+              0.9634146341463414
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.019753086419753152,
+            "ci95": [
+              -0.10009128106291389,
+              0.06173409822866336
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      },
+      "c23_paired_w0p1_seed42": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.9107142857142857,
+            "ci95": [
+              0.8794642857142857,
+              0.9375
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9553571428571429,
+            "ci95": [
+              0.9285714285714285,
+              0.9821428571428572
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": 0.9419642857142857,
+            "ci95": [
+              0.9017857142857143,
+              0.9732142857142857
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9464285714285714,
+            "ci95": [
+              0.9017857142857143,
+              0.9821428571428572
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 1.076086956521739,
+            "ci95": [
+              0.9680851063829786,
+              1.179798971165561
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9873417721518987,
+            "ci95": [
+              0.9605263157894737,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.08874518436984036,
+            "ci95": [
+              -0.19873718112807692,
+              0.022471910112359716
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.8928571428571428,
+            "ci95": [
+              0.84375,
+              0.9375
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9017857142857142,
+            "ci95": [
+              0.8392857142857143,
+              0.9642857142857143
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.9565217391304347,
+            "ci95": [
+              0.8505469039673709,
+              1.0568181818181819
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9240506329113922,
+            "ci95": [
+              0.860714865303473,
+              0.975609756097561
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.03247110621904248,
+            "ci95": [
+              -0.1179605263157893,
+              0.05454933954933955
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      },
+      "c23_paired_w1_seed42": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.9107142857142857,
+            "ci95": [
+              0.875,
+              0.9420758928571422
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9464285714285714,
+            "ci95": [
+              0.8839285714285714,
+              0.9910714285714286
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": 0.84375,
+            "ci95": [
+              0.7767857142857143,
+              0.90625
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9375,
+            "ci95": [
+              0.875,
+              0.9821428571428572
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.8369565217391305,
+            "ci95": [
+              0.6881552419354839,
+              0.9684210526315791
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9871794871794872,
+            "ci95": [
+              0.9605263157894737,
+              1.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.15022296544035674,
+            "ci95": [
+              0.007520800424277402,
+              0.3051701889859784
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.8526785714285714,
+            "ci95": [
+              0.7901785714285714,
+              0.9107142857142857
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.9107142857142857,
+            "ci95": [
+              0.8482142857142857,
+              0.9642857142857143
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.858695652173913,
+            "ci95": [
+              0.7209302325581396,
+              0.965909090909091
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.9487179487179488,
+            "ci95": [
+              0.9054054054054054,
+              0.9871794871794871
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.09002229654403582,
+            "ci95": [
+              -0.00814484126984128,
+              0.20701958144742
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      }
+    },
+    "paired_differences": {
+      "augmentation_minus_reference": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.017857142857142905,
+            "ci95": [
+              -0.017857142857142794,
+              0.05803571428571441
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.0,
+            "ci95": [
+              -0.0357142857142857,
+              0.03571428571428581
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": -0.017857142857142794,
+            "ci95": [
+              -0.0803571428571428,
+              0.0401785714285714
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": -0.008928571428571397,
+            "ci95": [
+              -0.0625,
+              0.044642857142857095
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": -0.08785529715762264,
+            "ci95": [
+              -0.22082917187457013,
+              0.038468001753850296
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": -0.012345679012345623,
+            "ci95": [
+              -0.05318261984928649,
+              0.025903614457831292
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.07550961814527701,
+            "ci95": [
+              -0.053441013270452635,
+              0.20811770139993394
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.1026785714285714,
+            "ci95": [
+              0.0357142857142857,
+              0.1607142857142857
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.1517857142857142,
+            "ci95": [
+              0.07142857142857151,
+              0.2232142857142858
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.22403100775193785,
+            "ci95": [
+              0.06180339452816786,
+              0.3425558879545072
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.20987654320987637,
+            "ci95": [
+              0.1131753300464732,
+              0.30537019781641056
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.014154464542061485,
+            "ci95": [
+              -0.19027827160488955,
+              0.20107086483082093
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      },
+      "pair_w0p1_minus_augmentation": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.008928571428571397,
+            "ci95": [
+              -0.0401785714285714,
+              0.0580357142857143
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": -0.017857142857142794,
+            "ci95": [
+              -0.05357142857142849,
+              0.017857142857142797
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": 0.08482142857142849,
+            "ci95": [
+              0.008928571428571397,
+              0.1651785714285714
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.0,
+            "ci95": [
+              -0.0357142857142857,
+              0.0357142857142857
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.18719806763284996,
+            "ci95": [
+              0.011104868913857424,
+              0.3762380767156714
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.024378809188935757,
+            "ci95": [
+              -0.0004518072289158015,
+              0.061265432098765296
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.1628192584439142,
+            "ci95": [
+              -0.34011386663923104,
+              0.005472174177642835
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": 0.017857142857142794,
+            "ci95": [
+              -0.04017857142857151,
+              0.0803571428571428
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": -0.008928571428571508,
+            "ci95": [
+              -0.0625,
+              0.0535714285714286
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.023188405797101352,
+            "ci95": [
+              -0.0707153728771714,
+              0.12211615208042384
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.010470385997812026,
+            "ci95": [
+              -0.06068541102077696,
+              0.08446136424708135
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": -0.012718019799289326,
+            "ci95": [
+              -0.10356147566031924,
+              0.07542288877824338
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      },
+      "pair_w1_minus_augmentation": {
+        "ref": {
+          "detection_ba": {
+            "point": 0.008928571428571397,
+            "ci95": [
+              -0.049107142857142794,
+              0.06707589285714234
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": -0.0267857142857143,
+            "ci95": [
+              -0.0714285714285714,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q80": {
+          "detection_ba": {
+            "point": -0.013392857142857206,
+            "ci95": [
+              -0.06696428571428581,
+              0.049107142857142905
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": -0.008928571428571397,
+            "ci95": [
+              -0.044642857142857206,
+              0.0267857142857143
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": -0.051932367149758574,
+            "ci95": [
+              -0.2348483526416359,
+              0.12926268519709105
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.024216524216524316,
+            "ci95": [
+              -0.024393917131942427,
+              0.07499999999999984
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.07614889136628289,
+            "ci95": [
+              -0.11326993594836421,
+              0.26671252242300786
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        },
+        "jpeg_q40": {
+          "detection_ba": {
+            "point": -0.022321428571428603,
+            "ci95": [
+              -0.0848214285714286,
+              0.03125000000000011
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_ba": {
+            "point": 0.0,
+            "ci95": [
+              -0.0535714285714286,
+              0.053571428571428714
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "detection_retention": {
+            "point": -0.07463768115942038,
+            "ci95": [
+              -0.20943511665695438,
+              0.04125026299179445
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_retention": {
+            "point": 0.03513770180436859,
+            "ci95": [
+              -0.030001054852320595,
+              0.10833416949675853
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          },
+          "attribution_minus_detection_retention": {
+            "point": 0.10977538296378897,
+            "ci95": [
+              -0.005627955270959289,
+              0.2299812807212809
+            ],
+            "valid_draws": 2000,
+            "undefined_draws": 0,
+            "interval_available": true
+          }
+        }
+      }
+    }
+  },
+  "descriptor_probes": {
+    "fft": {
+      "dimensions": 256,
+      "feature_sha256": "3c61ee8eeceeb8732b344db66afe48609124ee9714f0244b12ca31375584600e",
+      "rows_sha256": "5378b99712791a6232ef4605f4602d355efd6be0fcfcbcad6cb49d0a4a2f04ff",
+      "real_labels": {
+        "alpha": 0.01,
+        "selection_score": 0.5491071428571428,
+        "validation": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.6326530612244898,
+          "detection_ba": 0.6339285714285714,
+          "detection_macro_f1": 0.5691287878787878,
+          "attribution_ba": 0.46428571428571425,
+          "attribution_top1": 0.4642857142857143,
+          "attribution_macro_f1": 0.4688894181154243
+        }
+      },
+      "shuffled_labels": [
+        {
+          "shuffle_seed": 101,
+          "alpha": 0.001,
+          "selection_score": 0.4196428571428571,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.526466836734694,
+            "detection_ba": 0.5446428571428571,
+            "detection_macro_f1": 0.47013328945203225,
+            "attribution_ba": 0.29464285714285715,
+            "attribution_top1": 0.29464285714285715,
+            "attribution_macro_f1": 0.27147200625461493
+          }
+        },
+        {
+          "shuffle_seed": 102,
+          "alpha": 0.1,
+          "selection_score": 0.4151785714285714,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.543686224489796,
+            "detection_ba": 0.5625,
+            "detection_macro_f1": 0.5543981481481481,
+            "attribution_ba": 0.26785714285714285,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.26030482128813776
+          }
+        },
+        {
+          "shuffle_seed": 103,
+          "alpha": 1.0,
+          "selection_score": 0.4040178571428571,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.48246173469387754,
+            "detection_ba": 0.48660714285714285,
+            "detection_macro_f1": 0.4845652789578023,
+            "attribution_ba": 0.3214285714285714,
+            "attribution_top1": 0.32142857142857145,
+            "attribution_macro_f1": 0.3105102547725499
+          }
+        },
+        {
+          "shuffle_seed": 104,
+          "alpha": 0.1,
+          "selection_score": 0.4330357142857143,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5350765306122448,
+            "detection_ba": 0.5625,
+            "detection_macro_f1": 0.5140890640625919,
+            "attribution_ba": 0.3035714285714286,
+            "attribution_top1": 0.30357142857142855,
+            "attribution_macro_f1": 0.30036535737336656
+          }
+        },
+        {
+          "shuffle_seed": 105,
+          "alpha": 0.001,
+          "selection_score": 0.4107142857142857,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.6033163265306121,
+            "detection_ba": 0.5625,
+            "detection_macro_f1": 0.5140890640625919,
+            "attribution_ba": 0.2589285714285714,
+            "attribution_top1": 0.25892857142857145,
+            "attribution_macro_f1": 0.24943111747623026
+          }
+        }
+      ],
+      "elapsed_seconds": 2.1322228999997606
+    },
+    "rgb": {
+      "dimensions": 768,
+      "feature_sha256": "3606b51c53e856dd5c609356e1fc07661ed10959b39ae7665c6305f14cd82252",
+      "rows_sha256": "5378b99712791a6232ef4605f4602d355efd6be0fcfcbcad6cb49d0a4a2f04ff",
+      "real_labels": {
+        "alpha": 0.001,
+        "selection_score": 0.49776785714285715,
+        "validation": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.5978954081632653,
+          "detection_ba": 0.53125,
+          "detection_macro_f1": 0.5284078149562093,
+          "attribution_ba": 0.4642857142857143,
+          "attribution_top1": 0.4642857142857143,
+          "attribution_macro_f1": 0.4463383838383838
+        }
+      },
+      "shuffled_labels": [
+        {
+          "shuffle_seed": 101,
+          "alpha": 1.0,
+          "selection_score": 0.3928571428571428,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5051020408163266,
+            "detection_ba": 0.5178571428571428,
+            "detection_macro_f1": 0.5138888888888888,
+            "attribution_ba": 0.26785714285714285,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.2588443814250266
+          }
+        },
+        {
+          "shuffle_seed": 102,
+          "alpha": 0.001,
+          "selection_score": 0.36383928571428575,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5169005102040816,
+            "detection_ba": 0.5133928571428572,
+            "detection_macro_f1": 0.4662873399715505,
+            "attribution_ba": 0.21428571428571427,
+            "attribution_top1": 0.21428571428571427,
+            "attribution_macro_f1": 0.18673252129134482
+          }
+        },
+        {
+          "shuffle_seed": 103,
+          "alpha": 0.001,
+          "selection_score": 0.41071428571428575,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.508609693877551,
+            "detection_ba": 0.5446428571428572,
+            "detection_macro_f1": 0.5119564552626751,
+            "attribution_ba": 0.2767857142857143,
+            "attribution_top1": 0.2767857142857143,
+            "attribution_macro_f1": 0.2707815520574427
+          }
+        },
+        {
+          "shuffle_seed": 104,
+          "alpha": 1.0,
+          "selection_score": 0.36607142857142855,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.4713010204081632,
+            "detection_ba": 0.4464285714285714,
+            "detection_macro_f1": 0.3980952380952381,
+            "attribution_ba": 0.2857142857142857,
+            "attribution_top1": 0.2857142857142857,
+            "attribution_macro_f1": 0.2818121919411304
+          }
+        },
+        {
+          "shuffle_seed": 105,
+          "alpha": 0.1,
+          "selection_score": 0.3660714285714286,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5191326530612245,
+            "detection_ba": 0.5,
+            "detection_macro_f1": 0.49712643678160917,
+            "attribution_ba": 0.23214285714285715,
+            "attribution_top1": 0.23214285714285715,
+            "attribution_macro_f1": 0.22351616045645897
+          }
+        }
+      ],
+      "elapsed_seconds": 2.9897869000051287
+    },
+    "dct": {
+      "dimensions": 128,
+      "feature_sha256": "e38bc86f98b062fb04bfcab41745ab19dfecf2f774816893b753fdfd81bd9760",
+      "rows_sha256": "5378b99712791a6232ef4605f4602d355efd6be0fcfcbcad6cb49d0a4a2f04ff",
+      "real_labels": {
+        "alpha": 0.001,
+        "selection_score": 0.5758928571428572,
+        "validation": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.6654974489795918,
+          "detection_ba": 0.6160714285714286,
+          "detection_macro_f1": 0.568859324956886,
+          "attribution_ba": 0.5357142857142857,
+          "attribution_top1": 0.5357142857142857,
+          "attribution_macro_f1": 0.5321134244198655
+        }
+      },
+      "shuffled_labels": [
+        {
+          "shuffle_seed": 101,
+          "alpha": 0.01,
+          "selection_score": 0.40401785714285715,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5216836734693877,
+            "detection_ba": 0.5580357142857143,
+            "detection_macro_f1": 0.5185520361990951,
+            "attribution_ba": 0.25,
+            "attribution_top1": 0.25,
+            "attribution_macro_f1": 0.24827488687782806
+          }
+        },
+        {
+          "shuffle_seed": 102,
+          "alpha": 1.0,
+          "selection_score": 0.4017857142857143,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5813137755102041,
+            "detection_ba": 0.5625,
+            "detection_macro_f1": 0.5035460992907801,
+            "attribution_ba": 0.2410714285714286,
+            "attribution_top1": 0.24107142857142858,
+            "attribution_macro_f1": 0.2341779988031613
+          }
+        },
+        {
+          "shuffle_seed": 103,
+          "alpha": 0.1,
+          "selection_score": 0.38839285714285715,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.46396683673469397,
+            "detection_ba": 0.4910714285714286,
+            "detection_macro_f1": 0.48097560975609754,
+            "attribution_ba": 0.2857142857142857,
+            "attribution_top1": 0.2857142857142857,
+            "attribution_macro_f1": 0.27795675126237784
+          }
+        },
+        {
+          "shuffle_seed": 104,
+          "alpha": 0.01,
+          "selection_score": 0.4330357142857143,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5545280612244897,
+            "detection_ba": 0.5803571428571429,
+            "detection_macro_f1": 0.5022222222222222,
+            "attribution_ba": 0.2857142857142857,
+            "attribution_top1": 0.2857142857142857,
+            "attribution_macro_f1": 0.27063939149052285
+          }
+        },
+        {
+          "shuffle_seed": 105,
+          "alpha": 0.1,
+          "selection_score": 0.4330357142857143,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5535714285714286,
+            "detection_ba": 0.5714285714285714,
+            "detection_macro_f1": 0.5432154052843707,
+            "attribution_ba": 0.29464285714285715,
+            "attribution_top1": 0.29464285714285715,
+            "attribution_macro_f1": 0.28559779091340554
+          }
+        }
+      ],
+      "elapsed_seconds": 0.8131530000027851
+    },
+    "wavelet": {
+      "dimensions": 28,
+      "feature_sha256": "0135c61ccd5997329d3c10f8e3182bff9035ab3944aac961cd15c70df126e26a",
+      "rows_sha256": "5378b99712791a6232ef4605f4602d355efd6be0fcfcbcad6cb49d0a4a2f04ff",
+      "real_labels": {
+        "alpha": 0.01,
+        "selection_score": 0.4575892857142857,
+        "validation": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.6017219387755102,
+          "detection_ba": 0.59375,
+          "detection_macro_f1": 0.5516136979551614,
+          "attribution_ba": 0.3214285714285714,
+          "attribution_top1": 0.32142857142857145,
+          "attribution_macro_f1": 0.3042480575813909
+        }
+      },
+      "shuffled_labels": [
+        {
+          "shuffle_seed": 101,
+          "alpha": 0.1,
+          "selection_score": 0.39955357142857145,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.48373724489795916,
+            "detection_ba": 0.53125,
+            "detection_macro_f1": 0.48717948717948717,
+            "attribution_ba": 0.2678571428571429,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.2169093792805133
+          }
+        },
+        {
+          "shuffle_seed": 102,
+          "alpha": 0.001,
+          "selection_score": 0.3995535714285714,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5181760204081632,
+            "detection_ba": 0.53125,
+            "detection_macro_f1": 0.46567841141656063,
+            "attribution_ba": 0.26785714285714285,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.24060112878898454
+          }
+        },
+        {
+          "shuffle_seed": 103,
+          "alpha": 0.01,
+          "selection_score": 0.3839285714285714,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.4952168367346938,
+            "detection_ba": 0.5,
+            "detection_macro_f1": 0.4950055493895672,
+            "attribution_ba": 0.2678571428571428,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.2513795986622074
+          }
+        },
+        {
+          "shuffle_seed": 104,
+          "alpha": 0.1,
+          "selection_score": 0.38839285714285715,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5232780612244897,
+            "detection_ba": 0.5,
+            "detection_macro_f1": 0.43941637869562833,
+            "attribution_ba": 0.2767857142857143,
+            "attribution_top1": 0.2767857142857143,
+            "attribution_macro_f1": 0.2551851851851852
+          }
+        },
+        {
+          "shuffle_seed": 105,
+          "alpha": 0.1,
+          "selection_score": 0.40625,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5573979591836735,
+            "detection_ba": 0.5625,
+            "detection_macro_f1": 0.5238095238095238,
+            "attribution_ba": 0.25,
+            "attribution_top1": 0.25,
+            "attribution_macro_f1": 0.2276545051983057
+          }
+        }
+      ],
+      "elapsed_seconds": 0.4537583999990602
+    },
+    "residual": {
+      "dimensions": 263,
+      "feature_sha256": "7448c362e6e71e72c13572e9263bd4afcaaf432365dccbc457710995271d7469",
+      "rows_sha256": "5378b99712791a6232ef4605f4602d355efd6be0fcfcbcad6cb49d0a4a2f04ff",
+      "real_labels": {
+        "alpha": 0.001,
+        "selection_score": 0.49107142857142855,
+        "validation": {
+          "videos": 140,
+          "fake_videos": 112,
+          "detection_auc": 0.5771683673469388,
+          "detection_ba": 0.5982142857142857,
+          "detection_macro_f1": 0.5570444816675972,
+          "attribution_ba": 0.3839285714285714,
+          "attribution_top1": 0.38392857142857145,
+          "attribution_macro_f1": 0.37998885569308105
+        }
+      },
+      "shuffled_labels": [
+        {
+          "shuffle_seed": 101,
+          "alpha": 0.1,
+          "selection_score": 0.3995535714285714,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5204081632653061,
+            "detection_ba": 0.5669642857142857,
+            "detection_macro_f1": 0.5379537953795379,
+            "attribution_ba": 0.2321428571428571,
+            "attribution_top1": 0.23214285714285715,
+            "attribution_macro_f1": 0.22324422522632242
+          }
+        },
+        {
+          "shuffle_seed": 102,
+          "alpha": 0.001,
+          "selection_score": 0.38839285714285715,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.4588647959183673,
+            "detection_ba": 0.5,
+            "detection_macro_f1": 0.4846407717694846,
+            "attribution_ba": 0.2767857142857143,
+            "attribution_top1": 0.2767857142857143,
+            "attribution_macro_f1": 0.27357122313981674
+          }
+        },
+        {
+          "shuffle_seed": 103,
+          "alpha": 1.0,
+          "selection_score": 0.40848214285714285,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.47767857142857145,
+            "detection_ba": 0.46875,
+            "detection_macro_f1": 0.4682828282828283,
+            "attribution_ba": 0.3482142857142857,
+            "attribution_top1": 0.3482142857142857,
+            "attribution_macro_f1": 0.34082694839166977
+          }
+        },
+        {
+          "shuffle_seed": 104,
+          "alpha": 1.0,
+          "selection_score": 0.3816964285714286,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.46875,
+            "detection_ba": 0.4955357142857143,
+            "detection_macro_f1": 0.4727891156462585,
+            "attribution_ba": 0.26785714285714285,
+            "attribution_top1": 0.26785714285714285,
+            "attribution_macro_f1": 0.2564934121796867
+          }
+        },
+        {
+          "shuffle_seed": 105,
+          "alpha": 0.1,
+          "selection_score": 0.42857142857142855,
+          "validation": {
+            "videos": 140,
+            "fake_videos": 112,
+            "detection_auc": 0.5787627551020409,
+            "detection_ba": 0.5982142857142857,
+            "detection_macro_f1": 0.5570444816675972,
+            "attribution_ba": 0.2589285714285714,
+            "attribution_top1": 0.25892857142857145,
+            "attribution_macro_f1": 0.24788106841033866
+          }
+        }
+      ],
+      "elapsed_seconds": 1.6433389999947394
+    }
+  },
+  "source_hashes": {
+    "experiments/assemble_pilot.py": {
+      "working_tree_sha256": "8d72cba6e1b91e32969fd087b22f7acf34fa9c11c24c26c5efef8493fa351ee1",
+      "lf_normalized_sha256": "7ad55efc97a1a8ce99a5f7039e23e7a82bcbfdce2bb7fa84d7dcc42b46bf6717"
+    },
+    "experiments/analyze_validation.py": {
+      "working_tree_sha256": "08f6297f0c398ac509b97d03ed9e6f864e429f30d680f9b0d8b0190513d51566",
+      "lf_normalized_sha256": "a1fa4622981ee3d8689f54e20c5137f96341b688a6118d0a9690fe40e942c6cb"
+    },
+    "experiments/freeze_validation_thresholds.py": {
+      "working_tree_sha256": "c774e6abe2149927b4c2a6b7a276629be31063c8c4acfa9e1b7ecdbc704b9239",
+      "lf_normalized_sha256": "ebd883a3d8a8716eadf1d374bf0a8f9150bed729204caee3b4b183cac878efd0"
+    },
+    "experiments/probe_validation.py": {
+      "working_tree_sha256": "e19e7a5694b6cf958a8db1334ead233ce9cf79c808bb4edabe0c5fa9b7203931",
+      "lf_normalized_sha256": "4cd6200bca947a92bcdad49d7bf0c8d7c9137c54ade5b65a5f511913cfd7dacc"
+    },
+    "experiments/research_metrics.py": {
+      "working_tree_sha256": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+      "lf_normalized_sha256": "4f342ce6127c358c00a20c431b42ee37f043c63a0f460295264acc12dd5314a2"
+    },
+    "experiments/common.py": {
+      "working_tree_sha256": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc",
+      "lf_normalized_sha256": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc"
+    },
+    "experiments/features.py": {
+      "working_tree_sha256": "65c67c09492e744c94b8240b3ed05438dd8ada3cd4d9a891ad8cf1fa5c4219ef",
+      "lf_normalized_sha256": "65c67c09492e744c94b8240b3ed05438dd8ada3cd4d9a891ad8cf1fa5c4219ef"
+    },
+    "experiments/metrics.py": {
+      "working_tree_sha256": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",
+      "lf_normalized_sha256": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110"
+    },
+    "experiments/model.py": {
+      "working_tree_sha256": "85bdfdec7ce38f8e91c34d68f53c9a76e11c0ae30ea38c2c55302fb4fd6eacc0",
+      "lf_normalized_sha256": "85bdfdec7ce38f8e91c34d68f53c9a76e11c0ae30ea38c2c55302fb4fd6eacc0"
+    },
+    "experiments/train_paired.py": {
+      "working_tree_sha256": "c2f2f83d3c9c7b89af8aa563c48496bace1515e97d7966a46be1b0c554d4be41",
+      "lf_normalized_sha256": "c2f2f83d3c9c7b89af8aa563c48496bace1515e97d7966a46be1b0c554d4be41"
+    },
+    "experiments/prepare_jpeg.py": {
+      "working_tree_sha256": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239",
+      "lf_normalized_sha256": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239"
+    },
+    "experiments/configs/pilot.json": {
+      "working_tree_sha256": "18959908d5625609fcaccb15dc90af4d0b9e917b4202c608c17a193fe86bb93a",
+      "lf_normalized_sha256": "18959908d5625609fcaccb15dc90af4d0b9e917b4202c608c17a193fe86bb93a"
+    },
+    "experiments/configs/sanity_reference.json": {
+      "working_tree_sha256": "58f72cc8e5ba3282920adbed40eb43d4811fba90d120c8c32a54ed04a866a50c",
+      "lf_normalized_sha256": "2a37e6f0a2b94d5b90d21c34fb96fd3b0f62f912d228a79cfa37ecc99070acda"
+    }
+  },
+  "limitations": [
+    "RGB training seed 42 only",
+    "Validation predictions used for checkpoint and threshold selection",
+    "Bootstrap intervals conditional on selected models and thresholds",
+    "No reported main test results or held-out JPEG qualities",
+    "DINOv2, video codecs and final shortcut controls remain pending",
+    "No individual-generator attribution or algorithmic novelty established"
+  ]
+}

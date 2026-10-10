@@ -1,26 +1,33 @@
-# Module progress tracker
+﻿# Module progress tracker
 
-Prepared 10 October 2026. Status describes this workspace's current evidence, not planned completion.
+Updated 11 October 2026 from user-supplied execution results.
+Status describes completed evidence, not planned experiments.
 
-| ID | Module | Prerequisites | Current state | Next completion check |
-|---|---|---|---|---|
-| 01 | Research scope and analysis rules | None | Initial C23 specification recorded | Finalize measured run budget and log any subsequent design changes |
-| 02 | Literature/baseline selection | 01 | Review/bibliography prepared | Complete access/code audit for the method selected for reproduction |
-| 03 | Environment/resource benchmark | None; real pilot later | Private preprocessing environment ready | Install GPU research stack; measure actual training step |
-| 04 | Dataset access/inventory | 01 | C23 mirror inventoried; 5,000 core videos | Full media decoding if needed; raw-reference extension optional |
-| 05 | Lineage/splits | 04 | Official 500 source-pair groups mapped without conflicts | Document remaining identity/YouTube-level limitations |
-| 06 | Reference crops | 03–05 | 800 crops from 100-video smoke set, zero failures | Complete full 1,000-video pilot and coverage checks |
-| 07 | JPEG conditions | 06 | 7,200 real smoke manifest rows passed audit | Expand after full-pilot extraction; add distortion summaries |
-| 08 | Metrics/statistical harness | 01 | Partial implementation | Complete EER, retention, coverage and group bootstrap; verify edge cases |
-| 09 | End-to-end pilot | 03–08 | Real preprocessing smoke passed; classifier unrun | Learning sanity, source support and measured training-resource gate |
-| 10 | Representation panel | 09 | Five cheap descriptors; ML starters prepared | DINOv2 plus all claimed representations/probes verified on real data |
-| 11 | Main JPEG experiments | 08–10 | Unrun | Frozen reference/matched/mixed comparisons and predictions |
-| 12 | Video codecs | 09; 11 recommended | Encoder starter only | Full-video alignment, calibration and held-out-codec results |
-| 13 | Recompression | 11; 12 for video | JPEG generator tested synthetically | History comparison with final-distortion controls |
-| 14 | Source-aware pairing | 09–11 | Baseline trainer syntax-checked | Fair controls, validation sweep, actual seeds and held-out results |
-| 15 | External study | 11 | Optional, unstarted | Compatible external task/labels and independently audited data |
-| 16 | Statistics/controls/errors | 08; completed run families | Design prepared | Paired uncertainty, source failures, shortcut checks and bounded claims |
-| 17 | Reproducibility package | Continuous; finalized after 16 | Starter documentation | Traceable runs and regenerated paper figures/tables |
-| 18 | Paper | Background can begin now; results after 16–17 | Review material only | Complete checked manuscript matching actual evidence |
+| ID | Module | Current evidence | Work remaining |
+|---|---|---|---|
+| 01 | Scope and analysis rules | Initial C23 scope recorded; validation threshold rule frozen | Final dataset size and main comparison register |
+| 02 | Literature and baselines | Review and corrected bibliography prepared | Selected reproduction audits and final novelty refresh |
+| 03 | Environment and resources | Python 3.11/CUDA stack working; synthetic and real RGB training passed | Real peak-resource records and codec budget |
+| 04 | Dataset inventory | C23 mirror inventoried; 5,000 core videos; 1,000-video pilot assembled | Final expansion decision; authenticity limitations retained |
+| 05 | Lineage and splits | Official provenance groups audited; no known input-ID split conflicts | Identity/YouTube-level limitations and final support checks |
+| 06 | Reference crops | 8,000 crops from 1,000 videos; zero extraction failures | Visual crop QA and final documentation |
+| 07 | JPEG conditions | Reference/Q80/Q40 used in RGB validation and augmentation | Distortion measurements and full controlled sweep |
+| 08 | Evaluation | EER, confusion, gating, retention and paired bootstrap checked; thresholds recorded | Generalized final test analysis and repeated-seed reporting |
+| 09 | End-to-end pilot | RGB training and independent descriptor probes completed | Remaining crop, error and resource closeout checks |
+| 10 | Representations | Five reference descriptor probes and shuffled controls completed | Frozen DINOv2 features and compression comparisons |
+| 11 | Main JPEG study | Seed-42 pilot reference/augmentation RGB runs completed | Matched-quality, held-out evaluation and final seeds |
+| 12 | Video codecs | Starter implementation only | Encoding, alignment, calibration and experiments |
+| 13 | Recompression | Transform generator available | History experiments and distortion controls |
+| 14 | Paired learning | Weights 0, 0.1 and 1 evaluated on seed-42 validation | Final ablations and repeated-seed held-out comparisons |
+| 15 | External validation | Optional; unstarted | Separate data/task preparation if retained |
+| 16 | Statistics and controls | Conditional 14-group validation bootstrap; descriptor label-shuffle diagnostics | Test inference, seed variability, shortcut controls and error analysis |
+| 17 | Reproducibility | Source scripts, environment snapshot and aggregate pilot records prepared | Final run register and figure/table regeneration |
+| 18 | Paper | Literature and protocol material available | Manuscript, final figures, revisions and numerical checks |
 
-Read `research_roadmap.md` for each module's data, detailed steps, deliverables, and exit criterion. Use `experiment_matrix.md` to register runs before execution. Update this tracker only when the corresponding evidence exists.
+Pilot results are exploratory validation evidence. Threshold tuning and checkpoint
+selection use validation data; current intervals exclude selection uncertainty
+and training-seed variability. Main test results are not yet reported.
+
+See pilot_results_seed42.json for recorded pilot evidence and
+environment_deepfake.json for the current package snapshot.
+Original datasets, feature caches, checkpoints and raw predictions remain local.

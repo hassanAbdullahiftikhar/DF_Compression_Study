@@ -21,3 +21,4 @@ experiments/results/
 *.zip
 *.7z
 *.rar
+/DeepFake/
