@@ -1,0 +1,24 @@
+{
+  "fetched_utc": "2026-10-10T17:06:00.973045+00:00",
+  "source_ref": "master; exact downloaded content identified by SHA256",
+  "splits": {
+    "train": {
+      "url": "https://raw.githubusercontent.com/ondyari/FaceForensics/master/dataset/splits/train.json",
+      "sha256": "e59386911255e6fb0a79a7808ec2210536b8c0474268342694c4bca766d1b347",
+      "pairs": 360,
+      "original_ids": 720
+    },
+    "val": {
+      "url": "https://raw.githubusercontent.com/ondyari/FaceForensics/master/dataset/splits/val.json",
+      "sha256": "b48cc511f66938e05356aaa9c67e150b1e3638c355db3d745225b0022884b36e",
+      "pairs": 70,
+      "original_ids": 140
+    },
+    "test": {
+      "url": "https://raw.githubusercontent.com/ondyari/FaceForensics/master/dataset/splits/test.json",
+      "sha256": "886f5a0da623c25820692e0d8dc33d197ddb1db527a7f1cfcb9bcbca60fe4f40",
+      "pairs": 70,
+      "original_ids": 140
+    }
+  }
+}

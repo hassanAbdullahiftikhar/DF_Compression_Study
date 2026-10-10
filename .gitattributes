@@ -1,0 +1,12 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+# Preserve downloaded split bytes so the recorded source SHA256 stays valid.
+experiments/data/splits/train.json -text
+experiments/data/splits/val.json -text
+experiments/data/splits/test.json -text

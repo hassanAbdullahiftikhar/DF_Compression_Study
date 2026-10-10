@@ -1,0 +1,7 @@
+-r requirements-lite.txt
+scikit-learn>=1.5,<2
+scipy>=1.13,<2
+opencv-python-headless>=4.10,<5
+PyWavelets>=1.6,<2
+psutil>=6,<8
+av>=16,<20
