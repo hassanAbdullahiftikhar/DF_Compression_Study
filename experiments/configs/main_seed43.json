@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "seed": 43,
+  "task": "ffpp_closed_set_manipulation_attribution",
+  "input_size": 224,
+  "frames_per_video": 8,
+  "source_classes": [
+    "Deepfakes",
+    "Face2Face",
+    "FaceSwap",
+    "NeuralTextures"
+  ],
+  "jpeg": {
+    "subsampling": 2,
+    "evaluation_qualities": [
+      95,
+      80,
+      60,
+      40,
+      20
+    ],
+    "mixed_train_qualities": [
+      80,
+      40
+    ],
+    "held_out_qualities": [
+      95,
+      60,
+      20
+    ],
+    "history_sequences": [
+      [
+        80,
+        80
+      ],
+      [
+        80,
+        40
+      ],
+      [
+        40,
+        80
+      ]
+    ]
+  },
+  "video": {
+    "encoder": "libx264",
+    "held_out_encoder": "libx265",
+    "crf_values": [
+      18,
+      23,
+      32,
+      40
+    ],
+    "preset": "medium",
+    "pixel_format": "yuv420p",
+    "gop": 48,
+    "b_frames": 3,
+    "encoder_threads": 4,
+    "note": "Equal CRF across codecs is not equal distortion. Keep full videos before extraction."
+  },
+  "training": {
+    "backbone": "resnet18",
+    "microbatch_pairs": 8,
+    "epochs": 20,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "workers": 0,
+    "lambda_source": 1.0,
+    "lambda_pair_validation_grid": [
+      0.0,
+      0.1,
+      1.0
+    ]
+  },
+  "analysis": {
+    "primary_unit": "video",
+    "bootstrap_unit": "lineage_group",
+    "bootstrap_draws": 2000,
+    "final_seeds": [
+      42,
+      43,
+      44
+    ],
+    "retention_reference_margin": 0.05
+  }
+}

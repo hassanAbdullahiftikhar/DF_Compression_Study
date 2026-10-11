@@ -1,6 +1,28 @@
-# Experiment register template and planned comparisons
+# Experiment register and planned comparisons
 
-Prepared 10 October 2026. **All scientific experiments below are planned/unrun.** Synthetic starter checks are recorded separately in `verification_status.md`.
+Initial design prepared 10 October 2026; execution status updated 2026-10-12.
+Research is paused. The family table below retains the initial plan.
+
+## Current execution status
+
+| Family | Current evidence | Remaining |
+|---|---|---|
+| E00: Pipeline pilot | Completed | Historical evidence retained |
+| E01: Reference sensitivity | Six probes and RGB validation at ref/Q80/Q40 completed | Test and held-out qualities |
+| E02: Known-quality adaptation | Six Q40 probes completed; Q80 pending | Final matched-quality test comparison |
+| E03: Mixed-quality generalization | RGB augmentation trained at three seeds | Held-out testing; retained probe regimes |
+| E04: Task-sharing | Separate RGB encoder control unstarted | Selected control |
+| E05: Video coding | Starter design/code | Separate extension |
+| E06: Processing history | Generator and engineering checks | Scientific experiments if retained |
+| E07: Paired learning | Main weight-1 candidate at three seeds | Held-out comparisons |
+| E08: Source supervision | Binary-only RGB control unstarted | Selected control |
+| E09: Explanatory controls | Label shuffles and sampled crop QA completed | Background/border/content and sensitivity checks |
+| E10: External detection | Unstarted | Optional |
+| E11: Generator-family study | Unstarted | Optional separate study |
+
+Current results are validation evidence. Models, thresholds, penalties and
+regimes are recorded in [main_results_validation.json](main_results_validation.json).
+Final classifier test evaluation remains pending.
 
 ## Planned families of experiments
 

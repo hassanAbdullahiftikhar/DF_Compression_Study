@@ -1,33 +1,34 @@
-﻿# Module progress tracker
+# Module progress tracker
 
-Updated 11 October 2026 from user-supplied execution results.
-Status describes completed evidence, not planned experiments.
+Updated 2026-10-12. Research is paused at the user's request.
+Status describes completed evidence rather than planned experiments.
 
 | ID | Module | Current evidence | Work remaining |
 |---|---|---|---|
-| 01 | Scope and analysis rules | Initial C23 scope recorded; validation threshold rule frozen | Final dataset size and main comparison register |
-| 02 | Literature and baselines | Review and corrected bibliography prepared | Selected reproduction audits and final novelty refresh |
-| 03 | Environment and resources | Python 3.11/CUDA stack working; synthetic and real RGB training passed | Real peak-resource records and codec budget |
-| 04 | Dataset inventory | C23 mirror inventoried; 5,000 core videos; 1,000-video pilot assembled | Final expansion decision; authenticity limitations retained |
-| 05 | Lineage and splits | Official provenance groups audited; no known input-ID split conflicts | Identity/YouTube-level limitations and final support checks |
-| 06 | Reference crops | 8,000 crops from 1,000 videos; zero extraction failures | Visual crop QA and final documentation |
-| 07 | JPEG conditions | Reference/Q80/Q40 used in RGB validation and augmentation | Distortion measurements and full controlled sweep |
-| 08 | Evaluation | EER, confusion, gating, retention and paired bootstrap checked; thresholds recorded | Generalized final test analysis and repeated-seed reporting |
-| 09 | End-to-end pilot | RGB training and independent descriptor probes completed | Remaining crop, error and resource closeout checks |
-| 10 | Representations | Five reference descriptor probes and shuffled controls completed | Frozen DINOv2 features and compression comparisons |
-| 11 | Main JPEG study | Seed-42 pilot reference/augmentation RGB runs completed | Matched-quality, held-out evaluation and final seeds |
-| 12 | Video codecs | Starter implementation only | Encoding, alignment, calibration and experiments |
-| 13 | Recompression | Transform generator available | History experiments and distortion controls |
-| 14 | Paired learning | Weights 0, 0.1 and 1 evaluated on seed-42 validation | Final ablations and repeated-seed held-out comparisons |
-| 15 | External validation | Optional; unstarted | Separate data/task preparation if retained |
-| 16 | Statistics and controls | Conditional 14-group validation bootstrap; descriptor label-shuffle diagnostics | Test inference, seed variability, shortcut controls and error analysis |
-| 17 | Reproducibility | Source scripts, environment snapshot and aggregate pilot records prepared | Final run register and figure/table regeneration |
-| 18 | Paper | Literature and protocol material available | Manuscript, final figures, revisions and numerical checks |
+| 01 | Scope and rules | Initial rules, main inclusion policy and validation thresholds recorded | Final comparison/control register |
+| 02 | Literature | Initial review and qualified novelty assessment prepared | Final refresh and reproduction audits |
+| 03 | Environment | Nine measured RGB runs and frozen DINOv2 completed | RAM peaks and extension budgets |
+| 04 | Inventory | 5,000 core videos inventoried | Mirror authenticity limitations in paper |
+| 05 | Splits | 500 provenance groups; known input-ID separation audited | Identity/YouTube limitations and final support checks |
+| 06 | Crops | 39,898 crops; 102 failures; 4,999 usable videos; sampled QA | Complete-eight-frame sensitivity |
+| 07 | JPEG | Ref/Q80/Q40 validation and distortion measurements completed | Held-out qualities and final distortion analysis |
+| 08 | Evaluation | Frozen thresholds, aggregation, retention, gating and bootstrap implemented | Final test analysis |
+| 09 | Pilot | Pilot training, probes and preprocessing checks completed | Historical evidence retained |
+| 10 | Representations | Six reference probes and validation compression analyses completed | Test comparisons and retained mixed-quality baselines |
+| 11 | Main JPEG | Nine RGB runs; six Q40 probes; Q80 adaptation pending | Remaining controls/regimes and held-out testing |
+| 12 | Video codecs | Starter design/code only | Separate optional extension |
+| 13 | Recompression | Generator and engineering checks available | Scientific history controls if retained |
+| 14 | Paired learning | Weight-1 candidate evaluated at three seeds on validation | Held-out and task/source-supervision controls |
+| 15 | External validation | Unstarted | Optional external studies |
+| 16 | Statistics/controls | 70-group bootstrap, seed summaries and shuffle diagnostics completed | Shortcut/content controls and test inference |
+| 17 | Reproducibility | Scripts, configs, environment and aggregate milestone prepared | Final register and figure/table regeneration |
+| 18 | Paper | Literature and protocol material available | Manuscript, figures, numerical checks and revisions |
 
-Pilot results are exploratory validation evidence. Threshold tuning and checkpoint
-selection use validation data; current intervals exclude selection uncertainty
-and training-seed variability. Main test results are not yet reported.
+All classifier outcomes reported here are selected validation results.
+Bootstrap intervals exclude selection uncertainty; seed SD is descriptive.
+Test preprocessing has occurred; final classifier test evaluation is pending.
 
-See pilot_results_seed42.json for recorded pilot evidence and
-environment_deepfake.json for the current package snapshot.
-Original datasets, feature caches, checkpoints and raw predictions remain local.
+Next when resumed: Resume with the Q80 known-quality probe control, then prepare the remaining controls.
+
+See [the aggregate milestone](main_results_validation.json) for exact
+metrics, intervals, resource records and artifact hashes.

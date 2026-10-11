@@ -1,95 +1,75 @@
-# Experimental starter kit
+# Experiment workflow
 
-This is preparation for the protocol in `../research/experimental_protocol.md`. The downloaded C23 mirror is now present under `FaceForensics/FaceForensics++_C23`; its audit and real preprocessing checks are described in `../research/dataset_audit_c23.md`. There are no trained research classifiers or scientific accuracy results. PyTorch training and GPU speed remain unmeasured.
+Updated 2026-10-12. Research is paused.
+Current evidence and results are summarized in [the project README](../README.md)
+and [the validation milestone](../research/main_results_validation.json).
 
-## Environment
+## Current environment
 
-Use a private virtual environment. The bundled Python identified during preparation is:
-
-`C:/Users/hassa/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`
-
-The following commands describe the full research-environment recipe. The current installation state is recorded immediately below; GPU-training packages are still pending. Run from `C:/Users/hassa/Desktop/Sem7/MBR` in PowerShell:
-
-Update after dataset arrival: `.venv` now exists with the preprocessing packages listed in `environment-preprocessing.lock.txt`. The commands below are the remaining/full research-environment recipe, not evidence that torch is installed.
+Use the existing Python 3.11 DeepFake environment from the repository root:
 
 ```powershell
-& 'C:\Users\hassa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m venv .venv
-& .\.venv\Scripts\python.exe -m pip install --upgrade pip
-& .\.venv\Scripts\python.exe -m pip install -r experiments/requirements-research.txt
-& .\.venv\Scripts\python.exe -m pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
-& .\.venv\Scripts\python.exe experiments/preflight.py
-& .\.venv\Scripts\python.exe experiments/selftest.py
-& .\.venv\Scripts\python.exe experiments/benchmark_gpu.py --batch 8 --steps 100 --output experiments/results/gpu_batch8.json
+& .\DeepFake\Scripts\python.exe experiments/preflight.py
 ```
 
-Torch 2.7.1/cu128 is a documented reproducible Blackwell-compatible baseline, not a recommendation that it is the latest release. A current mutually compatible torch/torchvision CUDA 13.x stack is another option; use the official matrix and save installed versions. Do not copy old research repositories' GPU binaries blindly. FFmpeg/FFprobe with libx264 and libx265 are needed for the video extension and are absent from the inspected PATH.
+This is an environment check for reproduction, not part of the documentation
+export. The current stack is recorded in
+[environment_deepfake.json](../research/environment_deepfake.json).
+The earlier Python 3.12 lock describes historical preprocessing.
 
-For just audit/JPEG/descriptors/selftest, the existing bundled NumPy/Pillow suffice:
+## Completed workflow
+
+| Stage | Scripts |
+|---|---|
+| Inventory and official splits | audit_ffpp.py, fetch_ffpp_splits.py, common.py |
+| Fixed face crops | extract_reference_faces.py |
+| Reuse pilot crops and expand the cohort | prepare_main_expansion.py, assemble_main.py |
+| Three-seed measured RGB training | train_measured.py, train_paired.py, model.py |
+| RGB threshold freezing and validation analysis | freeze_main_thresholds.py, analyze_main_validation.py |
+| Deterministic and frozen DINOv2 features | features.py, extract_dinov2_features.py |
+| Reference ridge probes and label shuffles | probe_validation.py |
+| In-memory probe JPEG validation | evaluate_probe_compression.py |
+| Probe bootstrap | analyze_probe_validation.py |
+| Known-quality adaptation | fit_known_quality_probes.py |
+| Documentation/results export | export_validation_milestone.py |
+
+All nine main RGB runs use 20 epochs, eight pairs per batch and seeds
+42/43/44. The original checkpoint-selection rule is retained.
+Pair weight 1 was selected from the exploratory pilot.
+
+Reference probes select ridge penalties using reference validation.
+Known-quality probes use matched-quality validation. Scalers are fitted
+on the appropriate training features only. These are distinct tracks.
+
+## Resume point
+
+Q80 known-quality adaptation is pending.
+If pending, resume with:
 
 ```powershell
-& 'C:\Users\hassa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' experiments/selftest.py
+& .\DeepFake\Scripts\python.exe experiments/fit_known_quality_probes.py --quality 80
 ```
 
-## Data preparation contract
+Then prepare the remaining controls and final comparison register.
+Reference/Q80/Q40 are selection conditions; Q95/Q60/Q20 remain held out
+for the relevant generalization track.
 
-Obtain FF++ access and released splits through its official repository. Keep its train/val/test JSON files in `experiments/data/splits`. Build a reference crop manifest based on `manifest_template.csv`: paths must be absolute; input images must be fixed 224×224 PNG crops; `condition=ref`; every manipulation's original IDs and all shared provenance must have the same split and group ID. Do not infer all provenance from only the first filename component.
+predict_rgb.py produces test predictions. The earlier probe_features.py
+also scores test data; current validation uses probe_validation.py.
 
-For this C23 mirror, `audit_ffpp.py` now inventories the files and maps known inputs to official source-pair groups. `extract_reference_faces.py` performs deterministic frozen-YuNet extraction and logs reference geometry/failures; it was tested on 100 real videos. The full 1,000-video pilot's extraction is pending. `ref` means the C23-derived reference PNG; inherited compression history is recorded.
+## Storage and reproduction
 
-Completed data/audit paths and reproduction commands:
+JPEGs are generated in memory. Main manifests reuse existing crops and
+copy no images. Keep the underlying crop folders referenced by the manifests.
 
-```powershell
-& .\.venv\Scripts\python.exe experiments/audit_ffpp.py experiments/FaceForensics/FaceForensics++_C23 --official-splits experiments/data/splits --output experiments/data/audit_c23_new
-& .\.venv\Scripts\python.exe experiments/extract_reference_faces.py experiments/data/audit_c23/videos_pilot.csv experiments/data/c23_pilot --model experiments/models/face_detection_yunet_2023mar.onnx --official-splits experiments/data/splits
-```
+Known-quality fitting uses temporary numeric buffers in RAM and saves
+fitted heads, predictions and reports. Output tools refuse to overwrite
+existing destinations.
 
-The second command is the next full-pilot extraction. Do not reuse a nonempty output directory. `--groups-per-split 8 1 1` reproduces the smaller engineering check in a new directory. Public split lists can be obtained with `fetch_ffpp_splits.py`; saved copies and hashes already exist in `data/splits`.
+Raw media, feature caches, model parameters and predictions remain local.
+Aggregate evidence is exported to research/main_results_validation.json.
+Fresh reproduction requires dataset access and the recorded preprocessing
+and pretrained assets.
 
-```powershell
-& .\.venv\Scripts\python.exe experiments/common.py experiments/data/reference.csv --official-splits experiments/data/splits
-& .\.venv\Scripts\python.exe experiments/prepare_jpeg.py experiments/data/reference.csv experiments/data/jpeg_pilot --official-splits experiments/data/splits
-& .\.venv\Scripts\python.exe experiments/features.py experiments/data/jpeg_pilot/manifest.csv experiments/features/fft_pilot --representation fft
-```
-
-`prepare_jpeg.py` creates reference plus five single-pass and three repeated-pass conditions, logs hashes/encoder settings, and refuses to overwrite existing outputs. It is for pilot/evaluation materialization; the trainer generates selected JPEG conditions on demand to conserve storage. Crop geometry is provided by the reference preprocessing; the JPEG script does not perform face detection.
-
-`features.py` produces memory-mapped descriptors and a matching row manifest. Available families: `rgb`, `fft`, `dct`, `wavelet`, `residual`. They are low-cost deterministic probe baselines. RGB pooled pixels are not a learned ResNet embedding; residual is a declared Laplacian, not SRM; DCT statistics are recomputed from decoded crops. Frozen DINOv2 and stronger learned representation maps remain pending.
-
-Once scikit-learn is installed, `probe_features.py` fits balanced logistic detection and source probes. It fits feature scaling only on training rows, chooses regularization on video-level validation scores, and saves test predictions and numeric model parameters without pickle. It was syntax-checked; fitting was not executed in the inspected dependency-light environment.
-
-```powershell
-& .\.venv\Scripts\python.exe experiments/probe_features.py experiments/features/fft_pilot experiments/runs/fft_reference --official-splits experiments/data/splits --train-conditions ref
-& .\.venv\Scripts\python.exe experiments/probe_features.py experiments/features/fft_pilot experiments/runs/fft_mixed --official-splits experiments/data/splits --train-conditions ref jpeg_q80 jpeg_q40
-```
-
-By default, validation conditions match the training conditions. Keep held-out qualities out of model selection. The simple shared regularization selection is a starter protocol; predeclare any change to separate task-specific tuning.
-
-## Paired RGB baseline
-
-`model.py` and `train_paired.py` provide an ordinary ResNet-18 with binary, fake-source, and projection heads. Source loss excludes real samples. Both quality views receive supervised losses. Pair loss is cosine agreement of projections, and inverse-count loss weights address the 1-real/4-fake training imbalance. Validation uses only reference and training-domain qualities; test examples do not enter training or model selection.
-
-```powershell
-& .\.venv\Scripts\python.exe experiments/train_paired.py experiments/data/reference.csv experiments/runs/pair01 --official-splits experiments/data/splits --pair-weight 0.1 --pretrained
-& .\.venv\Scripts\python.exe experiments/train_paired.py experiments/data/reference.csv experiments/runs/pair0 --official-splits experiments/data/splits --pair-weight 0 --pretrained
-& .\.venv\Scripts\python.exe experiments/train_paired.py experiments/data/reference.csv experiments/runs/reference --official-splits experiments/data/splits --reference-only --pair-weight 0 --pretrained
-& .\.venv\Scripts\python.exe experiments/predict_rgb.py experiments/data/reference.csv experiments/runs/pair01/best.pt experiments/results/pair01_test.csv --official-splits experiments/data/splits
-& .\.venv\Scripts\python.exe experiments/metrics.py experiments/results/pair01_test.csv --threshold 0.5
-```
-
-The last threshold is an example. Choose the actual operating threshold on validation and freeze it before test. The starter's checkpoint ranking is average validation task balanced accuracy at 0.5; revise/predeclare selection rules before the final experiment. The `--pretrained` option downloads official ImageNet weights when absent. Training code was syntax-checked but could not be executed without its ML dependencies. Do not call its performance verified.
-
-`metrics.py` averages probabilities by video and condition and calculates AUROC, binary balanced accuracy/macro F1, and fake-only source balanced accuracy/top-1/macro F1. Missing class support produces undefined balanced accuracy. EER, source confusion matrices, detection-gated attribution, paired lineage bootstrap, and final inferential plots remain analysis tasks.
-
-## Video codec extension
-
-```powershell
-& .\.venv\Scripts\python.exe experiments/video_codec.py experiments/data/example_reference.mp4 experiments/data/transcoded/example_h264_crf23.mp4
-```
-
-The default prints a plan without encoding; add `--execute` when input data and FFmpeg are ready. It processes the complete video and records command, versions, and probe metadata. It refuses to overwrite a video. It does not perform face extraction or a distortion/PTS alignment audit. Preserve reference boxes/frame indices and validate timing before using the crops. Equal CRF between x264/x265 is not a matched-quality experiment.
-
-## Verification status
-
-- **Executed:** environment audit; official split mapping and structural checks on the 5,000 core files; full decoding of 15 sampled videos; reference face extraction on 100 videos; real JPEG/history generation on 800 crops; synthetic transform/metric/leakage checks; Python syntax checks.
-- **Not executed:** full-pilot face extraction, PyTorch forward/backward or training, new video encoding, DINOv2/learned feature extraction, published baseline reproduction, and scientific statistical inference.
-- **Next concrete gate:** finish full-pilot coverage and the isolated GPU research environment, then run the benchmark and training sanity check before the main grid.
+Frame failures are logged and unreplaced. The mixed-decoder compatibility
+check covered 80 crops in one training group; global equivalence is unverified.
