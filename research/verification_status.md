@@ -1,6 +1,14 @@
 # Verification record
 
-Date: 10 October 2026. No real-data experiments were run.
+> **Historical record — status reconciled 23 October 2026.** The table below
+> is the pre-experiment verification of 10 October 2026 and is kept unchanged
+> as a record. Several rows are superseded; see
+> [Status reconciliation](#status-reconciliation-23-october-2026) at the end.
+> Current status is maintained in [module_tracker.md](module_tracker.md),
+> [main_results_validation.json](main_results_validation.json) and
+> [main_results_test.json](main_results_test.json).
+
+Date: 10 October 2026. At that date, no real-data experiments had been run.
 
 | Check | Outcome |
 |---|---|
@@ -27,4 +35,23 @@ Synthetic checks establish code-path and mathematical behavior. They do not vali
 
 ## Update after the dataset download
 
-The C23 mirror is now present. All 7,000 metadata paths exist; 5,000 videos belong to the primary real/four-method study. Official split mapping yielded 500 complete source-pair groups without known input-ID conflicts. MP4 structural checks passed for all core videos; 15 sampled videos decoded completely with matching metadata counts/dimensions. A private preprocessing environment was created and locked. YuNet extraction produced 800 crops from 100 videos with zero logged failures; a training crop preview was inspected. JPEG/history generation produced 7,200 audited rows. Details and qualification of these checks are in `dataset_audit_c23.md`. Classifier training and scientific accuracy remain unmeasured.
+The C23 mirror is now present. All 7,000 metadata paths exist; 5,000 videos belong to the primary real/four-method study. Official split mapping yielded 500 complete source-pair groups without known input-ID conflicts. MP4 structural checks passed for all core videos; 15 sampled videos decoded completely with matching metadata counts/dimensions. A private preprocessing environment was created and locked. YuNet extraction produced 800 crops from 100 videos with zero logged failures; a training crop preview was inspected. JPEG/history generation produced 7,200 audited rows. Details and qualification of these checks are in `dataset_audit_c23.md`. At the time of that update, classifier training and scientific accuracy were unmeasured.
+
+## Status reconciliation (23 October 2026)
+
+| Historical row or statement (10 October) | Current evidence |
+|---|---|
+| "No real-data experiments were run" | Superseded. Main cohort assembled (39,898 crops, 4,999 videos); nine RGB runs, six reference probes, and Q40/Q80 known-quality probes completed on validation. See the module tracker and aggregate milestone. |
+| Python 3.12.14, NumPy 2.3.5; torch absent | Historical preprocessing interpreter only. Experiments use the Python 3.11.9 DeepFake environment with torch 2.7.1+cu128 (`environment_deepfake.json`). |
+| GPU benchmark `not_run` | Superseded by measured runs: main RGB runs took 49.1–56.0 min with about 500 MiB peak reserved PyTorch GPU memory; system RAM peaks remain unmeasured. |
+| Actual model training: not run | Superseded. All classifier results to date are **validation** evidence; classifier **test** scoring has not occurred. |
+| FFmpeg/FFprobe absent from PATH | Not rechecked. Video-codec work is an extension outside the frozen core. |
+| Free storage about 209 GiB | Snapshot only; about 198 GiB was free on 23 October 2026. |
+
+**Update, 24 October 2026.** The statement above that classifier test scoring has not occurred
+is now superseded. Test scoring took place once, under register gates G2–G4: scorers were
+verified on validation, the model-freeze manifest and Amendment 1 were recorded, then test
+was scored and analysed. See [main_results_test.json](main_results_test.json). About 196 GiB
+was free afterwards.
+
+The synthetic-check rows remain valid as code-path checks; they are not scientific results.

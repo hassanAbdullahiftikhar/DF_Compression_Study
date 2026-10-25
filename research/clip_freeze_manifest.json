@@ -1,0 +1,40 @@
+{
+  "status": "clip_freeze_manifest_before_test_scoring",
+  "register": "Amendments 4 and 5",
+  "frozen_on": "2026-10-25",
+  "clip_checkpoint_sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+  "models": {
+    "X7-REF": {
+      "threshold": 0.45009281620605984,
+      "parameters": "experiments/runs/c23_ext_clip_probes_validation/X7-REF/probe_parameters.npz",
+      "parameters_sha256": "96c1ad40daffe0026c9725581036f2aafa4efb62a31b358386b56bb6d967288d"
+    },
+    "X7-Q80": {
+      "threshold": 0.5043932567641725,
+      "parameters": "experiments/runs/c23_ext_clip_probes_validation/X7-Q80/probe_parameters.npz",
+      "parameters_sha256": "006f07a3163d46d54a4ba8239a7ce0c8303ea91acb0b79696acaf1d11f955bf0"
+    },
+    "X7-Q40": {
+      "threshold": 0.5199568604997042,
+      "parameters": "experiments/runs/c23_ext_clip_probes_validation/X7-Q40/probe_parameters.npz",
+      "parameters_sha256": "0507f814345b2de3323772d86b96d9f023bc2eb41b9c079ee12a868bb182e5cc"
+    }
+  },
+  "fit_report_sha256": "5dc9ccdd3d93ca0f455c18e27684c455e1bb5649cdf1a233256ef0fd7b47b567",
+  "verification_sha256": "114d63d302d19f3ebe2f17298d7f8f674082f2a890d6002f15d5c94389aa5458",
+  "scripts_sha256": {
+    "experiments/clip_probes.py": "fc50e4d94614f1a5aa450470b59f9fecdab1d4a30db0f6a388007d03ad7e9f9d",
+    "experiments/analyze_test.py": "bf30e4eb77c3da078d5baca09e86bd959f3acb7ffeae3eb1af6193dbc19cecf8",
+    "experiments/analyze_ext.py": "4d23499cc0dce570d99595c8f4d0696d45ad421aba4f0dbf9e708aed2894c752",
+    "experiments/codec_sweep.py": "84785a6975d91647d63b321cadb4a66fcedad0e810dbbde06e56445bfa2688a9",
+    "experiments/score_ext.py": "ff9d9daa1a66e222d83d84e9e137890c9d23da87224df0b9ffe854ed08d856e4",
+    "experiments/metrics.py": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",
+    "experiments/research_metrics.py": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+    "experiments/probe_validation.py": "e19e7a5694b6cf958a8db1334ead233ce9cf79c808bb4edabe0c5fa9b7203931",
+    "experiments/fit_known_quality_probes.py": "db7e863bb39f658ec94c601cb1d1187d32c0df485f089d11531a9a03ea9b627f",
+    "experiments/evaluate_probe_compression.py": "d1d02c51e206d8a7926ac50c458ce21754c0c942ff88a8fabe4d96a346844d3d",
+    "experiments/prepare_jpeg.py": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239",
+    "experiments/registered_models.py": "3e73803c2d7e42e7d5114f3f133a755d10093aa5916599c54d40c5dd8f24b860",
+    "experiments/common.py": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc"
+  }
+}

@@ -61,3 +61,5 @@ The core is complete when audited reference/JPEG inputs, all claimed representat
 ## Remaining implementation gates
 
 Complete the full pilot's preprocessing/coverage review, finish the statistical evaluator, install and benchmark GPU training, implement frozen DINOv2 extraction, and then freeze the final run budget before main test evaluation. This specification provides defaults; it does not mark those gates achieved.
+
+*Status, 23 October 2026:* these gates have been passed. The final run budget and test comparisons are frozen in [comparison_register.md](comparison_register.md). That register keeps this specification's primary contrast, the reference-trained Q20 attribution-minus-detection retention.

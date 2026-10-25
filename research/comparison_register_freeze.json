@@ -1,0 +1,115 @@
+{
+  "register": "research/comparison_register.md",
+  "register_version": "1.0",
+  "frozen_on": "2026-10-23",
+  "register_sha256": {
+    "working_tree_sha256": "375ff2f4ad6a6a39b452527ff2ff3ebe45372bb958ad76f506c3f807babf2983",
+    "lf_normalized_sha256": "375ff2f4ad6a6a39b452527ff2ff3ebe45372bb958ad76f506c3f807babf2983"
+  },
+  "test_scoring_status": "not_started",
+  "test_prediction_scan": {
+    "csv_files_scanned": 45,
+    "files_with_test_videos": []
+  },
+  "frozen_records": {
+    "experiments/data/c23_main/assembly.json": {
+      "working_tree_sha256": "e221f9a7e118b6e3c5bb8e0281389615ba2881ce19bfcc117af06506117706b6",
+      "lf_normalized_sha256": "d77ad6bf1e0f9f2dcf377822f85379f3249f75a611f09a48c7ed5554404f4c87"
+    },
+    "experiments/data/c23_main/reference.csv": {
+      "working_tree_sha256": "b9d5ab8dc8a6b101541374d85988dac5dbbeddf2a033b55e1c71791c45cfeb65",
+      "lf_normalized_sha256": "44da340ad7961c254a1a35abc2509518e5591d92fbcf8d4c02080d0affe6f0ea"
+    },
+    "experiments/data/c23_main/train_val_reference.csv": {
+      "working_tree_sha256": "56473b377a4074092f09f7ca1530e73de57045648a20d2e37bc2ecd00343431c",
+      "lf_normalized_sha256": "54f2d373a6f726253797ebbf89d2eac937758b634a81d2f3e8abd91b1f5a9904"
+    },
+    "experiments/results/main_validation_thresholds_seeds42_44.json": {
+      "working_tree_sha256": "6a45c823f7a827479d064456c45237f56e645e4187b96527645d36f841a9b203",
+      "lf_normalized_sha256": "de7a1df88f62b17592319369d5c76453e3c35797ae2317f93c6e83b3d651aaee"
+    },
+    "experiments/results/main_validation_analysis_seeds42_44.json": {
+      "working_tree_sha256": "d91e35f7aa9291d5e8ca3b656115f4851ec14e984f6e4f1650bd97a3a2235954",
+      "lf_normalized_sha256": "cdd0d51ac61627b37a2f85dab787142e72b117d035b185d3a86612d8ceb2f833"
+    },
+    "experiments/results/c23_main_probe_compression_validation/report.json": {
+      "working_tree_sha256": "4766f05560408827722efee39f4f0435284e554fbf80c1d0fd5a3bffafa1b6b3",
+      "lf_normalized_sha256": "a2565596d5f3b36608a2cc8b1f6191e0f656ca5ea217a36337481b499546fa8b"
+    },
+    "experiments/results/main_probe_validation_analysis.json": {
+      "working_tree_sha256": "a0dfdc2d04e31bd21b313176d229f3c7ee0a7fb7613403f6307934672326b9e4",
+      "lf_normalized_sha256": "29c290741e699bf670e9fac7878afd0572f286ae475060ae97b710d90bb66851"
+    },
+    "experiments/runs/c23_main_matched_q40_probes_validation/report.json": {
+      "working_tree_sha256": "3c37f6b1943ac438e577ef6d420b8a57534967baef3694a85a7bce7e88a8b4a4",
+      "lf_normalized_sha256": "9f68f93da067b6cc58b9e88212de1420c03880d37c05a27764fea4d53ea9dc77"
+    },
+    "experiments/runs/c23_main_matched_q80_probes_validation/report.json": {
+      "working_tree_sha256": "dcbffcf818ca9cfc267c35721577bb5dbd71c2909009cf2bfb6bbbc4815f2374",
+      "lf_normalized_sha256": "0082c0d8589d69a62d7842f51ae1b675ff455a4feca85fd7d6c4d64714defafc"
+    },
+    "experiments/results/eight_frame_sensitivity_validation.json": {
+      "working_tree_sha256": "b7e71435211f0957192749cf107e8bb1528a83acc485080417142a5718c5453e",
+      "lf_normalized_sha256": "176fade06faebbfa57c224a4e6a12daf8fc253db0ebeb98263c4b36879e200df"
+    }
+  },
+  "source_sha256": {
+    "experiments/common.py": {
+      "working_tree_sha256": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc",
+      "lf_normalized_sha256": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc"
+    },
+    "experiments/metrics.py": {
+      "working_tree_sha256": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",
+      "lf_normalized_sha256": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110"
+    },
+    "experiments/research_metrics.py": {
+      "working_tree_sha256": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+      "lf_normalized_sha256": "4f342ce6127c358c00a20c431b42ee37f043c63a0f460295264acc12dd5314a2"
+    },
+    "experiments/model.py": {
+      "working_tree_sha256": "85bdfdec7ce38f8e91c34d68f53c9a76e11c0ae30ea38c2c55302fb4fd6eacc0",
+      "lf_normalized_sha256": "85bdfdec7ce38f8e91c34d68f53c9a76e11c0ae30ea38c2c55302fb4fd6eacc0"
+    },
+    "experiments/train_paired.py": {
+      "working_tree_sha256": "c2f2f83d3c9c7b89af8aa563c48496bace1515e97d7966a46be1b0c554d4be41",
+      "lf_normalized_sha256": "c2f2f83d3c9c7b89af8aa563c48496bace1515e97d7966a46be1b0c554d4be41"
+    },
+    "experiments/train_measured.py": {
+      "working_tree_sha256": "1d029a22e40a5b0e9290d9566a498a7c24860395f1a9927bf9861d0c48b67289",
+      "lf_normalized_sha256": "b1d03271120b7ea3493f4098d406c51a322554217b98b1de91083bf2e3adc43e"
+    },
+    "experiments/predict_rgb.py": {
+      "working_tree_sha256": "886a5346ccae3c24aec11b5f5c2cea3e801b00c6911d8c1d4dcc68564c7cd2ce",
+      "lf_normalized_sha256": "886a5346ccae3c24aec11b5f5c2cea3e801b00c6911d8c1d4dcc68564c7cd2ce"
+    },
+    "experiments/prepare_jpeg.py": {
+      "working_tree_sha256": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239",
+      "lf_normalized_sha256": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239"
+    },
+    "experiments/features.py": {
+      "working_tree_sha256": "65c67c09492e744c94b8240b3ed05438dd8ada3cd4d9a891ad8cf1fa5c4219ef",
+      "lf_normalized_sha256": "65c67c09492e744c94b8240b3ed05438dd8ada3cd4d9a891ad8cf1fa5c4219ef"
+    },
+    "experiments/probe_validation.py": {
+      "working_tree_sha256": "e19e7a5694b6cf958a8db1334ead233ce9cf79c808bb4edabe0c5fa9b7203931",
+      "lf_normalized_sha256": "4cd6200bca947a92bcdad49d7bf0c8d7c9137c54ade5b65a5f511913cfd7dacc"
+    },
+    "experiments/evaluate_probe_compression.py": {
+      "working_tree_sha256": "d1d02c51e206d8a7926ac50c458ce21754c0c942ff88a8fabe4d96a346844d3d",
+      "lf_normalized_sha256": "167857c5d94ffd658cffb75f61552e46650610e282f7562df5a0c5ad731a865b"
+    },
+    "experiments/fit_known_quality_probes.py": {
+      "working_tree_sha256": "db7e863bb39f658ec94c601cb1d1187d32c0df485f089d11531a9a03ea9b627f",
+      "lf_normalized_sha256": "ec09506c560578cd3fc93fe724ffe5abe02ab9cb4fa8c8557ed6fa276d479e30"
+    },
+    "experiments/eight_frame_sensitivity.py": {
+      "working_tree_sha256": "113337f8f9ccf8e1ef0691275a4a4eb23e4d5e891f7ee943243a13f959c18f61",
+      "lf_normalized_sha256": "113337f8f9ccf8e1ef0691275a4a4eb23e4d5e891f7ee943243a13f959c18f61"
+    },
+    "experiments/freeze_register.py": {
+      "working_tree_sha256": "c481efab22050578f2f09c324936c40b852ecd13b12888cbf246dd032ce6fe46",
+      "lf_normalized_sha256": "c481efab22050578f2f09c324936c40b852ecd13b12888cbf246dd032ce6fe46"
+    }
+  },
+  "qualification": "Freezes the register text and the validation records it cites. Controls C1-C3 are registered but not yet trained; their checkpoints, heads and thresholds enter through the G3 model-freeze amendment."
+}

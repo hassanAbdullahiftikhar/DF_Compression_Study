@@ -1,0 +1,809 @@
+{
+  "status": "model_freeze_manifest_before_test_scoring",
+  "gate": "G3, research/comparison_register.md v1.0 section 9",
+  "frozen_on": "2026-10-24",
+  "register_v1_sha256": "375ff2f4ad6a6a39b452527ff2ff3ebe45372bb958ad76f506c3f807babf2983",
+  "register_v1_bytes": 15892,
+  "test_scoring_status": "not_started",
+  "test_prediction_scan": {
+    "csv_files_scanned": 67,
+    "files_with_test_videos": []
+  },
+  "test_conditions": [
+    "ref",
+    "jpeg_q95",
+    "jpeg_q80",
+    "jpeg_q60",
+    "jpeg_q40",
+    "jpeg_q20"
+  ],
+  "jpeg": {
+    "encoder": "Pillow",
+    "pillow": "12.3.0",
+    "jpeg_library": "8.0",
+    "subsampling": "4:2:0",
+    "optimize": false,
+    "progressive": false
+  },
+  "prediction_rule": "Fake when p_fake >= frozen threshold; attribution = argmax of four source probabilities",
+  "dinov2": {
+    "source_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "checkpoint_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9"
+  },
+  "model_count": 49,
+  "models": {
+    "F1_s42": {
+      "family": "F1",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.3288793472747784,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_reference_seed42/best.pt": "383a5685e6561eb3dd41f6da95a1cb3c9153f9f90568eed9d34bbd37207242eb"
+      },
+      "validation_predictions": "experiments/runs/c23_main_reference_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "462508bcea77cdfa59972b40b79658677ce2ae580bfe5b1bdc86778fdb2a33a3",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F2_s42": {
+      "family": "F2",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.6499275723472238,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_augmented_seed42/best.pt": "6d2906f3a6dda8cfe52bc331edaf55b803b1f10914e5c3423b7a32f604add45b"
+      },
+      "validation_predictions": "experiments/runs/c23_main_augmented_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "472080bd8348ba6e4ce11ba20b25f1e20d752cae2966a636bc6d0fc63ea3ac7b",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F3_s42": {
+      "family": "F3",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.6076385863125324,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed42/best.pt": "488537e13796c28b872bb8878a1e1f689de1aba549ab47df1e9a121df71d20fd"
+      },
+      "validation_predictions": "experiments/runs/c23_main_paired_w1_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "09c6dc12ea70472dda473b83d289c7f2c209e0ade070e907260c4d7c7de08825",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "C1-DET_s42": {
+      "family": "C1-DET",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.47170311212539673,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_det_seed42/best.pt": "4dd6ee0c6c715389eef783c36592ce6d0fe24b465e55a796e7591421ba74439c"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_det_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "2ff22c18e4eeda15ad0139898bca0eb719da67fe3fd038a1a0b0537cdee5fa93",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C1-ATT_s42": {
+      "family": "C1-ATT",
+      "kind": "rgb",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_att_seed42/best.pt": "de7bb294dec95864ec6153b0cf8b1193090a9f47ae9c60a6cb3ad81b75fa8e67"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_att_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "bbebd0aec18a37ba4d6500c0bf14d5b0609e4d61f212a4b0df5b96f238f3efbb",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C2-BIN_s42": {
+      "family": "C2-BIN",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.5416790153831244,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed42/best.pt": "e30f210b6d4367833cf6e3e7e1ec22c7c83a1656960dbaa4adf61107c7857a27"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c2_bin_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "ebad5bd0813e0e902ab113f7e773581d094090c0ebfbd1a8b4318a8da5e831e0",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "F1_s43": {
+      "family": "F1",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.3084944097790867,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_reference_seed43/best.pt": "1bc3266878cb2cad522710d55c9eea9d3cfec9a34ef0ec707b89f920c6349bb3"
+      },
+      "validation_predictions": "experiments/runs/c23_main_reference_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "f9b0fc77c895749a950a183b032885dcdcf6cf37ecfbcdad5d2e74142feb0847",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F2_s43": {
+      "family": "F2",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4550049528479576,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_augmented_seed43/best.pt": "964bb73c03d6d9ed0891f767f98f84f46248b5727eef13378b30b6e3a03ff10f"
+      },
+      "validation_predictions": "experiments/runs/c23_main_augmented_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "bf650846bb6fcb1340af872eb94b9b892c9a7f56c44d14b8b5df3692ddc57c94",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F3_s43": {
+      "family": "F3",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.6341867549344897,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed43/best.pt": "4f931215d92b38c75745f86d256cdc51e452325260099af2270d10359171042d"
+      },
+      "validation_predictions": "experiments/runs/c23_main_paired_w1_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "8703b715f19ff86e60e3d7548cdd111fe10b75c725f17de218ce8834e9bd79cf",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "C1-DET_s43": {
+      "family": "C1-DET",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.47358148588682525,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_det_seed43/best.pt": "98c4847c3c06d255d62628d88a410b8d6ae1da16d68ee4445f45a51b43051456"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_det_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "01171484628a488fb8634b70c42a4cfe4edefbd4c2dd830017426bbf65ed3a53",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C1-ATT_s43": {
+      "family": "C1-ATT",
+      "kind": "rgb",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_att_seed43/best.pt": "c50b2225f9463fc085eb86908a41a78a03456125b5f160176e0d535047d07479"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_att_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "c54e83cd48f995a9e8d3686223c0eabff32ef54a2e33336aabeec4d379f800fe",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C2-BIN_s43": {
+      "family": "C2-BIN",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.5751387141644955,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed43/best.pt": "11f9b952333b92fb12e32879e05b68e80f649b9c183d46e289d053ad772c7d4c"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c2_bin_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "82961845d0de6968e74d0d9981ec050de4d263934cbf2eeef07f1446dc3591bf",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "F1_s44": {
+      "family": "F1",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5108734446985181,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_reference_seed44/best.pt": "615c4757c5bd564a27ac988cc404aa95661aa08956f295462cc56f3685e7b5c2"
+      },
+      "validation_predictions": "experiments/runs/c23_main_reference_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "ae16ed6fbe3477170c3c7a72bdc44fc6f8748e34ae7b7619c18b722599524ff4",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F2_s44": {
+      "family": "F2",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5512900985777378,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_augmented_seed44/best.pt": "439d824512974efe277f7943a5b43135a2ff69a49005b2baa3fea6651c2a80e7"
+      },
+      "validation_predictions": "experiments/runs/c23_main_augmented_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "2d970a5679b65c73b5a98d372c0eff531e8703c85133183bca77bd6e28221d57",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "F3_s44": {
+      "family": "F3",
+      "kind": "rgb",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5562901813536882,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed44/best.pt": "b2445352744502ebff72827432357b6886b5e634ef5bc8486b2cc78b1577e63f"
+      },
+      "validation_predictions": "experiments/runs/c23_main_paired_w1_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "1019617d99a2224e1e379e03657f65894afc96e565df4a4a78ec8321c7d3f296",
+      "frozen_record": "experiments/results/main_validation_thresholds_seeds42_44.json"
+    },
+    "C1-DET_s44": {
+      "family": "C1-DET",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.5480153681710362,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_det_seed44/best.pt": "225fcf076303c078da7ead6f267d1661204ed3fb2127d3d5743e878f04c871e0"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_det_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "a2b9a1f25392f5402ad711a34d6ac48be52526fec06041368efd17ab078d0685",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C1-ATT_s44": {
+      "family": "C1-ATT",
+      "kind": "rgb",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c1_att_seed44/best.pt": "63c48220804846cc54923a0ad0988859e9b197a5d49a248f26f34eac9010df3f"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c1_att_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "85dcdf4f372b09b863065dc55389af0ade8e6971f3455a9f3d1591b46af012b1",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "C2-BIN_s44": {
+      "family": "C2-BIN",
+      "kind": "rgb",
+      "tasks": [
+        "detection"
+      ],
+      "threshold": 0.6074536517262459,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed44/best.pt": "822e5ec02696983ec624ea9ce8ee4e5b99d0d62547dd989312856a154aa7fea1"
+      },
+      "validation_predictions": "experiments/runs/c23_control_c2_bin_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "391cf51286175522118e230485876b4298c81944303c51ac2b0e1b9edf58abf5",
+      "frozen_record": "experiments/results/control_validation_thresholds.json"
+    },
+    "F3-R_s42": {
+      "family": "F3-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed42/best.pt": "488537e13796c28b872bb8878a1e1f689de1aba549ab47df1e9a121df71d20fd",
+        "experiments/runs/c23_control_source_readout_validation/f3_seed42/readout_parameters.npz": "651c54a6aa968fdbefd44ed0ec518d44d04fb05c2c26601e4ffd14bf3d8f37b6"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/f3_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "1943e3d54b599807adc8ec4ada9667e410a8db24da762b682afd3efc015c1331",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "F3_s42"
+    },
+    "C2-R_s42": {
+      "family": "C2-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed42/best.pt": "e30f210b6d4367833cf6e3e7e1ec22c7c83a1656960dbaa4adf61107c7857a27",
+        "experiments/runs/c23_control_source_readout_validation/c2_bin_seed42/readout_parameters.npz": "7ff2ad740f08fc1b6106868196aad4efcaea0a9073844fe9e8c54d5718de0953"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/c2_bin_seed42/validation_predictions.csv",
+      "validation_predictions_sha256": "db78f942ce5949a03cb1555ba0164f9dd8f93b87deac0b5cba3a183f1614c718",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "C2-BIN_s42"
+    },
+    "F3-R_s43": {
+      "family": "F3-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed43/best.pt": "4f931215d92b38c75745f86d256cdc51e452325260099af2270d10359171042d",
+        "experiments/runs/c23_control_source_readout_validation/f3_seed43/readout_parameters.npz": "499a23063631ad5aecf2075a6dd5ab91b26f2509b0fcf4e83ee0de0040cdee19"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/f3_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "80f5721f78a5588f4f213acb76789f15c4f80cc977eab0c111718d31f3663996",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "F3_s43"
+    },
+    "C2-R_s43": {
+      "family": "C2-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed43/best.pt": "11f9b952333b92fb12e32879e05b68e80f649b9c183d46e289d053ad772c7d4c",
+        "experiments/runs/c23_control_source_readout_validation/c2_bin_seed43/readout_parameters.npz": "5a60e3a612f72918086146f029734288ae66948dcd23e269699132c256f47be7"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/c2_bin_seed43/validation_predictions.csv",
+      "validation_predictions_sha256": "4cbc666df344c6849b0637a37ff79bc076960c8b83c74ac61b631b236e41a117",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "C2-BIN_s43"
+    },
+    "F3-R_s44": {
+      "family": "F3-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_paired_w1_seed44/best.pt": "b2445352744502ebff72827432357b6886b5e634ef5bc8486b2cc78b1577e63f",
+        "experiments/runs/c23_control_source_readout_validation/f3_seed44/readout_parameters.npz": "eaa023b677239c712cd54cacc1750d4697c78b46bb7b52e441c98b6c8dc361ef"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/f3_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "e966f067e80221e76f348ea8389b4f69bc7384f298a8118996c5170f87716eaf",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "F3_s44"
+    },
+    "C2-R_s44": {
+      "family": "C2-R",
+      "kind": "readout",
+      "tasks": [
+        "attribution"
+      ],
+      "threshold": null,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_c2_bin_seed44/best.pt": "822e5ec02696983ec624ea9ce8ee4e5b99d0d62547dd989312856a154aa7fea1",
+        "experiments/runs/c23_control_source_readout_validation/c2_bin_seed44/readout_parameters.npz": "5f8d7392588c30ca3be8fd89777d9373cd4d2e0b8337981ef17ddfd0bbd2f3e9"
+      },
+      "validation_predictions": "experiments/runs/c23_control_source_readout_validation/c2_bin_seed44/validation_predictions.csv",
+      "validation_predictions_sha256": "4971654a546844eb54f31414d8af9acc4f72c65e569202094f396e3f72cceb31",
+      "frozen_record": "experiments/runs/c23_control_source_readout_validation/report.json",
+      "encoder": "C2-BIN_s44"
+    },
+    "F4_fft": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5295512473618788,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_fft_probe_validation/probe_parameters.npz": "e00f0d6a18ec2483c9c2f00eef265e48742b3ad09e0bcb9eca6224823bec0abe"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/fft/validation_predictions.csv",
+      "validation_predictions_sha256": "066fb4c2f9052909a79fc54bc1e350766e741f806439926df3bb2d6f18220375",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F4_rgb": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5101698294190068,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_rgb_probe_validation/probe_parameters.npz": "71d7fff54828b9735e23101fae94419414cd259049bcf7f8db97eb4a40887cb2"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/rgb/validation_predictions.csv",
+      "validation_predictions_sha256": "12c2a81401879446b7efbaa6dfc837716f245b2cbfb9f4bb9def6cb8c46629f3",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F4_dct": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5005465051315627,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_dct_probe_validation/probe_parameters.npz": "dd66a2a7fa2b7a8225f0f022cf488e442c4263722bbf3d135f371a56a3e9c4bf"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/dct/validation_predictions.csv",
+      "validation_predictions_sha256": "e264670d1f3f2027feb9b2258ebab70ef85c636c30ec63948029c46683f6f843",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F4_wavelet": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4944279292942968,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_wavelet_probe_validation/probe_parameters.npz": "141b6f0073ef1cd5e3ecb28b4fa5036c13741b4ad932389250ac1ceccb7a2d15"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/wavelet/validation_predictions.csv",
+      "validation_predictions_sha256": "292b8d5ba35f87ebfd06748bd9ae216d02601bd1426e95a581afb22d4ee28e26",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F4_residual": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5088388771886421,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_residual_probe_validation/probe_parameters.npz": "6a828d45bccd9ecd6aa8931293455bab715c0660dfdac4bec7a7279f2e7bc6f0"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/residual/validation_predictions.csv",
+      "validation_predictions_sha256": "82ed046be073c5376059d0f1b2f1579859a0ab82f65cd582fee7d528e8ab319e",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F4_dinov2": {
+      "family": "F4",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.44505292399959673,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_dinov2_probe_validation/probe_parameters.npz": "fbc4d19cccae7aa3bca7ea3f42044deaa5386604785b93e5652c0fc4cdc20a6d"
+      },
+      "validation_predictions": "experiments/results/c23_main_probe_compression_validation/dinov2/validation_predictions.csv",
+      "validation_predictions_sha256": "ac856c63f3b1a9beba62a801f62837cbe1ef5f1369358c49b32908c83cd61a8f",
+      "frozen_record": "experiments/results/c23_main_probe_compression_validation/report.json"
+    },
+    "F5_fft": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5087574333885644,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/fft/probe_parameters.npz": "c4b7192cea7c09ea9ac0b12def871741f4a47b5eccc1bd3ce12ef215cf5e14c4"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/fft/validation_predictions.csv",
+      "validation_predictions_sha256": "2c7f50cb8b95d05533a4cd8801598aaef6c1d8a59faf33a06aeffbc61c601989",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F5_rgb": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.49389680302150707,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/rgb/probe_parameters.npz": "1583cbef2f0c9c6c399770f361e465d9339c029a59c99e28ac2afa3f3487e36f"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/rgb/validation_predictions.csv",
+      "validation_predictions_sha256": "c58e87cf739a3b110375d64046071511df61063b031a73984cf6f5234edeae8f",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F5_dct": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.47989257717129524,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/dct/probe_parameters.npz": "14e3dc68530a90227c49e72dc19d07ec2107e7359a9c8e6818a7ef820fbbe669"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/dct/validation_predictions.csv",
+      "validation_predictions_sha256": "466ff5d669e6b990b7f6efc262d088c681e9bcb4937632d49c583c1015ab32d7",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F5_wavelet": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4983635018405559,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/wavelet/probe_parameters.npz": "3869ce2489487d43bad715a3c52c7cb740e1d197d637c81a1566fc1565703b15"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/wavelet/validation_predictions.csv",
+      "validation_predictions_sha256": "06f3699f9416c77c8b941c364578a31dab8dd00069ab5b92fe2608ce898023f0",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F5_residual": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5159920829612794,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/residual/probe_parameters.npz": "c047a51a79e5781f9aed61341a48fdc434c54d1483291011d7605137921904ed"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/residual/validation_predictions.csv",
+      "validation_predictions_sha256": "88f5f351c800babd4d348ce2ad5ee687ba7d7d56ec9b48f8039cfa9366866642",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F5_dinov2": {
+      "family": "F5",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5162396286317127,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q80_probes_validation/dinov2/probe_parameters.npz": "28bed655c7cbb773e95edd1e287aa2ea4ad1a8aa1ebce7efe4dc452e6c8f7428"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q80_probes_validation/dinov2/validation_predictions.csv",
+      "validation_predictions_sha256": "64bc9b806361dd5fc86bcae14e72a8d6715c815ee8c8bb44066299d8dee4ce69",
+      "frozen_record": "experiments/runs/c23_main_matched_q80_probes_validation/report.json"
+    },
+    "F6_fft": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.49259924041477854,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/fft/probe_parameters.npz": "47c5fc4eecbe0002cd706f6ce656d55c825bc91a908a8293c24025bf61efd4a0"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/fft/validation_predictions.csv",
+      "validation_predictions_sha256": "167a503d64fd35a94d18568b5e0adb458433906dd2da15482a658ee935b862b5",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "F6_rgb": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4945808394265055,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/rgb/probe_parameters.npz": "f3da25a89600dd63ca7c6930578ab999d7d898583293400b0252defd9237e7ed"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/rgb/validation_predictions.csv",
+      "validation_predictions_sha256": "5a1bce4ae86d18fcbd5f766ab2d11b3d60cadab69784bd653a4638a15f78de7b",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "F6_dct": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.49929884013769393,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/dct/probe_parameters.npz": "61944565d4a43c6b82569dd466b81f860a534f5a88b06052cdbb17ffd8f6025f"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/dct/validation_predictions.csv",
+      "validation_predictions_sha256": "7aff1114fb06123c19e97efdbe42cc38eaf972dd49e7263511bc48ce4894e093",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "F6_wavelet": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4974936485960234,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/wavelet/probe_parameters.npz": "e821405d761644d31ab8527787b5660627e2e09741531d405bdc6e93887f5e54"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/wavelet/validation_predictions.csv",
+      "validation_predictions_sha256": "4fbc79368a9998d37e0790199ab8a49920abef4c7f0522ecaf8f2e6c4834d13e",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "F6_residual": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5084851186046659,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/residual/probe_parameters.npz": "f4bff408f04c068616d62173d6e2e21797568dfb6e03d786076972b2a3dcb94e"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/residual/validation_predictions.csv",
+      "validation_predictions_sha256": "b37dd5c6589654d1646aa3aec0508df00d44a0006c60c9075ffe267173f311c3",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "F6_dinov2": {
+      "family": "F6",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5058726214573639,
+      "artifacts_sha256": {
+        "experiments/runs/c23_main_matched_q40_probes_validation/dinov2/probe_parameters.npz": "a45172ff99d8c72d1fc2d8d5958f65b8b5cf5040737bcc39a71ebd83672b2caf"
+      },
+      "validation_predictions": "experiments/runs/c23_main_matched_q40_probes_validation/dinov2/validation_predictions.csv",
+      "validation_predictions_sha256": "8c9342a38207376eb4a4cc7cb812a744350af7f0fdb3ce22e0c835d3556f4f90",
+      "frozen_record": "experiments/runs/c23_main_matched_q40_probes_validation/report.json"
+    },
+    "C3a_fft": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5050237754893395,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/fft/probe_parameters.npz": "a795f1d84b64e28db73938d1c34e12db1c83cd5163eb1943ce99f89ec9b9d4a6"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/fft/validation_predictions.csv",
+      "validation_predictions_sha256": "0fabfc86de655a047cd00ed81449aedc01d7f532ead5c0d6c58c7351a9ce69c7",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3a_rgb": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5041822842671231,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/rgb/probe_parameters.npz": "7bd6d2ba4169feff9645debaaa032f77a71130eea9bdc44ea0249b8c6712232a"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/rgb/validation_predictions.csv",
+      "validation_predictions_sha256": "38deb31200019af8f3d0b40f95d8e5effbac50215662a8e737ce684cb63fc5d7",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3a_dct": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5060861811839861,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/dct/probe_parameters.npz": "af9aa9d4b1ae01703688ea48b658a592f3b7f634fc2e09d8522a9592abd82765"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/dct/validation_predictions.csv",
+      "validation_predictions_sha256": "cb4e767b4bae5733720baf20d4569ded1b19da61135883953c4ba5cea3a17b5b",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3a_wavelet": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.5034080710885471,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/wavelet/probe_parameters.npz": "78bf9ff28b99a4b8d1cd20bc20377c326a02096eb2bcd1e0e99106c501d3cb4c"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/wavelet/validation_predictions.csv",
+      "validation_predictions_sha256": "d661ca0d82fe8ff77b149fc4102026d85b4c7c4cad78544a2ae26db924e5225b",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3a_residual": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.4982360304529587,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/residual/probe_parameters.npz": "7009d3f82e0fb1f142d76ab2809ea9fca47d7abad8ac4b3ee2efd45edc17831a"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/residual/validation_predictions.csv",
+      "validation_predictions_sha256": "933c8ca6b8889e3f62aa73bd23127b64588e2e6c9de79a379d474dd9253c2191",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3a_dinov2": {
+      "family": "C3a",
+      "kind": "probe",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.500106833582896,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_border_probes_validation/dinov2/probe_parameters.npz": "c2db22a95191b8628601f089cff840f917d68bf486ef7f5818ad0bc0a690d013"
+      },
+      "validation_predictions": "experiments/runs/c23_control_border_probes_validation/dinov2/validation_predictions.csv",
+      "validation_predictions_sha256": "c63a08f92ec9ee0f698bd4822786129e77e8c53590b35ca63c7fbbe1d4dd129c",
+      "frozen_record": "experiments/runs/c23_control_border_probes_validation/report.json"
+    },
+    "C3b": {
+      "family": "C3b",
+      "kind": "metadata",
+      "tasks": [
+        "detection",
+        "attribution"
+      ],
+      "threshold": 0.49961996194108066,
+      "artifacts_sha256": {
+        "experiments/runs/c23_control_metadata_probe_validation/probe_parameters.npz": "5848818f74bab5ecdec2185452876df5fb8b81d49418ff321a088630ed29b5d4"
+      },
+      "validation_predictions": "experiments/runs/c23_control_metadata_probe_validation/validation_predictions.csv",
+      "validation_predictions_sha256": "67dce9ca8e699d4191d2c065e4cd526ec2a4cca8da918a17c34356321f7f51b3",
+      "frozen_record": "experiments/runs/c23_control_metadata_probe_validation/report.json"
+    }
+  },
+  "frozen_records_sha256": {
+    "experiments/results/main_validation_thresholds_seeds42_44.json": "6a45c823f7a827479d064456c45237f56e645e4187b96527645d36f841a9b203",
+    "experiments/results/control_validation_thresholds.json": "660997e84619f1361995a138d4b2edbafc1788e868dc08b7818b6c8501e7e5e1",
+    "experiments/runs/c23_control_source_readout_validation/report.json": "ccdd690823c1855236883b02cc71468454e927c2d9a136e81ccaf81199e4c575",
+    "experiments/results/c23_main_probe_compression_validation/report.json": "4766f05560408827722efee39f4f0435284e554fbf80c1d0fd5a3bffafa1b6b3",
+    "experiments/runs/c23_main_matched_q80_probes_validation/report.json": "dcbffcf818ca9cfc267c35721577bb5dbd71c2909009cf2bfb6bbbc4815f2374",
+    "experiments/runs/c23_main_matched_q40_probes_validation/report.json": "3c37f6b1943ac438e577ef6d420b8a57534967baef3694a85a7bce7e88a8b4a4",
+    "experiments/runs/c23_control_border_probes_validation/report.json": "8fdca100dbd01e0aa7ccf91bc04785f5c1f72052fe7a7b5a6dc54e47d085a7f5",
+    "experiments/runs/c23_control_metadata_probe_validation/report.json": "2e3bbd82c714e2aadbbdc016bd79256f8a635c5cc0aecef0f1f001d38b17885d"
+  },
+  "scripts_sha256": {
+    "experiments/score_rgb.py": "68fbb64b9626ae7a508e6abf2a51d28b7810b946ba693565a5b5b3c81db8c868",
+    "experiments/score_probes.py": "37ecc8ab3ee65546f03de7290d5161abbaa9458fe7720daa2b2a7a21a53569f5",
+    "experiments/analyze_test.py": "bf30e4eb77c3da078d5baca09e86bd959f3acb7ffeae3eb1af6193dbc19cecf8",
+    "experiments/registered_models.py": "3e73803c2d7e42e7d5114f3f133a755d10093aa5916599c54d40c5dd8f24b860",
+    "experiments/freeze_models.py": "ad02724ce91f169ad278c532f5e164e3954f440cc132c832b863301d9ef71449",
+    "experiments/train_paired.py": "c2f2f83d3c9c7b89af8aa563c48496bace1515e97d7966a46be1b0c554d4be41",
+    "experiments/train_control.py": "e43702a74232cb69378d160b4ef3f6c784f61f6e6ceb57603fdb43f3931523e2",
+    "experiments/fit_source_readout.py": "18ec97491c33c6f9e0711a595995eb606bab67ad4e1b443fc105f4d98ab5bf07",
+    "experiments/model.py": "85bdfdec7ce38f8e91c34d68f53c9a76e11c0ae30ea38c2c55302fb4fd6eacc0",
+    "experiments/prepare_jpeg.py": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239",
+    "experiments/metrics.py": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",
+    "experiments/research_metrics.py": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+    "experiments/probe_validation.py": "e19e7a5694b6cf958a8db1334ead233ce9cf79c808bb4edabe0c5fa9b7203931",
+    "experiments/evaluate_probe_compression.py": "d1d02c51e206d8a7926ac50c458ce21754c0c942ff88a8fabe4d96a346844d3d",
+    "experiments/fit_known_quality_probes.py": "db7e863bb39f658ec94c601cb1d1187d32c0df485f089d11531a9a03ea9b627f",
+    "experiments/fit_border_probes.py": "44d109071be0a006f4ec6bc5c901161c1b3f62b6e0bcba76e359ce55d874fb24",
+    "experiments/fit_metadata_probe.py": "06fe84f46b61bb32c144149f6ee81f6335daf6733c528f9d45adf3a9657bee90",
+    "experiments/features.py": "65c67c09492e744c94b8240b3ed05438dd8ada3cd4d9a891ad8cf1fa5c4219ef",
+    "experiments/common.py": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc",
+    "experiments/eight_frame_sensitivity.py": "113337f8f9ccf8e1ef0691275a4a4eb23e4d5e891f7ee943243a13f959c18f61",
+    "experiments/freeze_control_thresholds.py": "f35e0f2f72e5399279715b5fe69777a89c03fccc872c6b4dc2ce71f3a0ef1582",
+    "experiments/content_decomposition.py": "6e3e5e5883e08286f6f314c6d3fb21c8937fe57aff374ed097eb15b4efd3c1fc",
+    "experiments/freeze_register.py": "c481efab22050578f2f09c324936c40b852ecd13b12888cbf246dd032ce6fe46"
+  },
+  "g2_verification_sha256": {
+    "experiments/results/scorer_verification_rgb_validation.json": "cb00555c2a00fd2e414a7b159a397f0117ab10fa5ddf5586ff613589b9102482",
+    "experiments/results/scorer_verification_probes_validation.json": "1946870bfcf618f20df4c7f2d47b8548de12300cfac484505ff44042c7326f57",
+    "experiments/results/test_analysis_dryrun_validation.json": "bb308d7d9af51ae6e156176031bb324af8c29edd170a839ba6ee04f66e18e7fe"
+  },
+  "qualification": "Thresholds, heads and checkpoints were selected on validation only. Nothing listed here may change after test scoring starts (register section 9)."
+}

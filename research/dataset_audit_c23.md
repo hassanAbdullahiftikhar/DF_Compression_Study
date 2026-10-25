@@ -101,6 +101,8 @@ Do not assume that an equal frame number identifies equal visual content across 
 
 ## Next gates
 
+*Historical (preparation stage). As of 23 October 2026, all four gates have been passed on validation, and classifier test scoring has not occurred. See [module_tracker.md](module_tracker.md) and [comparison_register.md](comparison_register.md).*
+
 1. Complete the full 1,000-video pilot's crop extraction and source/failure coverage review.
 2. Finish the statistical evaluator and stronger representation extraction.
 3. Install/benchmark the GPU research stack and run a tiny training sanity check.

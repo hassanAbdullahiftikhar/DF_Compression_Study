@@ -2,6 +2,15 @@
 
 Prepared 10 October 2026. This is a proposed protocol, not measured experimental results. Numerical compression settings below replace equations/values missing from the supplied Markdown; they are recommendations, not recovered text.
 
+> **Status note, 23 October 2026.** This document is the original design
+> rationale and is retained as written. Statements about missing software,
+> pending datasets, or unrun experiments in §9 and §11 describe 10 October
+> and are superseded; see the dated notes in §6, §9 and §11. The binding
+> definition of what will be compared on the test cohort is now
+> [comparison_register.md](comparison_register.md), frozen before any
+> classifier test scoring. Where this protocol and the register differ,
+> the register governs.
+
 ## 1. Scope and operational definitions
 
 The primary project is **closed-set FF++ manipulation-method attribution under compression**, alongside binary real/fake detection. Fake source labels are Deepfakes, Face2Face, FaceSwap, NeuralTextures. Real examples do not have a fake source label. Distinguish this from architecture identification, trained checkpoint attribution, open-set discovery, and fully synthetic image attribution.
@@ -90,6 +99,8 @@ Required training regimes:
 
 If time permits, reproduce ADD or QAD on a small backbone and transparently adapt its source head. Published scores using different splits/backbones/frame counts must not be treated as directly comparable experimental results. Keep exact paper reproduction distinct from architecture-inspired controls.
 
+*Implementation status, 23 October 2026:* regimes 1 and 6 (pair weight 1) are trained at three seeds. The run labelled "JPEG augmentation" is the two-view, pair-weight-0 model (reference view plus a Q80/Q40 view), so it implements regime 4 and serves as the augmentation baseline; a separate single-view regime 3 was not run. Regimes 2 and 5 are retained as registered controls. Regime 7 and ADD/QAD reproduction are outside the frozen core. See the comparison register.
+
 For x and its degraded counterpart C_q(x), let z=E(x), z_q=E(C_q(x)), binary target y∈{0,1}, fake source s∈{0,1,2,3}. A transparent objective is:
 
 \[
@@ -155,6 +166,8 @@ NVIDIA specifies the desktop RTX 5070 as 12 GB GDDR7 and compute capability 12.0
 
 Blackwell needs a compatible PyTorch binary. Current releases should follow the [official install matrix](https://pytorch.org/get-started/previous-versions/); the [2.12 release notes](https://pytorch.org/blog/pytorch-2-12-release-blog/) move newer GPUs to CUDA 13.0+ builds. The starter setup pins documented torch 2.7.1/torchvision 0.22.1 cu128 as a conservative reproducible baseline, rather than claiming it is latest. Use one internally compatible stack and run the GPU forward/backward test. The driver's reported CUDA capability is not the installed toolkit version. Old repository CUDA/PyTorch environments may not support this GPU. Global software was not changed during preparation.
 
+*Superseded observations, 23 October 2026:* the "no torch …" and "FFmpeg absent" statements describe the 10 October bundled Python. Experiments now run in the Python 3.11.9 DeepFake environment with torch 2.7.1+cu128 (`environment_deepfake.json`). Measured main RGB runs took 49.1–56.0 minutes with about 500 MiB peak reserved PyTorch GPU memory, using eight pairs per microbatch and workers=0. FFmpeg was not rechecked because video codecs are an extension. The resource table below remains a set of initial estimates.
+
 ### Starting resource settings — estimates, not benchmarks
 
 | Workload | Starting microbatch | Local assessment |
@@ -191,6 +204,49 @@ The proposal's sixteen weeks are reasonable if weeks 1–2 cover access/preparat
 
 ## 11. Preparation completed versus pending
 
+*Historical (10 October 2026); superseded by the status below.*
+
 Completed: review of twelve references with access qualifications; novelty search including close predecessors; local GPU/CPU/disk audit; explicit protocol and configs; manifest/leakage checks; deterministic JPEG/recompression tools; descriptor extraction; optional ResNet two-head trainer and GPU benchmark entry points; synthetic smoke verification of the dependency-light preparation path.
 
 Pending: dataset access/download, detector choice and face extraction, production provenance grouping, installed research environment/FFmpeg, GPU training benchmark, DINOv2 extraction, full learned transform-map models, paper-baseline reproduction, grouped confidence intervals on real predictions, and all scientific results. These are ongoing research stages, not findings that can be fabricated during setup.
+
+### Status on 23 October 2026
+
+Completed since 10 October:
+- Dataset (Kaggle FF++ C23 mirror) obtained and audited.
+- YuNet face extraction and provenance grouping.
+- Main cohort assembled.
+- Research environment set up, with measured GPU training.
+- Frozen DINOv2-small extraction.
+- Nine three-seed RGB runs.
+- Six reference-trained probes.
+- Q40/Q80 known-quality probes.
+- Group-bootstrap validation intervals.
+- Validation complete-eight-frame sensitivity.
+
+All of these are **validation** results.
+
+Still pending:
+- The registered controls.
+- Classifier test scoring at reference and Q95/Q80/Q60/Q40/Q20.
+- Test statistics.
+- The paper.
+
+Out of the frozen core:
+- Learned transform-map models.
+- Paper-baseline reproduction.
+- FFmpeg-based video codecs.
+- Recompression history.
+
+See [comparison_register.md](comparison_register.md) and [module_tracker.md](module_tracker.md).
+
+### Status on 24 October 2026
+
+Completed since 23 October, in register order:
+- G1: the registered controls C1–C3 were trained or fitted and frozen on validation.
+- G2: test scorers reproduced the stored validation predictions of all 49 registered models.
+- G3: the model-freeze manifest (`model_freeze_manifest.json`) and register Amendment 1 were recorded.
+- G4: every registered model was scored once on test at reference and Q95/Q80/Q60/Q40/Q20,
+  and the registered analysis ran once.
+
+Results: [main_results_test.json](main_results_test.json). Still pending: figures, tables and the paper.

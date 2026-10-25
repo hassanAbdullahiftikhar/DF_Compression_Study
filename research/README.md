@@ -1,6 +1,6 @@
 # Research documents and current evidence
 
-Updated 2026-10-12. Research is paused after the Q40 known-quality control.
+Updated 2026-10-25. Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains.
 
 The proposal in Mgr.md was evaluated as source material. The literature
 review covers its references and qualifies the project's novelty claims.
@@ -11,18 +11,19 @@ The main cohort contains 39,898 crops from 4,999 videos.
 Nine RGB runs across three seeds, six reference-trained probes,
 validation compression sweeps, frozen operating thresholds and
 70-group bootstrap analyses are complete.
-Six Q40 adaptation probes are complete; Q80 adaptation is pending.
+Six Q40 adaptation probes are complete; Q80 adaptation: complete, validation only.
 
-All classifier results currently reported are validation evidence.
-Final test classification, the held-out quality sweep, selected controls
-and the manuscript remain unfinished.
+Registered held-out test results (gates G2-G4, 24 October 2026) are in
+[main_results_test.json](main_results_test.json). They come from one scoring pass
+after the [model-freeze manifest](model_freeze_manifest.json) and register Amendment 1.
+Validation evidence remains in the validation milestone. The manuscript is unfinished.
 
 Read these first:
 
 1. [Project overview and results](../README.md)
-2. [Aggregate validation milestone](main_results_validation.json)
+2. [Registered test results](main_results_test.json) and [aggregate validation milestone](main_results_validation.json)
 3. [Module tracker](module_tracker.md)
-4. [Experiment register](experiment_matrix.md)
+4. [Frozen comparison register](comparison_register.md) and [experiment register](experiment_matrix.md)
 5. [Main cohort specification](main_cohort_specification.md)
 6. [Initial analysis specification](module1_specification.md)
 7. [Literature and novelty assessment](literature_review.md)
@@ -36,6 +37,6 @@ register and aggregate milestone.
 
 Broad claims of first studying attribution under compression or inventing
 paired compression learning remain unsupported. Final conclusions depend
-on held-out evaluation and controls.
+on the registered held-out results and controls, including null results.
 
-Next when resumed: Resume with the Q80 known-quality probe control, then prepare the remaining controls.
+Next: Prepare final figures and tables from research/main_results_test.json, refresh the literature review and write the manuscript, reporting every registered outcome.

@@ -22,3 +22,21 @@ experiments/results/
 *.7z
 *.rar
 /DeepFake/
+
+# Local datasets (never commit media)
+DFDM/
+Celeb-DF*/
+
+# Local notes and assistant/session files (shared separately, not part of the project record)
+context.md
+CLAUDE.md
+**/CLAUDE.md
+.claude/
+Mgr (1).md
+
+# Editor and OS clutter
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store

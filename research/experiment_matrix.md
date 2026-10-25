@@ -1,28 +1,29 @@
 # Experiment register and planned comparisons
 
-Initial design prepared 10 October 2026; execution status updated 2026-10-12.
-Research is paused. The family table below retains the initial plan.
+Initial design prepared 10 October 2026; execution status updated 2026-10-25.
+Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains. The family table below retains the initial plan.
 
 ## Current execution status
 
 | Family | Current evidence | Remaining |
 |---|---|---|
 | E00: Pipeline pilot | Completed | Historical evidence retained |
-| E01: Reference sensitivity | Six probes and RGB validation at ref/Q80/Q40 completed | Test and held-out qualities |
-| E02: Known-quality adaptation | Six Q40 probes completed; Q80 pending | Final matched-quality test comparison |
-| E03: Mixed-quality generalization | RGB augmentation trained at three seeds | Held-out testing; retained probe regimes |
-| E04: Task-sharing | Separate RGB encoder control unstarted | Selected control |
-| E05: Video coding | Starter design/code | Separate extension |
+| E01: Reference sensitivity | Six probes and RGB at ref/Q80/Q40 (validation); test at six conditions completed | Paper reporting |
+| E02: Known-quality adaptation | Q40 and Q80 probes; registered test comparison S3 completed | Paper reporting |
+| E03: Mixed-quality generalization | RGB augmentation at three seeds; tested at held-out Q95/Q60/Q20 | Paper reporting |
+| E04: Task-sharing | C1 separate models at three seeds; registered test comparison S4 completed | Paper reporting |
+| E05: Video coding | Post-freeze extension X5 on test (Amendments 2-3): H.264 CRF 40 breaks the JPEG direction; H.265 repeats it | Paper reporting as a labelled extension |
 | E06: Processing history | Generator and engineering checks | Scientific experiments if retained |
-| E07: Paired learning | Main weight-1 candidate at three seeds | Held-out comparisons |
-| E08: Source supervision | Binary-only RGB control unstarted | Selected control |
-| E09: Explanatory controls | Label shuffles and sampled crop QA completed | Background/border/content and sensitivity checks |
+| E07: Paired learning | Weight-1 candidate at three seeds; test S2: no reliable benefit over augmentation | Paper reporting |
+| E08: Source supervision | C2 binary-only paired model and readout; registered test comparison S5 completed | Paper reporting |
+| E09: Explanatory controls | Validation controls; test S6/S7 completed (C3b flagged material for attribution) | Paper reporting |
 | E10: External detection | Unstarted | Optional |
 | E11: Generator-family study | Unstarted | Optional separate study |
 
-Current results are validation evidence. Models, thresholds, penalties and
-regimes are recorded in [main_results_validation.json](main_results_validation.json).
-Final classifier test evaluation remains pending.
+Models, thresholds, penalties and regimes are recorded in
+[main_results_validation.json](main_results_validation.json) and frozen in
+[model_freeze_manifest.json](model_freeze_manifest.json). Registered test results are in
+[main_results_test.json](main_results_test.json).
 
 ## Planned families of experiments
 
