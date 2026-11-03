@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{External detection test E10: frozen FF++ detectors on the 518 official Celeb-DF v2 test videos, AUROC (\%), mean $\pm$ SD over three seeds.}
+\label{tab:e10}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+FF++ model & Ref & Q95 & Q80 & Q60 & Q40 & Q20 \\
+\midrule
+ResNet-18, reference (F1) & 63.3 $\pm$ 3.2 & 63.7 $\pm$ 2.2 & 63.4 $\pm$ 3.6 & 58.5 $\pm$ 5.3 & 56.9 $\pm$ 6.2 & 56.1 $\pm$ 2.7 \\
+ResNet-18, JPEG aug. (F2) & 71.9 $\pm$ 4.5 & 72.6 $\pm$ 3.9 & 73.3 $\pm$ 3.9 & 73.0 $\pm$ 4.1 & 71.5 $\pm$ 5.1 & 62.6 $\pm$ 4.6 \\
+ResNet-18, paired (F3) & 68.0 $\pm$ 2.7 & 68.2 $\pm$ 2.3 & 69.8 $\pm$ 1.3 & 68.2 $\pm$ 2.5 & 66.1 $\pm$ 2.7 & 60.8 $\pm$ 2.4 \\
+EfficientNet-B4, reference & 66.0 $\pm$ 1.4 & 66.5 $\pm$ 1.6 & 65.4 $\pm$ 2.6 & 61.3 $\pm$ 3.7 & 58.1 $\pm$ 5.2 & 53.4 $\pm$ 2.6 \\
+EfficientNet-B4, JPEG aug. & 72.1 $\pm$ 0.9 & 72.0 $\pm$ 1.2 & 72.4 $\pm$ 1.4 & 73.2 $\pm$ 2.0 & 72.7 $\pm$ 1.9 & 65.0 $\pm$ 2.2 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize FF++ comparison register Amendment 6; models, thresholds and preprocessing unchanged.}
+\end{table*}

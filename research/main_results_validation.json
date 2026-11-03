@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-10-25",
+  "as_of": "2026-10-28",
   "project_status": "active",
   "evidence_scope": "Selected validation results. Registered held-out test results are exported separately to research/main_results_test.json.",
   "cohort": {
@@ -17585,6 +17585,10 @@
       "working_tree_sha256": "2409d2ac3aa84c3f49cd3baa436506df91dba27dae798f1cbd32f2f6b7f62acd",
       "lf_normalized_sha256": "2409d2ac3aa84c3f49cd3baa436506df91dba27dae798f1cbd32f2f6b7f62acd"
     },
+    "experiments/celebdf_external.py": {
+      "working_tree_sha256": "6da0ff8bdc2c06e9b5cc29a10e41e411bed5656c38d5cc886cafaf95f7df3c08",
+      "lf_normalized_sha256": "6da0ff8bdc2c06e9b5cc29a10e41e411bed5656c38d5cc886cafaf95f7df3c08"
+    },
     "experiments/check_video_decode.py": {
       "working_tree_sha256": "0b4fc836234db99b4355a8fc1fa14037c5a398e7f8e8a5414a14c55c269ec64e",
       "lf_normalized_sha256": "0b4fc836234db99b4355a8fc1fa14037c5a398e7f8e8a5414a14c55c269ec64e"
@@ -17605,6 +17609,34 @@
       "working_tree_sha256": "6e3e5e5883e08286f6f314c6d3fb21c8937fe57aff374ed097eb15b4efd3c1fc",
       "lf_normalized_sha256": "6e3e5e5883e08286f6f314c6d3fb21c8937fe57aff374ed097eb15b4efd3c1fc"
     },
+    "experiments/dfdm_analyze.py": {
+      "working_tree_sha256": "f3f3dc2e742c6d94539923d5a671beeccc27501771486b636b7d65bbdf3850a7",
+      "lf_normalized_sha256": "f3f3dc2e742c6d94539923d5a671beeccc27501771486b636b7d65bbdf3850a7"
+    },
+    "experiments/dfdm_crops.py": {
+      "working_tree_sha256": "7446d542cb8d1aa60b862309862a85e2facf7652b7c86f7596248cac250a1ccd",
+      "lf_normalized_sha256": "7446d542cb8d1aa60b862309862a85e2facf7652b7c86f7596248cac250a1ccd"
+    },
+    "experiments/dfdm_freeze.py": {
+      "working_tree_sha256": "8f61ee2541095a9c7bac0df54cac287e08de43d20a0d1ce060d0981489945513",
+      "lf_normalized_sha256": "8f61ee2541095a9c7bac0df54cac287e08de43d20a0d1ce060d0981489945513"
+    },
+    "experiments/dfdm_lib.py": {
+      "working_tree_sha256": "3e15a96a9221b7b6a91f7654c6dd0834689b86b811e48c8a008c8d0d55062018",
+      "lf_normalized_sha256": "3e15a96a9221b7b6a91f7654c6dd0834689b86b811e48c8a008c8d0d55062018"
+    },
+    "experiments/dfdm_probes.py": {
+      "working_tree_sha256": "54b2a527d360be8e498b114d30b0d69506d68b40a552e3ee47d56e990a176131",
+      "lf_normalized_sha256": "54b2a527d360be8e498b114d30b0d69506d68b40a552e3ee47d56e990a176131"
+    },
+    "experiments/dfdm_score.py": {
+      "working_tree_sha256": "2daadb52a7345afaf2c86704576090b9ca8f0e88203f7195e4bec2eea34ef934",
+      "lf_normalized_sha256": "2daadb52a7345afaf2c86704576090b9ca8f0e88203f7195e4bec2eea34ef934"
+    },
+    "experiments/dfdm_train.py": {
+      "working_tree_sha256": "a73a780a61aaef6d8a548cb37ce5315f40ee4af5d5983d19046f503a747631be",
+      "lf_normalized_sha256": "a73a780a61aaef6d8a548cb37ce5315f40ee4af5d5983d19046f503a747631be"
+    },
     "experiments/eight_frame_sensitivity.py": {
       "working_tree_sha256": "113337f8f9ccf8e1ef0691275a4a4eb23e4d5e891f7ee943243a13f959c18f61",
       "lf_normalized_sha256": "113337f8f9ccf8e1ef0691275a4a4eb23e4d5e891f7ee943243a13f959c18f61"
@@ -17614,8 +17646,8 @@
       "lf_normalized_sha256": "167857c5d94ffd658cffb75f61552e46650610e282f7562df5a0c5ad731a865b"
     },
     "experiments/export_validation_milestone.py": {
-      "working_tree_sha256": "b72241c561473e81c08ad4a7330ea8a11d6946d0c250193539008f20d6b72336",
-      "lf_normalized_sha256": "7236c934bc3dee6036361439552e9a268dce09697447717e7425cd9f2ad37c74"
+      "working_tree_sha256": "b5fb4b3a5d162510ea09106e8953d3b7b7931652da3866a70ef42e0e37c59e86",
+      "lf_normalized_sha256": "d85f31e00119ecdec094f6602db2bfcab779b3a340cbd9f6767ede46c5282162"
     },
     "experiments/extract_dinov2_features.py": {
       "working_tree_sha256": "19425b88aa988d00de974e662e75ed79ac8cb8b2d3c25bea13f348c2092fd1d8",
@@ -17657,6 +17689,10 @@
       "working_tree_sha256": "f35e0f2f72e5399279715b5fe69777a89c03fccc872c6b4dc2ce71f3a0ef1582",
       "lf_normalized_sha256": "f35e0f2f72e5399279715b5fe69777a89c03fccc872c6b4dc2ce71f3a0ef1582"
     },
+    "experiments/freeze_dfdm_register.py": {
+      "working_tree_sha256": "ac35e0d136095347ccc4c5ce07d1f6e1deed8a0f26fb2d792556e444895421ae",
+      "lf_normalized_sha256": "ac35e0d136095347ccc4c5ce07d1f6e1deed8a0f26fb2d792556e444895421ae"
+    },
     "experiments/freeze_ext_models.py": {
       "working_tree_sha256": "f81fe64a7267acb50b94f545a4890a9d3bcffb2e37f097f255031cee0073c68c",
       "lf_normalized_sha256": "f81fe64a7267acb50b94f545a4890a9d3bcffb2e37f097f255031cee0073c68c"
@@ -17676,6 +17712,14 @@
     "experiments/freeze_validation_thresholds.py": {
       "working_tree_sha256": "c774e6abe2149927b4c2a6b7a276629be31063c8c4acfa9e1b7ecdbc704b9239",
       "lf_normalized_sha256": "ebd883a3d8a8716eadf1d374bf0a8f9150bed729204caee3b4b183cac878efd0"
+    },
+    "experiments/jepa_probes.py": {
+      "working_tree_sha256": "7f93120389ecc3e86903e0a926cbe5e021b41bdab13bf1b8f71687585de1a3c0",
+      "lf_normalized_sha256": "7f93120389ecc3e86903e0a926cbe5e021b41bdab13bf1b8f71687585de1a3c0"
+    },
+    "experiments/make_paper_figures.py": {
+      "working_tree_sha256": "f1b25268a7f9435859ecd92e2007361e817200d93eb46154ab18c962cb1865ba",
+      "lf_normalized_sha256": "f1b25268a7f9435859ecd92e2007361e817200d93eb46154ab18c962cb1865ba"
     },
     "experiments/metrics.py": {
       "working_tree_sha256": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="252pt" height="194pt" viewBox="0 0 252 194" font-family="Arial, Helvetica, sans-serif">
+<rect width="252" height="194" fill="#ffffff"/>
+<line x1="40.00" y1="162.00" x2="244.00" y2="162.00" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="164.50" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">−0.25</text>
+<line x1="40.00" y1="140.67" x2="244.00" y2="140.67" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="143.17" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0</text>
+<line x1="40.00" y1="119.33" x2="244.00" y2="119.33" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="121.83" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.25</text>
+<line x1="40.00" y1="98.00" x2="244.00" y2="98.00" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="100.50" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.5</text>
+<line x1="40.00" y1="76.67" x2="244.00" y2="76.67" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="79.17" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.75</text>
+<line x1="40.00" y1="55.33" x2="244.00" y2="55.33" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="57.83" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">1</text>
+<line x1="40.00" y1="34.00" x2="244.00" y2="34.00" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="36.50" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">1.25</text>
+<line x1="40.00" y1="162.00" x2="244.00" y2="162.00" stroke="#c3c2b7" stroke-width="0.7"/>
+<text x="52.00" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Det.</text>
+<text x="78.87" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Family</text>
+<text x="105.73" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">DF/FS</text>
+<text x="132.60" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">4-way</text>
+<text x="159.46" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">F2F/NT</text>
+<text x="205.13" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Det.</text>
+<text x="232.00" y="171.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">5-way</text>
+<text x="13.00" y="98.00" font-size="7.2" text-anchor="middle" fill="#52514e" font-weight="normal" transform="rotate(-90 13.00 98.00)">Retention S (0 chance, 1 no loss)</text>
+<line x1="40.00" y1="140.67" x2="244.00" y2="140.67" stroke="#c3c2b7" stroke-width="0.8"/>
+<line x1="40.00" y1="55.33" x2="244.00" y2="55.33" stroke="#c3c2b7" stroke-width="0.8"/>
+<circle cx="48.00" cy="11.50" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<text x="60.00" y="14.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">Q60</text>
+<rect x="90.35" y="9.05" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<text x="104.80" y="14.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">Q20</text>
+<text x="244.00" y="14.00" font-size="6.4" text-anchor="end" fill="#898781" font-weight="normal" font-style="italic">marker = seed mean; dots = seeds</text>
+<line x1="182.30" y1="34.00" x2="182.30" y2="184.00" stroke="#e1e0d9" stroke-width="0.7"/>
+<circle cx="47.50" cy="73.05" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="47.50" cy="66.11" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="47.50" cy="67.04" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="47.50" cy="68.74" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="74.37" cy="56.57" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="74.37" cy="62.52" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="74.37" cy="57.82" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="74.37" cy="58.97" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="101.23" cy="55.33" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="101.23" cy="57.16" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="101.23" cy="55.33" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="101.23" cy="55.94" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="128.10" cy="57.20" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="128.10" cy="61.59" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="128.10" cy="57.81" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="128.10" cy="58.87" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="154.96" cy="57.23" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="154.96" cy="59.13" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="154.96" cy="60.28" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="154.96" cy="58.88" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="200.63" cy="54.14" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="200.63" cy="93.28" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="200.63" cy="43.08" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="200.63" cy="63.50" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="227.50" cy="124.86" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="227.50" cy="130.95" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="227.50" cy="140.67" r="1.3" fill="#2a78d6" fill-opacity="0.45"/>
+<circle cx="227.50" cy="132.16" r="3.0" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="56.50" cy="113.83" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="56.50" cy="118.37" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="56.50" cy="137.83" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="53.88" y="120.72" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="83.37" cy="81.71" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="83.37" cy="95.03" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="83.37" cy="85.85" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="80.74" y="84.91" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="110.23" cy="59.60" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="110.23" cy="63.87" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="110.23" cy="67.52" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="107.61" y="61.04" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="137.10" cy="88.97" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="137.10" cy="88.72" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="137.10" cy="95.83" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="134.47" y="88.55" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="163.96" cy="101.48" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="163.96" cy="92.63" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="163.96" cy="118.41" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="161.34" y="101.54" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="209.63" cy="126.97" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="209.63" cy="140.67" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="209.63" cy="140.45" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="207.01" y="133.40" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="236.50" cy="138.30" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="236.50" cy="135.81" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<circle cx="236.50" cy="140.67" r="1.3" fill="#eb6834" fill-opacity="0.45"/>
+<rect x="233.88" y="135.63" width="5.25" height="5.25" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<text x="105.73" y="186.00" font-size="7.2" text-anchor="middle" fill="#0b0b0b" font-weight="bold">FF++ (ResNet-18, F1)</text>
+<text x="218.57" y="186.00" font-size="7.2" text-anchor="middle" fill="#0b0b0b" font-weight="bold">DFDM (D-F1)</text>
+</svg>

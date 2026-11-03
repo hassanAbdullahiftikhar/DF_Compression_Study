@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Frozen pretrained encoders with ridge heads on FF++ test, trained at the reference condition: BA (\%) and the Q20 contrasts with 95\% group-bootstrap intervals.}
+\label{tab:encoders}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+Encoder & Det. ref & Attr. ref & Det. Q20 & Attr. Q20 & $\Delta$ & $\Delta_\mathrm{AUC}$\textsuperscript{\dag} \\
+\midrule
+DINOv2 ViT-S/14 (F4) & 72.3 & 75.0 & 61.2 & 53.2 & 0.06 [$-$0.12, 0.20] & 0.20 [0.13, 0.25] \\
+CLIP ViT-L/14\textsuperscript{\dag} & 80.9 & 83.4 & 65.7 & 42.1 & $-$0.22 [$-$0.35, $-$0.09] & 0.07 [0.01, 0.14] \\
+I-JEPA ViT-H/14\textsuperscript{\ddag} & 72.2 & 82.5 & 51.0 & 48.6 & 0.37 [0.30, 0.43] & 0.19 [0.10, 0.27] \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize $\Delta$ is at the frozen validation operating point; $\Delta_\mathrm{AUC}$ is threshold-free. DINOv2 values except $\Delta_\mathrm{AUC}$ are registered. \textsuperscript{\dag} Post-freeze extension (X1a, X7). \textsuperscript{\ddag} Post-freeze extension X8, designed after all other results; its Q20 detection BA reflects a collapsed threshold, so $\Delta_\mathrm{AUC}$ is the better reading.}
+\end{table*}

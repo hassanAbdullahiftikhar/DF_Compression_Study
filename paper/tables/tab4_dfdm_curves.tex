@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{DFDM test results, mean $\pm$ SD over three seeds. JPEG columns add compression to the lossless reference; CRF columns re-encode the whole video with DFDM's x264 settings.}
+\label{tab:dfdm-curves}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & Ref & Q95 & Q80 & Q60 & Q40 & Q20 & CRF 10 & CRF 23 \\
+\midrule
+\multicolumn{9}{l}{\textit{Attribution BA (\%), chance 20\%}} \\
+ResNet-18, reference & 46.8 $\pm$ 4.6 & 39.4 $\pm$ 4.3 & 27.9 $\pm$ 1.4 & 22.4 $\pm$ 2.2 & 21.8 $\pm$ 1.4 & 20.7 $\pm$ 0.7 & 46.5 $\pm$ 1.1 & 23.6 $\pm$ 1.8 \\
+ResNet-18, JPEG aug. & 35.6 $\pm$ 2.0 & 34.6 $\pm$ 2.1 & 34.0 $\pm$ 1.9 & 32.5 $\pm$ 0.5 & 31.9 $\pm$ 1.0 & 26.2 $\pm$ 3.0 & 35.9 $\pm$ 0.6 & 33.7 $\pm$ 1.7 \\
+EfficientNet-B4, reference & 53.6 $\pm$ 1.0 & 32.8 $\pm$ 3.7 & 30.8 $\pm$ 0.7 & 24.6 $\pm$ 0.1 & 22.7 $\pm$ 1.4 & 21.0 $\pm$ 0.6 & 46.6 $\pm$ 0.7 & 28.8 $\pm$ 1.9 \\
+EfficientNet-B4, JPEG aug. & 40.3 $\pm$ 2.7 & 41.9 $\pm$ 4.3 & 41.8 $\pm$ 4.1 & 38.0 $\pm$ 2.3 & 36.1 $\pm$ 3.5 & 32.7 $\pm$ 1.4 & 42.0 $\pm$ 1.3 & 39.2 $\pm$ 3.3 \\
+\midrule
+\multicolumn{9}{l}{\textit{Detection BA (\%)}} \\
+ResNet-18, reference & 95.3 $\pm$ 4.2 & 96.5 $\pm$ 3.0 & 97.0 $\pm$ 3.2 & 90.1 $\pm$ 11.0 & 60.8 $\pm$ 8.2 & 52.5 $\pm$ 4.2 & 92.5 $\pm$ 8.2 & 81.5 $\pm$ 14.6 \\
+ResNet-18, JPEG aug. & 99.5 $\pm$ 0.4 & 99.6 $\pm$ 0.5 & 99.1 $\pm$ 0.5 & 98.2 $\pm$ 0.6 & 97.0 $\pm$ 0.7 & 89.1 $\pm$ 4.6 & 99.5 $\pm$ 0.5 & 92.4 $\pm$ 1.5 \\
+EfficientNet-B4, reference & 88.6 $\pm$ 2.9 & 94.9 $\pm$ 1.1 & 97.8 $\pm$ 1.4 & 82.0 $\pm$ 2.9 & 66.6 $\pm$ 2.8 & 60.5 $\pm$ 1.5 & 66.1 $\pm$ 7.4 & 50.5 $\pm$ 0.5 \\
+EfficientNet-B4, JPEG aug. & 99.8 $\pm$ 0.3 & 100.0 $\pm$ 0.0 & 99.9 $\pm$ 0.1 & 99.8 $\pm$ 0.3 & 98.9 $\pm$ 0.9 & 91.5 $\pm$ 4.0 & 100.0 $\pm$ 0.0 & 95.6 $\pm$ 1.6 \\
+\midrule
+\multicolumn{9}{l}{\textit{Detection AUROC (\%)}} \\
+ResNet-18, reference & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 99.4 $\pm$ 0.3 & 87.7 $\pm$ 3.5 & 66.8 $\pm$ 7.4 & 100.0 $\pm$ 0.0 & 98.9 $\pm$ 0.6 \\
+ResNet-18, JPEG aug. & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 99.9 $\pm$ 0.1 & 99.7 $\pm$ 0.1 & 98.9 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 \\
+EfficientNet-B4, reference & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 99.9 $\pm$ 0.2 & 93.3 $\pm$ 2.9 & 81.3 $\pm$ 3.8 & 69.3 $\pm$ 1.5 & 100.0 $\pm$ 0.0 & 86.5 $\pm$ 2.6 \\
+EfficientNet-B4, JPEG aug. & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 100.0 $\pm$ 0.0 & 99.7 $\pm$ 0.2 & 100.0 $\pm$ 0.0 & 99.8 $\pm$ 0.1 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Detection results carry the compression-history caveat of Table~\ref{tab:controls}.}
+\end{table*}

@@ -1,6 +1,6 @@
 # Project status, proposal scope, and future plan
 
-**Status snapshot:** 25 October 2026, updated after the registered held-out test evaluation (register gates G1–G4, 24 October) and the post-freeze extensions X1–X6 (Amendments 2–3, 25 October). Exact metrics are in the project README, `main_results_test.json` (registered test), `main_results_extensions.json` (extensions) and `main_results_validation.json` (validation).
+**Status snapshot:** 28 October 2026, updated after the registered FF++ test evaluation (gates G1–G4, 24 October), the post-freeze extensions X1–X7 (Amendments 2–5, 25 October), and the separately registered DFDM + Celeb-DF study with the external test E10 (28 October). Exact metrics are in the project README, `main_results_test.json`, `main_results_extensions.json`, `main_results_dfdm.json` and `main_results_validation.json`.
 
 ## Research question in plain language
 
@@ -107,6 +107,29 @@ the README and `main_results_extensions.json`.
   - negative for FFT and DCT.
 
   **The defensible headline is therefore representation- and codec-specific, not universal.**
+
+### Second dataset: DFDM + Celeb-DF, and external test E10 (28 October 2026)
+
+- **Register:** `dfdm_register.md` v1.0 was frozen before any crop extraction. Amendment D-1 handles shared
+  real sources; Amendment D-2 is the model freeze.
+- **Data:** DFDM provides five related autoencoder face-swap generators with a lossless reference. Real
+  videos come from Celeb-DF v2 (official copy) and are the exact source clips, re-encoded with DFDM's x264
+  settings. Face boxes are shared, so backgrounds are pixel-identical.
+- **Split:** identity-disjoint.
+- **Models:** ResNet-18 and EfficientNet-B4 (F1 and F2 recipes, 3 seeds each), DINOv2 and CLIP probes, and
+  two controls. All 18 models reproduced their validation predictions exactly before one test pass.
+- **Fine-grained attribution collapses first:**
+  - Five-way attribution (chance 20%) falls from about 47–54% at ref to chance by JPEG Q60.
+  - The registered contrast is "direction not established" for ResNet-18 and "attribution retained less
+    than detection" for EfficientNet-B4.
+  - Threshold-free Δ_AUC(Q20) is negative in all six reference-trained models.
+- **Detection is confounded by compression history:** the C1-DCT control is material, at 84.0%
+  [80.6, 87.9] detection BA from block-DCT statistics. The face-masked control is at chance.
+- **External E10** (FF++ register Amendment 6): frozen FF++ detectors reach about 63–72% AUROC on the
+  518-video Celeb-DF v2 test set. JPEG augmentation improves transfer.
+- **Synthesis:** compression retention of method evidence depends on attribution granularity. Coarse FF++
+  method differences survive; fine-grained distinctions collapse first, both DFDM's generators and FF++'s
+  Face2Face vs. NeuralTextures.
 - **Disclosed process deviation:** two copies of one EfficientNet run overlapped for under five minutes.
   Both were stopped before any epoch, and the run was restarted alone.
 

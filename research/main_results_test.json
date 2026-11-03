@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "as_of": "2026-10-25",
+  "as_of": "2026-10-28",
   "evidence_scope": "Registered held-out test results (register gates G2-G4); scored once after the G3 model freeze",
   "register": {
     "file": "research/comparison_register.md",
     "v1_sha256": "375ff2f4ad6a6a39b452527ff2ff3ebe45372bb958ad76f506c3f807babf2983",
-    "current_sha256": "48a750e52f6759af2dd421bd7447a7f0ac432305402cd0ec58431962adca2448",
+    "current_sha256": "78b136942858ab4e64508a383a8a1c9cae4c09b38400e1ca722621b1deea7a3a",
     "amendments": [
       "Amendment 1 — 24 October 2026 — before test scoring — model freeze (gate G3)"
     ]

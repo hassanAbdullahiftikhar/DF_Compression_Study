@@ -421,3 +421,80 @@ written before its fitting.
 - **Note:** all three probes selected the smallest penalty in the grid (0.001), as several F4–F6 probes did.
   The grid was fixed in advance and is not extended.
 - **Reason:** Amendment 4 requires this freeze before X7 touches test.
+
+### Amendment 6 — 28 October 2026 — before scoring — extension E10: external Celeb-DF v2 detection test
+
+- **Status:** post-freeze extension, linked to `research/dfdm_register.md` section 9. It is descriptive
+  and changes no FF++ reading.
+- **Data:**
+  - The 518 official Celeb-DF v2 test videos (178 real, 340 fake), from the authors' official copy.
+  - Crops follow the FF++ protocol: YuNet 2023mar, 8 uniform frames, square box with margin 1.3, 224 px
+    Lanczos. Of 4,144 scheduled frames, 17 had no face and were logged; every video has crops.
+  - Bootstrap groups are target identities, with YouTube-real videos as their own groups: 124 groups.
+- **Models:** the frozen FF++ detectors F1, F2 and F3 (ResNet-18) and EB4-F1 / EB4-F2, three seeds each.
+  Their checkpoint hashes and thresholds are in the model and extension freeze manifests; nothing is
+  refitted.
+- **Conditions:** ref and JPEG Q95/Q80/Q60/Q40/Q20, applied in memory.
+- **Reported:** detection AUROC and BA at the frozen thresholds, with 2,000 group-bootstrap draws
+  (seed 4242). There is no attribution, because Celeb-DF has one manipulation method.
+- **Code:** `experiments/celebdf_external.py`, SHA-256 `6da0ff8bdc2c06e9b5cc29a10e41e411bed5656c38d5cc886cafaf95f7df3c08`. It may not change before scoring.
+
+### Amendment 7 — 28 October 2026 — before fitting — extension X8: I-JEPA ViT-H/14 probes
+
+- **Status:** post-freeze extension. It was designed after the registered, X1–X7, DFDM and E10 results were
+  seen, and nothing here changes those readings. It adds a third pretrained-encoder family (self-supervised
+  latent prediction) next to DINOv2 (F4) and CLIP (X7). Scope is FF++ only, as for X7.
+- **Backbone:**
+  - Model: Meta's official I-JEPA ViT-H/14, ImageNet-1k, 300 epochs (`IN1K-vit.h.14-300e.pth.tar` from
+    `dl.fbaipublicfiles.com/ijepa/`). The **target encoder** is used, as in the I-JEPA paper's evaluations.
+  - Loading: `jepa_probes.py --prepare` extracts the target encoder into a state-dict file and records the
+    checkpoint and encoder SHA-256 in `experiments/results/ext_jepa_encoder_extraction.json`. The network is a
+    plain-PyTorch copy of the I-JEPA ViT loaded with strict key matching; no extra packages.
+  - Precision and batch: float32, TF32 off, deterministic kernels, batch 8.
+- **Features:**
+  - Input: the 224-px study crop, without resizing (16×16 patches of 14 px), with ImageNet mean and standard
+    deviation.
+  - Output: the mean of the 256 final-layer tokens after the final layer norm, 1280-d.
+  - JPEG is applied before feature extraction, as in the F4 and X7 tracks.
+- **Probes:** identical to X7 (Amendment 4), renamed:
+  - **X8-REF:** fitted on training features at ref; penalty by mean validation detection/source BA at ref;
+    threshold maximizes mean validation video detection BA over ref/Q80/Q40.
+  - **X8-Q80 and X8-Q40:** fitted at Q80 or Q40, with penalty and threshold from matched-quality validation.
+  - Five video-level label shuffles (seeds 101–105) per probe as diagnostics. The penalty grid is the fixed
+    F4–F6 grid and is not extended.
+- **Verification:** re-extracting validation features end to end must reproduce the stored validation
+  probabilities to within 1e-6.
+- **Freeze:** Amendment 8 will record the head hashes, thresholds and code hashes before any test scoring.
+- **Test:** one pass covering the six JPEG conditions and the six X5 codec conditions.
+- **Analysis** (descriptive; same 2,000 group draws, seed 4242):
+  - Δ(Q20) for X8-REF, with its interval and a two-sided bootstrap p, outside the P1-PROBE Holm family.
+  - Δ_AUC at every condition for X8-REF.
+  - X8-Q80 − X8-REF at Q80 and X8-Q40 − X8-REF at Q40: attribution BA with an interval, AUROC as a point.
+  - X8-REF Δ at each codec setting.
+  - X8-REF − F4-DINOv2 and X8-REF − X7-REF detection and attribution BA at ref and Q20 (paired draws). The
+    registered F4-DINOv2 and the X7-REF intervals must be reproduced exactly from their stored predictions.
+- **Expectation, stated in advance and not a confirmatory hypothesis:** I-JEPA predicts in latent space rather
+  than pixels, so its features may depend less on high-frequency detail than DINOv2 or CLIP. This would show as
+  smaller detection and attribution losses under JPEG; no direction for Δ is registered. Whatever the result,
+  it is reported with the other probes and marked as a post-freeze extension.
+
+### Amendment 8 — 28 October 2026 — before I-JEPA test scoring — X8 freeze
+
+- **Change:** this amendment adopts `research/jepa_freeze_manifest.json`
+  (SHA-256 `7ceee04c938608dcfc94086eda9e352dc4e7cb371226a8aa53a19dbd0096a90e`). It freezes the X8-REF,
+  X8-Q80 and X8-Q40 heads and thresholds, the I-JEPA checkpoint hash
+  (`0382013c481743e9ccea89f970bc6c6aa126aa19a62127500d6e672a641aae22`), the extracted target-encoder hash
+  (`ffc0cd9296785cf095d7fbee7beff629e6ded1e20f95308f7d008563545dc46a`), and the X8 scoring and analysis code.
+- **Verification:** re-extracting the validation features end to end reproduced every stored validation
+  probability exactly (maximum difference 0). A first verification attempt was stopped by the operating
+  environment for low system memory before it wrote anything; it was rerun unchanged.
+- **Note:** X8-REF and X8-Q80 selected the smallest penalty in the grid (0.001) and X8-Q40 selected 0.01. The
+  grid was fixed in advance and is not extended.
+- **Reason:** Amendment 7 requires this freeze before X8 touches test.
+
+### Amendment 9 — 28 October 2026 — after X8 test scoring — disclosure only
+
+- **Record:** the first X8 test-scoring attempt was stopped by the operating environment for low system
+  memory before its first condition finished. It wrote no predictions, report or log lines, and no test
+  output was seen. The frozen code was then rerun unchanged as a separate process and completed in one pass
+  (66 minutes); `ext_jepa_analysis_test.json` came from that pass. Nothing in Amendments 7–8 changed.

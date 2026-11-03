@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="252pt" height="196pt" viewBox="0 0 252 196" font-family="Arial, Helvetica, sans-serif">
+<rect width="252" height="196" fill="#ffffff"/>
+<line x1="40.00" y1="164.00" x2="244.00" y2="164.00" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="166.50" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.50</text>
+<line x1="40.00" y1="139.20" x2="244.00" y2="139.20" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="141.70" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.55</text>
+<line x1="40.00" y1="114.40" x2="244.00" y2="114.40" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="116.90" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.60</text>
+<line x1="40.00" y1="89.60" x2="244.00" y2="89.60" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="92.10" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.65</text>
+<line x1="40.00" y1="64.80" x2="244.00" y2="64.80" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="67.30" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.70</text>
+<line x1="40.00" y1="40.00" x2="244.00" y2="40.00" stroke="#e1e0d9" stroke-width="0.5"/>
+<text x="37.00" y="42.50" font-size="6.8" text-anchor="end" fill="#898781" font-weight="normal">0.75</text>
+<line x1="40.00" y1="164.00" x2="244.00" y2="164.00" stroke="#c3c2b7" stroke-width="0.7"/>
+<text x="50.00" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Ref</text>
+<text x="86.80" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Q95</text>
+<text x="123.60" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Q80</text>
+<text x="160.40" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Q60</text>
+<text x="197.20" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Q40</text>
+<text x="234.00" y="173.00" font-size="6.8" text-anchor="middle" fill="#52514e" font-weight="normal">Q20</text>
+<text x="13.00" y="102.00" font-size="7.2" text-anchor="middle" fill="#52514e" font-weight="normal" transform="rotate(-90 13.00 102.00)">Detection AUROC</text>
+<line x1="40.00" y1="164.00" x2="244.00" y2="164.00" stroke="#c3c2b7" stroke-width="0.8"/>
+<text x="242.00" y="161.50" font-size="6.2" text-anchor="end" fill="#898781" font-weight="normal" font-style="italic">chance</text>
+<path d="M50.00,97.93 L86.80,96.26 L123.60,97.44 L160.40,121.68 L197.20,129.91 L234.00,133.68" fill="none" stroke="#2a78d6" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="50.00" cy="97.93" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="86.80" cy="96.26" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="123.60" cy="97.44" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="160.40" cy="121.68" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="197.20" cy="129.91" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<circle cx="234.00" cy="133.68" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<path d="M50.00,55.14 L86.80,51.92 L123.60,48.53 L160.40,49.89 L197.20,57.25 L234.00,101.58" fill="none" stroke="#eb6834" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="50.00" cy="55.14" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="86.80" cy="51.92" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="123.60" cy="48.53" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="160.40" cy="49.89" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="197.20" cy="57.25" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<circle cx="234.00" cy="101.58" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<path d="M50.00,74.72 L86.80,73.82 L123.60,65.71 L160.40,73.67 L197.20,84.32 L234.00,110.52" fill="none" stroke="#1baf7a" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="50.00" cy="74.72" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<circle cx="86.80" cy="73.82" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<circle cx="123.60" cy="65.71" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<circle cx="160.40" cy="73.67" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<circle cx="197.20" cy="84.32" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<circle cx="234.00" cy="110.52" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#1baf7a"/>
+<path d="M50.00,84.67 L86.80,82.36 L123.60,87.40 L160.40,108.13 L197.20,123.72 L234.00,146.98" fill="none" stroke="#2a78d6" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3.5,2"/>
+<rect x="47.55" y="82.22" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<rect x="84.35" y="79.91" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<rect x="121.15" y="84.95" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<rect x="157.95" y="105.68" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<rect x="194.75" y="121.27" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<rect x="231.55" y="144.53" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#2a78d6"/>
+<path d="M50.00,54.49 L86.80,54.97 L123.60,53.11 L160.40,48.93 L197.20,51.39 L234.00,89.80" fill="none" stroke="#eb6834" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3.5,2"/>
+<rect x="47.55" y="52.04" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<rect x="84.35" y="52.52" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<rect x="121.15" y="50.66" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<rect x="157.95" y="46.48" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<rect x="194.75" y="48.94" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<rect x="231.55" y="87.35" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#eb6834"/>
+<path d="M40.00,9.50 L56.00,9.50" fill="none" stroke="#2a78d6" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="60.00" y="12.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">Reference</text>
+<path d="M102.40,9.50 L118.40,9.50" fill="none" stroke="#eb6834" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="122.40" y="12.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">JPEG aug.</text>
+<path d="M164.80,9.50 L180.80,9.50" fill="none" stroke="#1baf7a" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="184.80" y="12.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">Paired</text>
+<path d="M40.00,22.50 L56.00,22.50" fill="none" stroke="#52514e" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="48.00" cy="22.50" r="2.8" stroke="#ffffff" stroke-width="0.8" fill="#52514e"/>
+<text x="60.00" y="25.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">ResNet-18</text>
+<path d="M102.40,22.50 L118.40,22.50" fill="none" stroke="#52514e" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3.5,2"/>
+<rect x="107.95" y="20.05" width="4.90" height="4.90" stroke="#ffffff" stroke-width="0.8" fill="#52514e"/>
+<text x="122.40" y="25.00" font-size="7.2" text-anchor="start" fill="#52514e" font-weight="normal">EfficientNet-B4</text>
+<text x="142.00" y="190.00" font-size="7.2" text-anchor="middle" fill="#52514e" font-weight="normal">Additional JPEG quality (seed means)</text>
+</svg>

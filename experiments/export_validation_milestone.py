@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE = "2026-10-25"
+DATE = "2026-10-28"
 REPS = ("fft", "rgb", "dct", "wavelet", "residual", "dinov2")
 MODES = ("reference", "augmented", "paired_w1")
 SEEDS = (42, 43, 44)
@@ -251,7 +251,9 @@ changes = {
 status_line = (
     "Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); "
     "post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); "
-    "DFDM second-dataset study in preparation; manuscript work remains."
+    "DFDM + Celeb-DF second-dataset study, external test E10 and the I-JEPA probe extension X8 "
+    "(Amendments 7-8) completed on 28 October 2026; "
+    "manuscript work remains."
 )
 adaptation_title = "Q80 and Q40" if matched80 else "Q40"
 adaptation_note = (
@@ -268,9 +270,8 @@ remaining = [
     "   including null and negative ones, with validation and test kept separate.",
     "Any further error analysis (for example the Q20 detection score shift) is\n"
     "   exploratory and must be labelled as such; it cannot change registered readings.",
-    "Second dataset (Tier 3): DFDM is downloaded and inventoried (6,450 videos, identity-disjoint\n"
-    "   split by identity components). Celeb-DF real videos are needed for its detection arm; a new\n"
-    "   register must be written before any DFDM fitting.",
+    "Second dataset (DFDM + Celeb-DF) and external test E10 are complete; integrate their results\n"
+    "   into the paper as a separately registered replication.",
     "Recompression history (E06) and other extensions are outside the frozen core;\n"
     "   each needs a register amendment written before its own test scoring.",
     "Refresh the literature/novelty assessment, write the manuscript and revise\n"
@@ -587,9 +588,16 @@ clip = read_ext("experiments/results/ext_clip_analysis_test.json")
 clip_verification = read_ext("experiments/results/ext_clip_verification_validation.json")
 assert clip["provenance"]["clip_freeze_manifest_sha256"] == clip_sha and clip_sha in register_text
 assert clip_verification["all_passed"] and clip["registered_F4_dinov2_reproduced_max_abs_difference"] < 1e-10
+jepa_sha = sha256(ROOT / "research/jepa_freeze_manifest.json")
+jepa = read_ext("experiments/results/ext_jepa_analysis_test.json")
+jepa_verification = read_ext("experiments/results/ext_jepa_verification_validation.json")
+jepa_encoder = read_ext("experiments/results/ext_jepa_encoder_extraction.json")
+assert jepa["provenance"]["jepa_freeze_manifest_sha256"] == jepa_sha and jepa_sha in register_text
+assert jepa_verification["all_passed"] and "Amendment 8" in register_text
+assert jepa["registered_F4_dinov2_reproduced_max_abs_difference"] < 1e-10 and jepa["X7_REF_reproduced_max_abs_difference"] < 1e-10
 ext_snapshot = {
-    "schema_version": 1, "as_of": "2026-10-25",
-    "evidence_scope": ("Post-freeze extensions X1-X7 (register Amendments 2-5), designed after the registered "
+    "schema_version": 1, "as_of": "2026-10-28",
+    "evidence_scope": ("Post-freeze extensions X1-X8 (register Amendments 2-5, 7-8), designed after the registered "
                        "test results were seen; validation-selected; scored once. Not registered results."),
     "extension_freeze_manifest_sha256": ext_manifest_sha,
     "verification": {"all_passed": ext_verification["all_passed"],
@@ -603,6 +611,8 @@ ext_snapshot = {
                      for name, r in ext_reports.items()},
     "analysis": ext,
     "X7_clip": {"clip_freeze_manifest_sha256": clip_sha, "verification": clip_verification, "analysis": clip},
+    "X8_jepa": {"jepa_freeze_manifest_sha256": jepa_sha, "encoder": jepa_encoder, "verification": jepa_verification,
+                "analysis": jepa},
     "input_artifact_sha256": ext_hashes,
     "disclosed_deviation": ("Two copies of the EfficientNet-B4 F2 seed-43 run overlapped for under five minutes "
                             "on 24 October; both were stopped before any epoch and the run was restarted alone."),
@@ -684,8 +694,79 @@ assert lower(x1a["F4_dinov2"]["jpeg_q20"]["delta_auc"]) > 0
 assert all(lower(x1a[f"F4_{r}"]["jpeg_q20"]["delta_auc"]) <= 0 <= upper(x1a[f"F4_{r}"]["jpeg_q20"]["delta_auc"])
            for r in ("rgb", "wavelet", "residual"))
 assert lower(clip["X7_REF_minus_F4_dinov2"]["ref"]["attribution_ba"]) > 0 and upper(clip["X7_REF_minus_F4_dinov2"]["jpeg_q20"]["attribution_ba"]) < 0
+jepa_curve = jepa["curves"]
+jepa_rows = [f"| {metric_label}: {label} | " + " | ".join(percentage(jepa_curve[name][c][metric]["point"]) for c in TEST_COLUMNS) + " |"
+             for metric, metric_label in (("detection_ba", "Detection BA"), ("attribution_ba", "Attribution BA"))
+             for name, label in (("X8-REF", "I-JEPA ViT-H/14 probe"), ("X7-REF", "CLIP probe (X7)"), ("F4_dinov2", "DINOv2 probe (F4)"))]
+jepa_rows.append("| Detection AUROC: I-JEPA probe | " + " | ".join(percentage(jepa["auroc_points"]["X8-REF"][c]) for c in TEST_COLUMNS) + " |")
+jepa_delta, jepa_auc = jepa["X8_REF_delta_q20"], jepa["X8_REF_delta_auc"]["jpeg_q20"]
+jepa_adapt = jepa["adaptation"]
+assert lower(jepa_delta) > 0 and lower(jepa_auc["delta_auc"]) > 0
+assert jepa_curve["X8-REF"]["jpeg_q20"]["detection_ba"]["point"] < 0.52
+assert all(lower(v) <= 0 <= upper(v) for c, v in jepa["codec_delta"].items() if c.startswith("h264"))
+assert all(lower(v) > 0 for c, v in jepa["codec_delta"].items() if c.startswith("h265"))
+assert upper(jepa["X8_REF_minus_F4_dinov2"]["jpeg_q20"]["detection_ba"]) < 0
 x4_ref_zero = all(lower(x4[n]["ref"]["accuracy_meta_correct_minus_wrong"]) <= 0 <= upper(x4[n]["ref"]["accuracy_meta_correct_minus_wrong"])
                   for n in x4 if n.startswith(("F1_", "F2_", "F3_", "C1-ATT", "EB4")))
+
+
+# Second dataset (DFDM + Celeb-DF; research/dfdm_register.md) and external test E10.
+dfdm_hashes = {}
+
+
+def read_dfdm(relative):
+    path = ROOT / relative
+    dfdm_hashes[relative] = sha256(path)
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+dfdm = read_dfdm("experiments/results/dfdm_analysis_test.json")
+dfdm_freeze = read_dfdm("research/dfdm_model_freeze_manifest.json")
+dfdm_register_freeze = read_dfdm("research/dfdm_register_freeze.json")
+dfdm_crops = read_dfdm("experiments/data/dfdm_crops/report.json")
+dfdm_audit = read_dfdm("experiments/data/audit_dfdm/audit.json")
+dfdm_verify = [read_dfdm(f"experiments/results/dfdm_{k}_verification_validation.json") for k in ("rgb", "probes")]
+e10 = read_dfdm("experiments/results/e10_celebdf_analysis.json")
+e10_crops = read_dfdm("experiments/data/celebdf_test_crops/report.json")
+dfdm_register_text = (ROOT / "research/dfdm_register.md").read_text(encoding="utf-8")
+assert dfdm["provenance"]["dfdm_freeze_manifest_sha256"] == dfdm_hashes["research/dfdm_model_freeze_manifest.json"]
+assert dfdm_hashes["research/dfdm_model_freeze_manifest.json"] in dfdm_register_text
+assert all(v["all_passed"] for v in dfdm_verify)
+assert "Amendment 6" in register_text and e10["script_sha256"] in register_text
+write("research/main_results_dfdm.json", json.dumps({
+    "schema_version": 1, "as_of": DATE,
+    "evidence_scope": "Second-dataset study (DFDM + Celeb-DF; dfdm_register.md v1.0 + Amendments D-1, D-2) "
+                      "and FF++ extension E10 (comparison_register.md Amendment 6); single test passes",
+    "dfdm_register_freeze": dfdm_register_freeze, "dfdm_model_freeze_manifest_sha256": dfdm_hashes["research/dfdm_model_freeze_manifest.json"],
+    "dfdm_audit": dfdm_audit, "dfdm_crops": dfdm_crops,
+    "dfdm_verification": [{"all_passed": v["all_passed"], "max_abs_probability_difference": max(
+        m["max_abs_probability_difference"] for m in v.get("models", v.get("probes", {})).values())} for v in dfdm_verify],
+    "dfdm_analysis": dfdm, "e10_crops": e10_crops, "e10_analysis": e10, "input_artifact_sha256": dfdm_hashes,
+}, indent=2, ensure_ascii=False, allow_nan=False))
+DF_COLS = ("ref", "jpeg_q80", "jpeg_q60", "jpeg_q40", "jpeg_q20", "h264_crf10", "h264_crf23")
+DF_LABELS = "| Ref | Q80 | Q60 | Q40 | Q20 | H.264 CRF 10 | H.264 CRF 23 |"
+sm = dfdm["seed_means"]
+dfdm_rows = [f"| {metric_label}: {label} | " + " | ".join(percentage(sm[fam][c][metric][0]) for c in DF_COLS) + " |"
+             for metric, metric_label in (("attribution_ba", "Attribution BA"), ("detection_ba", "Detection BA"),
+                                          ("detection_auc", "Detection AUROC"))
+             for fam, label in (("D-F1", "ResNet-18, reference"), ("D-F2", "ResNet-18, augmentation"),
+                                ("D-EB4-F1", "EfficientNet-B4, reference"), ("D-EB4-F2", "EfficientNet-B4, augmentation"))]
+p1d = dfdm["D_P1"]
+dfdm_p1_rows = [f"| {s} | {ci(p1d['D-F1']['per_seed'][f'D-F1_s{s}'], 1, 2)} | {ci(dfdm['D_S1_delta_auc_q20'][f'D-F1_s{s}'], 1, 2)} | "
+                f"{ci(p1d['D-EB4-F1']['per_seed'][f'D-EB4-F1_s{s}'], 1, 2)} | {ci(dfdm['D_S1_delta_auc_q20'][f'D-EB4-F1_s{s}'], 1, 2)} |"
+                for s in SEEDS]
+dfdm_c1, dfdm_c2 = dfdm["D_C1_compression_history"], dfdm["D_C2_face_masked"]
+e10_rows = [f"| {label} | " + " | ".join(percentage(e10["seed_means"][fam][c]["detection_auc"]) for c in TEST_COLUMNS) + " |"
+            for fam, label in (("F1", "ResNet-18, reference (F1)"), ("F2", "ResNet-18, augmentation (F2)"), ("F3", "ResNet-18, paired (F3)"),
+                               ("EB4-F1", "EfficientNet-B4, reference"), ("EB4-F2", "EfficientNet-B4, augmentation"))]
+# Checks behind the DFDM prose.
+assert p1d["D-F1"]["reading"] == "direction not established"
+assert p1d["D-EB4-F1"]["reading"] == "attribution retained less than detection"
+assert all(upper(v) < 0 for v in dfdm["D_S1_delta_auc_q20"].values())
+assert dfdm_c1["material"] and dfdm_c2["detection_ba"]["point"] == 0.5
+assert all(sm[f]["jpeg_q60"]["attribution_ba"][0] < 0.25 for f in ("D-F1", "D-EB4-F1"))
+assert all(e10["seed_means"][f]["ref"]["detection_auc"] > e10["seed_means"][g]["ref"]["detection_auc"]
+           for f, g in (("F2", "F1"), ("EB4-F2", "EB4-F1")))
 
 root_readme = f"""
 # What Survives Compression?
@@ -974,17 +1055,112 @@ reproduced every stored probability exactly. Test balanced accuracy and AUROC in
 - **Codecs:** Δ is near zero at every H.264 setting and positive at H.265 CRF 32
   ({ci(clip["codec_delta"]["h265_crf32"], 1, 2)}).
 
+### I-JEPA ViT-H/14 probes (X8, Amendments 7–8)
+
+Frozen I-JEPA ViT-H/14 target-encoder features (Meta's ImageNet-1k checkpoint; mean of the final-layer
+tokens) with the same ridge heads and procedures as X7. The encoder is a plain-PyTorch copy loaded with
+strict key matching, and re-extracting validation reproduced every stored probability exactly. This
+extension was designed after every other result was known. Test balanced accuracy and AUROC in percent:
+
+| Probe {COLUMN_LABELS}
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(jepa_rows)}
+
+- **Strong attribution at reference.** I-JEPA exceeds DINOv2 by
+  {ci(jepa["X8_REF_minus_F4_dinov2"]["ref"]["attribution_ba"])} points of attribution BA and matches CLIP
+  ({ci(jepa["X8_REF_minus_X7_REF"]["ref"]["attribution_ba"])}). Its reference detection is below CLIP's.
+- **Same sign as the trained CNNs at the operating point:** Δ(Q20) = {ci(jepa_delta, 1, 2)} (bootstrap
+  p < 0.001; descriptive, outside the Holm family). Much of this is a threshold failure: at Q20 the frozen
+  threshold labels almost every video one way, so detection BA is
+  {percentage(jepa_curve["X8-REF"]["jpeg_q20"]["detection_ba"]["point"])}%.
+- **Positive without a threshold too:** Δ_AUC(Q20) = {ci(jepa_auc["delta_auc"], 1, 2)}, with detection AUROC
+  {ci(jepa_auc["detection_auc"])} and attribution AUROC {ci(jepa_auc["attribution_auc"])}. This is the
+  better-supported reading.
+- **The stated expectation was not borne out.** Amendment 7 anticipated smaller JPEG losses from a
+  latent-prediction encoder. At Q20, I-JEPA minus DINOv2 is
+  {ci(jepa["X8_REF_minus_F4_dinov2"]["jpeg_q20"]["detection_ba"])} points of detection BA and
+  {ci(jepa["X8_REF_minus_F4_dinov2"]["jpeg_q20"]["attribution_ba"])} of attribution BA. I-JEPA still keeps
+  more attribution than CLIP ({ci(jepa["X8_REF_minus_X7_REF"]["jpeg_q20"]["attribution_ba"])} points).
+- **Matched heads:** {ci(jepa_adapt["X8-Q40_minus_X8-REF_jpeg_q40"]["attribution_ba"])} points of attribution
+  BA at Q40, and {ci(jepa_adapt["X8-Q80_minus_X8-REF_jpeg_q80"]["attribution_ba"])} at Q80.
+- **Codecs:** as for the trained CNNs, Δ is near zero at every H.264 setting and positive at H.265
+  (CRF 23: {ci(jepa["codec_delta"]["h265_crf23"], 1, 2)}; CRF 32: {ci(jepa["codec_delta"]["h265_crf32"], 1, 2)}).
+
 The sign of a fixed-operating-point detection/attribution contrast therefore depends on the representation.
 The threshold-free contrast Δ_AUC(Q20) also depends on it:
 
-- **Attribution retained better** for both trained CNNs, DINOv2 ({ci(x1a["F4_dinov2"]["jpeg_q20"]["delta_auc"], 1, 2)})
-  and CLIP.
+- **Attribution retained better** for both trained CNNs, DINOv2 ({ci(x1a["F4_dinov2"]["jpeg_q20"]["delta_auc"], 1, 2)}),
+  CLIP and I-JEPA.
 - **Near zero** for the pooled-RGB, wavelet and residual descriptors.
 - **Attribution retained worse** for the FFT ({ci(x1a["F4_fft"]["jpeg_q20"]["delta_auc"], 1, 2)}) and DCT
   ({ci(x1a["F4_dct"]["jpeg_q20"]["delta_auc"], 1, 2)}) descriptors. Their method cues appear tied to
   compression-sensitive frequency statistics, consistent with DCT's recovery under matched heads.
 
 No single direction holds across representations.
+
+## Second dataset: DFDM + Celeb-DF (separate register)
+
+A separate study with its own pre-registered register ([dfdm_register.md](research/dfdm_register.md),
+frozen before any crop extraction), its own validation selection, a model freeze (Amendment D-2) and a
+single test pass. Full results are in [main_results_dfdm.json](research/main_results_dfdm.json).
+
+**Setup:**
+- **Fakes:** DFDM (Jia, Li & Lyu 2022), 430 clips × 5 related autoencoder face-swap generators. The
+  reference is lossless H.264 4:4:4.
+- **Reals:** Celeb-DF v2, the exact source videos the fakes were made from, re-encoded with DFDM's own
+  x264 settings.
+- **Split:** identity-disjoint, from the identity graph: test has 16 identities, 95 clips and 570 videos in
+  19 groups.
+- **Crops:** face boxes come from the real video and are reused for all five fakes, so backgrounds are
+  pixel-identical and geometry cannot reveal the generator.
+- **Models:** ResNet-18 and EfficientNet-B4, reference-only and JPEG-augmented, 3 seeds each. Attribution
+  is five-way (chance 20%).
+
+Test results in percent, seed means:
+
+| Model {DF_LABELS}
+|---|---:|---:|---:|---:|---:|---:|---:|
+{chr(10).join(dfdm_rows)}
+
+**Primary contrast D-P1** (Δ(Q20) = S_attr − S_det) and its threshold-free version:
+
+| Seed | ResNet-18 Δ(Q20) | ResNet-18 Δ_AUC(Q20) | EfficientNet-B4 Δ(Q20) | EfficientNet-B4 Δ_AUC(Q20) |
+|---|---:|---:|---:|---:|
+{chr(10).join(dfdm_p1_rows)}
+
+Registered readings: ResNet-18 — **{p1d["D-F1"]["reading"]}**; EfficientNet-B4 —
+**{p1d["D-EB4-F1"]["reading"]}**. Threshold-free, attribution separability is lost faster than detection
+separability in all six models.
+
+- **Fine-grained attribution is fragile.** Telling five closely related generators apart falls to chance
+  by JPEG Q60. At Q20 the reference-trained models assign almost every fake to one or two generators.
+  This is the opposite of FF++, where coarse method differences survived.
+- **Controls:**
+  - The compression-history probe (block-DCT statistics, detection only) reaches
+    {ci(dfdm_c1["detection_ba_ref"])}% detection BA at ref. It is **material**: DFDM detection results carry
+    a compression-history caveat, because the real faces carry an earlier MPEG-4 encode.
+  - The face-masked probe is exactly at chance, so backgrounds carry no signal.
+- **JPEG augmentation** keeps detection high under compression. It improves Q20 attribution, but costs
+  8–17 points of reference attribution.
+- **Frozen DINOv2 and CLIP probes** detect well but cannot attribute DFDM generators, even at ref.
+
+**Synthesis with FF++.** Whether method evidence survives compression depends on how fine the attribution
+task is:
+- coarse method differences survive (FF++ four-way, and Deepfakes vs. FaceSwap);
+- fine distinctions collapse first (Face2Face vs. NeuralTextures within FF++, and DFDM's five autoencoder
+  variants).
+
+### External detection test E10 (FF++ Amendment 6)
+
+Frozen FF++ detectors on the 518 official Celeb-DF v2 test videos (124 identity groups). Detection AUROC,
+seed means, percent:
+
+| FF++ model {COLUMN_LABELS}
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(e10_rows)}
+
+Transfer is weak, as is typical across datasets. JPEG augmentation improves both external AUROC and its
+robustness to compression.
 
 ## Validation: main RGB results at JPEG Q40
 
@@ -1108,7 +1284,8 @@ Its losses come from family separation and from Face2Face vs. NeuralTextures.
   - the frozen CLIP probe reverses the sign at its operating point;
   - the FFT and DCT descriptors retain attribution worse even without a threshold.
 
-  The defensible claim is representation- and codec-specific.
+  The defensible claim is representation-, codec- and granularity-specific. On DFDM's fine-grained generator
+  attribution the direction does not hold: attribution collapses before detection.
 - No reference-trained probe contrast survives Holm correction, and several probes are close to
   chance even on reference test crops. The probe track does not establish a representation ranking.
 - JPEG augmentation is the clear compression-aware gain. Paired training shows no reliable
@@ -1131,7 +1308,7 @@ Its losses come from family separation and from Face2Face vs. NeuralTextures.
 
 {remaining_list}
 
-Whole-video H.264/H.265 was added as post-freeze extension X5; external datasets are in preparation.
+Whole-video H.264/H.265 was added as post-freeze extension X5. DFDM + Celeb-DF were added as a separately registered study.
 
 ## Measured environment and feasibility
 
@@ -1155,7 +1332,8 @@ The current environment is recorded in
 - [Registered test results](research/main_results_test.json)
 - [Model-freeze manifest](research/model_freeze_manifest.json)
 - [Post-freeze extension results](research/main_results_extensions.json), with the
-  [extension](research/extension_freeze_manifest.json) and [CLIP](research/clip_freeze_manifest.json) freeze manifests
+  [extension](research/extension_freeze_manifest.json), [CLIP](research/clip_freeze_manifest.json) and
+  [I-JEPA](research/jepa_freeze_manifest.json) freeze manifests
 - [Aggregate validation milestone](research/main_results_validation.json)
 - [Current module tracker](research/module_tracker.md)
 - [Frozen comparison register](research/comparison_register.md)
@@ -1337,7 +1515,7 @@ tracker_rows = [
     ("12", "Video codecs", "Post-freeze extension X5: H.264 CRF 18/23/32/40 and H.265 CRF 23/32 test re-encoding scored with frozen models (2026-10-25)", "Paper reporting as a labelled extension"),
     ("13", "Recompression", "Generator and engineering checks available", "Scientific history controls if retained"),
     ("14", "Paired learning", "Weight-1 candidate at three seeds; C1 and C2 controls; registered test comparisons S2, S4 and S5 completed", "Paper reporting (no reliable paired benefit over augmentation)"),
-    ("15", "External validation", "Unstarted", "Optional external studies"),
+    ("15", "External validation", "DFDM + Celeb-DF study (separate register, 28 October 2026) and E10 external Celeb-DF test completed", "Paper reporting"),
     ("16", "Statistics/controls", "Validation bootstrap and controls; gates G1-G4 completed; registered test inference recorded", "Paper reporting of every registered outcome"),
     ("17", "Reproducibility", "Scripts, configs, environment, model-freeze manifest and validation/test aggregates prepared", "Figure/table regeneration"),
     ("18", "Paper", "Literature and protocol material available", "Manuscript, figures, numerical checks and revisions"),
@@ -1382,7 +1560,7 @@ Initial design prepared 10 October 2026; execution status updated {DATE}.
 | Family | Current evidence | Remaining |
 |---|---|---|
 | E00: Pipeline pilot | Completed | Historical evidence retained |
-| E01: Reference sensitivity | Six probes and RGB at ref/Q80/Q40 (validation); test at six conditions completed | Paper reporting |
+| E01: Reference sensitivity | Six probes and RGB at ref/Q80/Q40 (validation); test at six conditions completed; CLIP (X7) and I-JEPA (X8) probes as labelled extensions | Paper reporting |
 | E02: Known-quality adaptation | Q40 and Q80 probes; registered test comparison S3 completed | Paper reporting |
 | E03: Mixed-quality generalization | RGB augmentation at three seeds; tested at held-out Q95/Q60/Q20 | Paper reporting |
 | E04: Task-sharing | C1 separate models at three seeds; registered test comparison S4 completed | Paper reporting |
@@ -1391,8 +1569,8 @@ Initial design prepared 10 October 2026; execution status updated {DATE}.
 | E07: Paired learning | Weight-1 candidate at three seeds; test S2: no reliable benefit over augmentation | Paper reporting |
 | E08: Source supervision | C2 binary-only paired model and readout; registered test comparison S5 completed | Paper reporting |
 | E09: Explanatory controls | Validation controls; test S6/S7 completed (C3b flagged material for attribution) | Paper reporting |
-| E10: External detection | Unstarted | Optional |
-| E11: Generator-family study | Unstarted | Optional separate study |
+| E10: External detection | Frozen FF++ detectors on the 518 Celeb-DF v2 test videos (Amendment 6): AUROC about 63–72% | Paper reporting |
+| E11: Generator-family study | DFDM five-generator study (dfdm_register.md): fine-grained attribution collapses by Q60 | Paper reporting |
 
 Models, thresholds, penalties and regimes are recorded in
 [main_results_validation.json](main_results_validation.json) and frozen in

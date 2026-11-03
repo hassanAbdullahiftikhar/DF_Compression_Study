@@ -1,14 +1,14 @@
 # Experiment register and planned comparisons
 
-Initial design prepared 10 October 2026; execution status updated 2026-10-25.
-Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains. The family table below retains the initial plan.
+Initial design prepared 10 October 2026; execution status updated 2026-10-28.
+Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM + Celeb-DF second-dataset study, external test E10 and the I-JEPA probe extension X8 (Amendments 7-8) completed on 28 October 2026; manuscript work remains. The family table below retains the initial plan.
 
 ## Current execution status
 
 | Family | Current evidence | Remaining |
 |---|---|---|
 | E00: Pipeline pilot | Completed | Historical evidence retained |
-| E01: Reference sensitivity | Six probes and RGB at ref/Q80/Q40 (validation); test at six conditions completed | Paper reporting |
+| E01: Reference sensitivity | Six probes and RGB at ref/Q80/Q40 (validation); test at six conditions completed; CLIP (X7) and I-JEPA (X8) probes as labelled extensions | Paper reporting |
 | E02: Known-quality adaptation | Q40 and Q80 probes; registered test comparison S3 completed | Paper reporting |
 | E03: Mixed-quality generalization | RGB augmentation at three seeds; tested at held-out Q95/Q60/Q20 | Paper reporting |
 | E04: Task-sharing | C1 separate models at three seeds; registered test comparison S4 completed | Paper reporting |
@@ -17,8 +17,8 @@ Registered held-out test evaluation completed on 24 October 2026 (register gates
 | E07: Paired learning | Weight-1 candidate at three seeds; test S2: no reliable benefit over augmentation | Paper reporting |
 | E08: Source supervision | C2 binary-only paired model and readout; registered test comparison S5 completed | Paper reporting |
 | E09: Explanatory controls | Validation controls; test S6/S7 completed (C3b flagged material for attribution) | Paper reporting |
-| E10: External detection | Unstarted | Optional |
-| E11: Generator-family study | Unstarted | Optional separate study |
+| E10: External detection | Frozen FF++ detectors on the 518 Celeb-DF v2 test videos (Amendment 6): AUROC about 63–72% | Paper reporting |
+| E11: Generator-family study | DFDM five-generator study (dfdm_register.md): fine-grained attribution collapses by Q60 | Paper reporting |
 
 Models, thresholds, penalties and regimes are recorded in
 [main_results_validation.json](main_results_validation.json) and frozen in

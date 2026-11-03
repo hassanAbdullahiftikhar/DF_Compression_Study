@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Effect of JPEG augmentation: augmented minus reference-trained BA, in percentage points.}
+\label{tab:augmentation}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrr}
+\toprule
+ & Attr. Ref & Attr. Q20 & Det. Ref & Det. Q20 \\
+\midrule
+\multicolumn{5}{l}{\textit{FF++, ResNet-18 (F2 $-$ F1)}} \\
+Seed 42 & 0.0 [$-$1.2, 1.2] & 26.3 [22.0, 30.7] & 0.2 [$-$2.5, 3.0] & 15.2 [12.8, 17.9] \\
+Seed 43 & 0.2 [$-$0.7, 1.1] & 23.4 [19.8, 27.0] & 2.6 [$-$0.5, 6.0] & 19.2 [16.6, 21.6] \\
+Seed 44 & $-$0.7 [$-$1.8, 0.2] & 29.8 [26.3, 33.4] & 4.3 [1.6, 7.1] & 29.7 [27.2, 32.0] \\
+\midrule
+\multicolumn{5}{l}{\textit{FF++, EfficientNet-B4 (X6)\textsuperscript{\dag}}} \\
+Seed 42 & $-$0.2\textsuperscript{\ddag} & 16.6 [13.2, 20.0] & 0.4\textsuperscript{\ddag} & 25.4 [23.0, 27.8] \\
+Seed 43 & 0.0\textsuperscript{\ddag} & 22.0 [18.6, 25.5] & 3.0\textsuperscript{\ddag} & 24.7 [22.3, 27.1] \\
+Seed 44 & $-$0.2\textsuperscript{\ddag} & 21.3 [18.0, 24.5] & $-$1.2\textsuperscript{\ddag} & 20.3 [18.1, 22.3] \\
+\midrule
+\multicolumn{5}{l}{\textit{DFDM, ResNet-18}} \\
+Seed 42 & $-$8.4 [$-$13.1, $-$4.0] & 5.1 [2.9, 7.2] & 3.9 [1.1, 6.9] & 26.5 [20.5, 32.0] \\
+Seed 43 & $-$8.0 [$-$13.3, $-$3.4] & 8.0 [5.1, 11.2] & $-$0.1 [$-$1.7, 1.5] & 41.7 [38.7, 44.5] \\
+Seed 44 & $-$17.3 [$-$22.9, $-$11.8] & 3.6 [1.7, 5.7] & 8.9 [5.3, 12.6] & 41.7 [38.7, 44.7] \\
+\midrule
+\multicolumn{5}{l}{\textit{DFDM, EfficientNet-B4}} \\
+Seed 42 & $-$16.2 [$-$21.1, $-$11.2] & 10.3 [7.2, 13.3] & 10.0 [5.8, 15.3] & 33.6 [29.6, 37.5] \\
+Seed 43 & $-$13.9 [$-$17.9, $-$9.7] & 12.8 [10.1, 15.6] & 14.2 [11.1, 17.9] & 32.6 [28.1, 36.6] \\
+Seed 44 & $-$9.9 [$-$15.4, $-$4.0] & 12.0 [7.6, 16.0] & 9.5 [5.8, 13.2] & 26.8 [22.6, 31.1] \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize \textsuperscript{\dag} Post-freeze extension. \textsuperscript{\ddag} Point difference only; no interval was computed.}
+\end{table*}

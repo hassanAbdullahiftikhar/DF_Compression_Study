@@ -1,0 +1,28 @@
+{
+  "register": "research/dfdm_register.md",
+  "register_version": "1.0",
+  "frozen_on": "2026-10-27",
+  "register_sha256": {
+    "working_tree_sha256": "259caaf1847fae8b23b61785247d94588f60846b2bd43d073e5d09f2cfeb6f78",
+    "lf_normalized_sha256": "ba899d54a426628c6708fb538b8117c7dcf9d01072184e99418cd71ff36186c7"
+  },
+  "status": "no DFDM crops, models or predictions existed at freeze time",
+  "inputs_sha256": {
+    "experiments/data/audit_dfdm/videos.csv": {
+      "working_tree_sha256": "e1807e5a200af3ec978645634cbcf40587c42afc1214762709fa764dff2edf59",
+      "lf_normalized_sha256": "b84124b9f9b77c1bc957af9925d5f71ae47c03167a50d26388e9870c96e9a034"
+    },
+    "experiments/data/audit_dfdm/audit.json": {
+      "working_tree_sha256": "2f3d0094da6a642aa034e657dad37718e8a98a11ffcdb13fa4b7f4b39f04ca0c",
+      "lf_normalized_sha256": "4e7c4d391bace300a58cb8816a3d64548eb86bf4ca9faadbf67f80527cd91dfb"
+    },
+    "CelebDF_V2/List_of_testing_videos.txt": {
+      "working_tree_sha256": "07063d46206e011aef9d1ad8d1854f5b87ae519ba6e452b897cc528c3dcfcdc0",
+      "lf_normalized_sha256": "07063d46206e011aef9d1ad8d1854f5b87ae519ba6e452b897cc528c3dcfcdc0"
+    },
+    "experiments/audit_dfdm.py": {
+      "working_tree_sha256": "22051729e1c1e7dfb9cf1bbd95280d834a183e53d558d7ff9cce74e61c1472cd",
+      "lf_normalized_sha256": "22051729e1c1e7dfb9cf1bbd95280d834a183e53d558d7ff9cce74e61c1472cd"
+    }
+  }
+}

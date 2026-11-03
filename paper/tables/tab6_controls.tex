@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Shortcut controls at the reference condition: test BA (\%) with 95\% bootstrap intervals.}
+\label{tab:controls}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrr}
+\toprule
+Control & Attribution BA & Detection BA & Material \\
+\midrule
+\multicolumn{4}{l}{\textit{FF++ (chance 25\% / 50\%)}} \\
+C3a face-masked FFT & 29.1 [27.0, 31.2] & 51.5 [48.4, 54.6] & none \\
+C3a face-masked Pooled RGB & 27.0 [25.2, 28.7] & 50.5 [48.3, 52.9] & none \\
+C3a face-masked DCT & 29.6 [27.5, 31.8] & 48.8 [46.1, 51.4] & none \\
+C3a face-masked Wavelet & 30.0 [28.2, 32.0] & 52.7 [50.6, 54.7] & none \\
+C3a face-masked Residual & 25.9 [24.1, 27.7] & 54.1 [50.4, 57.6] & none \\
+C3a face-masked DINOv2 & 30.4 [28.0, 32.9] & 53.6 [51.6, 55.7] & none \\
+C3b metadata/geometry & 35.4 [33.0, 37.9] & 55.0 [52.7, 57.6] & attribution \\
+\midrule
+\multicolumn{4}{l}{\textit{DFDM (chance 20\% / 50\%)}} \\
+C1 compression history (block DCT) & — & 84.0 [80.6, 87.9] & detection \\
+C2 face-masked & 20.0 [20.0, 20.0] & 50.0 [50.0, 50.0] & none \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize FF++ flags: lower bound above 30\% (attribution) or 55\% (detection). DFDM C1 flag: lower bound above 60\%. C1 is detection-only.}
+\end{table}

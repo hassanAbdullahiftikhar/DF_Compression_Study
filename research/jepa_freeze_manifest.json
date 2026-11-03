@@ -1,0 +1,41 @@
+{
+  "status": "jepa_freeze_manifest_before_test_scoring",
+  "register": "Amendments 7 and 8",
+  "frozen_on": "2026-10-28",
+  "checkpoint_sha256": "0382013c481743e9ccea89f970bc6c6aa126aa19a62127500d6e672a641aae22",
+  "encoder_sha256": "ffc0cd9296785cf095d7fbee7beff629e6ded1e20f95308f7d008563545dc46a",
+  "models": {
+    "X8-REF": {
+      "threshold": 0.4084588266668009,
+      "parameters": "experiments/runs/c23_ext_jepa_probes_validation/X8-REF/probe_parameters.npz",
+      "parameters_sha256": "f68ad04706a06f33f0691f0715d2f1fb84db7b16440322b12f3e949abde5b39c"
+    },
+    "X8-Q80": {
+      "threshold": 0.5229729461443424,
+      "parameters": "experiments/runs/c23_ext_jepa_probes_validation/X8-Q80/probe_parameters.npz",
+      "parameters_sha256": "9600f8749c77a2271dabfd44843c36f655e7f8d4f121be4201accab7cd8741a2"
+    },
+    "X8-Q40": {
+      "threshold": 0.5166652794055007,
+      "parameters": "experiments/runs/c23_ext_jepa_probes_validation/X8-Q40/probe_parameters.npz",
+      "parameters_sha256": "01bc79c78e768b9361455e085b60a29713102f3e4f0baf2198e761bb23469952"
+    }
+  },
+  "fit_report_sha256": "7908660fe65522d0a4531c302ae501d48cab7859e72855d96d0e00384d3e0388",
+  "verification_sha256": "cb584eb936123324d629e0e5734ad44a8a3746ba7cf5b66d5f8c73fbfd72cfe5",
+  "scripts_sha256": {
+    "experiments/jepa_probes.py": "7f93120389ecc3e86903e0a926cbe5e021b41bdab13bf1b8f71687585de1a3c0",
+    "experiments/analyze_test.py": "bf30e4eb77c3da078d5baca09e86bd959f3acb7ffeae3eb1af6193dbc19cecf8",
+    "experiments/analyze_ext.py": "4d23499cc0dce570d99595c8f4d0696d45ad421aba4f0dbf9e708aed2894c752",
+    "experiments/codec_sweep.py": "84785a6975d91647d63b321cadb4a66fcedad0e810dbbde06e56445bfa2688a9",
+    "experiments/score_ext.py": "ff9d9daa1a66e222d83d84e9e137890c9d23da87224df0b9ffe854ed08d856e4",
+    "experiments/metrics.py": "8dfdf427e0c22b602bfebdee3ca1568a9ae822951f24287a6e034f35e9e25110",
+    "experiments/research_metrics.py": "7b145cc79d60bee91c620fff6094ea9165ae5312db10a63b30cc760145fa5b35",
+    "experiments/probe_validation.py": "e19e7a5694b6cf958a8db1334ead233ce9cf79c808bb4edabe0c5fa9b7203931",
+    "experiments/fit_known_quality_probes.py": "db7e863bb39f658ec94c601cb1d1187d32c0df485f089d11531a9a03ea9b627f",
+    "experiments/evaluate_probe_compression.py": "d1d02c51e206d8a7926ac50c458ce21754c0c942ff88a8fabe4d96a346844d3d",
+    "experiments/prepare_jpeg.py": "d578e91ff8f08ada0cf9f0b7ef3140cb5bbe9730d92a61312858b1c7c1fa4239",
+    "experiments/registered_models.py": "3e73803c2d7e42e7d5114f3f133a755d10093aa5916599c54d40c5dd8f24b860",
+    "experiments/common.py": "d0686cbf94e6a53387a98ac052f48d9ffa514eb03ed1983ea0058e48829ab1dc"
+  }
+}

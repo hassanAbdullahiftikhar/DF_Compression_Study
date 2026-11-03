@@ -1,6 +1,6 @@
 # Experiment workflow
 
-Updated 2026-10-25. Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains.
+Updated 2026-10-28. Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM + Celeb-DF second-dataset study, external test E10 and the I-JEPA probe extension X8 (Amendments 7-8) completed on 28 October 2026; manuscript work remains.
 Current evidence and results are summarized in [the project README](../README.md)
 and [the validation milestone](../research/main_results_validation.json).
 

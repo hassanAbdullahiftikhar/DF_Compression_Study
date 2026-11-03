@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{FF++ primary contrast at JPEG Q20 for reference-trained models (95\% provenance-group bootstrap intervals). Registered reading for ResNet-18: attribution retained more than detection.}
+\label{tab:ffpp-primary}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+ & R18 $S_\mathrm{det}$ & R18 $S_\mathrm{attr}$ & R18 $\Delta$ & R18 $\Delta_\mathrm{AUC}$\textsuperscript{\dag} & EB4 $\Delta$\textsuperscript{\dag} & EB4 $\Delta_\mathrm{AUC}$\textsuperscript{\dag} \\
+\midrule
+Seed 42 & 0.31 [0.26, 0.37] & 0.61 [0.55, 0.66] & 0.29 [0.23, 0.35] & 0.42 [0.37, 0.46] & 0.49 [0.44, 0.55] & 0.26 [0.22, 0.31] \\
+Seed 43 & 0.26 [0.21, 0.31] & 0.61 [0.56, 0.65] & 0.35 [0.29, 0.40] & 0.29 [0.25, 0.33] & 0.38 [0.33, 0.43] & 0.27 [0.22, 0.31] \\
+Seed 44 & 0.03 [0.02, 0.05] & 0.53 [0.48, 0.57] & 0.49 [0.45, 0.53] & 0.41 [0.36, 0.45] & 0.40 [0.35, 0.45] & 0.29 [0.24, 0.33] \\
+Pooled\textsuperscript{\dag} &  &  & 0.38 [0.28, 0.48] &  & 0.42 [0.36, 0.50] &  \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize $\Delta$ = $S_\mathrm{attr}$ $-$ $S_\mathrm{det}$ at the frozen operating point; $\Delta_\mathrm{AUC}$ uses AUROC for both tasks. \textsuperscript{\dag} Post-freeze extensions (X1a, X3, X6); the pooled row resamples training seeds and groups.}
+\end{table*}

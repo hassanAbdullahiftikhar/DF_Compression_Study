@@ -1,6 +1,6 @@
 # Module progress tracker
 
-Updated 2026-10-25. Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains.
+Updated 2026-10-28. Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM + Celeb-DF second-dataset study, external test E10 and the I-JEPA probe extension X8 (Amendments 7-8) completed on 28 October 2026; manuscript work remains.
 Status describes completed evidence rather than planned experiments.
 
 | ID | Module | Current evidence | Work remaining |
@@ -19,7 +19,7 @@ Status describes completed evidence rather than planned experiments.
 | 12 | Video codecs | Post-freeze extension X5: H.264 CRF 18/23/32/40 and H.265 CRF 23/32 test re-encoding scored with frozen models (2026-10-25) | Paper reporting as a labelled extension |
 | 13 | Recompression | Generator and engineering checks available | Scientific history controls if retained |
 | 14 | Paired learning | Weight-1 candidate at three seeds; C1 and C2 controls; registered test comparisons S2, S4 and S5 completed | Paper reporting (no reliable paired benefit over augmentation) |
-| 15 | External validation | Unstarted | Optional external studies |
+| 15 | External validation | DFDM + Celeb-DF study (separate register, 28 October 2026) and E10 external Celeb-DF test completed | Paper reporting |
 | 16 | Statistics/controls | Validation bootstrap and controls; gates G1-G4 completed; registered test inference recorded | Paper reporting of every registered outcome |
 | 17 | Reproducibility | Scripts, configs, environment, model-freeze manifest and validation/test aggregates prepared | Figure/table regeneration |
 | 18 | Paper | Literature and protocol material available | Manuscript, figures, numerical checks and revisions |

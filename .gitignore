@@ -26,6 +26,7 @@ experiments/results/
 # Local datasets (never commit media)
 DFDM/
 Celeb-DF*/
+CelebDF*/
 
 # Local notes and assistant/session files (shared separately, not part of the project record)
 context.md

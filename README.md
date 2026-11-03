@@ -1,6 +1,6 @@
 # What Survives Compression?
 
-Updated 2026-10-25. **Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM second-dataset study in preparation; manuscript work remains.**
+Updated 2026-10-28. **Registered held-out test evaluation completed on 24 October 2026 (register gates G1-G4); post-freeze extensions X1-X7 completed on 25 October 2026 (Amendments 2-5); DFDM + Celeb-DF second-dataset study, external test E10 and the I-JEPA probe extension X8 (Amendments 7-8) completed on 28 October 2026; manuscript work remains.**
 
 A controlled study of deepfake detection and four-way, closed-set
 manipulation-method attribution under additional JPEG compression.
@@ -354,17 +354,135 @@ reproduced every stored probability exactly. Test balanced accuracy and AUROC in
 - **Codecs:** Δ is near zero at every H.264 setting and positive at H.265 CRF 32
   (0.21 [0.10, 0.32]).
 
+### I-JEPA ViT-H/14 probes (X8, Amendments 7–8)
+
+Frozen I-JEPA ViT-H/14 target-encoder features (Meta's ImageNet-1k checkpoint; mean of the final-layer
+tokens) with the same ridge heads and procedures as X7. The encoder is a plain-PyTorch copy loaded with
+strict key matching, and re-extracting validation reproduced every stored probability exactly. This
+extension was designed after every other result was known. Test balanced accuracy and AUROC in percent:
+
+| Probe | Ref | Q95 | Q80 | Q60 | Q40 | Q20 |
+|---|---:|---:|---:|---:|---:|---:|
+| Detection BA: I-JEPA ViT-H/14 probe | 72.23 | 69.46 | 73.39 | 66.96 | 58.39 | 50.98 |
+| Detection BA: CLIP probe (X7) | 80.89 | 58.84 | 74.91 | 67.59 | 72.95 | 65.71 |
+| Detection BA: DINOv2 probe (F4) | 72.32 | 72.68 | 71.96 | 70.71 | 66.61 | 61.16 |
+| Attribution BA: I-JEPA ViT-H/14 probe | 82.50 | 82.14 | 80.89 | 73.57 | 64.11 | 48.57 |
+| Attribution BA: CLIP probe (X7) | 83.39 | 70.18 | 70.71 | 62.32 | 61.07 | 42.14 |
+| Attribution BA: DINOv2 probe (F4) | 75.00 | 73.04 | 71.79 | 67.14 | 62.50 | 53.21 |
+| Detection AUROC: I-JEPA probe | 84.58 | 83.29 | 81.11 | 77.48 | 74.43 | 69.69 |
+
+- **Strong attribution at reference.** I-JEPA exceeds DINOv2 by
+  7.5 [3.8, 11.4] points of attribution BA and matches CLIP
+  (-0.9 [-4.8, 3.2]). Its reference detection is below CLIP's.
+- **Same sign as the trained CNNs at the operating point:** Δ(Q20) = 0.37 [0.30, 0.43] (bootstrap
+  p < 0.001; descriptive, outside the Holm family). Much of this is a threshold failure: at Q20 the frozen
+  threshold labels almost every video one way, so detection BA is
+  50.98%.
+- **Positive without a threshold too:** Δ_AUC(Q20) = 0.19 [0.10, 0.27], with detection AUROC
+  69.7 [67.3, 72.6] and attribution AUROC 84.7 [82.8, 86.6]. This is the
+  better-supported reading.
+- **The stated expectation was not borne out.** Amendment 7 anticipated smaller JPEG losses from a
+  latent-prediction encoder. At Q20, I-JEPA minus DINOv2 is
+  -10.2 [-12.8, -7.8] points of detection BA and
+  -4.6 [-7.9, -1.4] of attribution BA. I-JEPA still keeps
+  more attribution than CLIP (6.4 [2.7, 10.4] points).
+- **Matched heads:** 14.6 [10.7, 18.6] points of attribution
+  BA at Q40, and 0.2 [-2.5, 3.0] at Q80.
+- **Codecs:** as for the trained CNNs, Δ is near zero at every H.264 setting and positive at H.265
+  (CRF 23: 0.55 [0.42, 0.67]; CRF 32: 0.51 [0.39, 0.63]).
+
 The sign of a fixed-operating-point detection/attribution contrast therefore depends on the representation.
 The threshold-free contrast Δ_AUC(Q20) also depends on it:
 
-- **Attribution retained better** for both trained CNNs, DINOv2 (0.20 [0.13, 0.25])
-  and CLIP.
+- **Attribution retained better** for both trained CNNs, DINOv2 (0.20 [0.13, 0.25]),
+  CLIP and I-JEPA.
 - **Near zero** for the pooled-RGB, wavelet and residual descriptors.
 - **Attribution retained worse** for the FFT (-0.33 [-0.52, -0.16]) and DCT
   (-0.20 [-0.33, -0.07]) descriptors. Their method cues appear tied to
   compression-sensitive frequency statistics, consistent with DCT's recovery under matched heads.
 
 No single direction holds across representations.
+
+## Second dataset: DFDM + Celeb-DF (separate register)
+
+A separate study with its own pre-registered register ([dfdm_register.md](research/dfdm_register.md),
+frozen before any crop extraction), its own validation selection, a model freeze (Amendment D-2) and a
+single test pass. Full results are in [main_results_dfdm.json](research/main_results_dfdm.json).
+
+**Setup:**
+- **Fakes:** DFDM (Jia, Li & Lyu 2022), 430 clips × 5 related autoencoder face-swap generators. The
+  reference is lossless H.264 4:4:4.
+- **Reals:** Celeb-DF v2, the exact source videos the fakes were made from, re-encoded with DFDM's own
+  x264 settings.
+- **Split:** identity-disjoint, from the identity graph: test has 16 identities, 95 clips and 570 videos in
+  19 groups.
+- **Crops:** face boxes come from the real video and are reused for all five fakes, so backgrounds are
+  pixel-identical and geometry cannot reveal the generator.
+- **Models:** ResNet-18 and EfficientNet-B4, reference-only and JPEG-augmented, 3 seeds each. Attribution
+  is five-way (chance 20%).
+
+Test results in percent, seed means:
+
+| Model | Ref | Q80 | Q60 | Q40 | Q20 | H.264 CRF 10 | H.264 CRF 23 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Attribution BA: ResNet-18, reference | 46.81 | 27.93 | 22.39 | 21.75 | 20.70 | 46.53 | 23.58 |
+| Attribution BA: ResNet-18, augmentation | 35.58 | 33.96 | 32.49 | 31.93 | 26.25 | 35.86 | 33.68 |
+| Attribution BA: EfficientNet-B4, reference | 53.61 | 30.81 | 24.56 | 22.74 | 20.98 | 46.60 | 28.84 |
+| Attribution BA: EfficientNet-B4, augmentation | 40.28 | 41.82 | 37.96 | 36.14 | 32.70 | 42.04 | 39.16 |
+| Detection BA: ResNet-18, reference | 95.26 | 97.02 | 90.11 | 60.77 | 52.46 | 92.46 | 81.51 |
+| Detection BA: ResNet-18, augmentation | 99.51 | 99.09 | 98.25 | 97.02 | 89.09 | 99.47 | 92.39 |
+| Detection BA: EfficientNet-B4, reference | 88.60 | 97.79 | 81.96 | 66.56 | 60.46 | 66.14 | 50.49 |
+| Detection BA: EfficientNet-B4, augmentation | 99.82 | 99.93 | 99.79 | 98.91 | 91.47 | 100.00 | 95.58 |
+| Detection AUROC: ResNet-18, reference | 100.00 | 100.00 | 99.37 | 87.75 | 66.76 | 100.00 | 98.92 |
+| Detection AUROC: ResNet-18, augmentation | 100.00 | 99.98 | 99.90 | 99.67 | 98.92 | 99.99 | 99.98 |
+| Detection AUROC: EfficientNet-B4, reference | 100.00 | 99.87 | 93.28 | 81.29 | 69.26 | 100.00 | 86.46 |
+| Detection AUROC: EfficientNet-B4, augmentation | 100.00 | 100.00 | 100.00 | 99.97 | 99.74 | 100.00 | 99.85 |
+
+**Primary contrast D-P1** (Δ(Q20) = S_attr − S_det) and its threshold-free version:
+
+| Seed | ResNet-18 Δ(Q20) | ResNet-18 Δ_AUC(Q20) | EfficientNet-B4 Δ(Q20) | EfficientNet-B4 Δ_AUC(Q20) |
+|---|---:|---:|---:|---:|
+| 42 | -0.13 [-0.22, -0.05] | -0.38 [-0.47, -0.30] | -0.20 [-0.34, -0.10] | -0.28 [-0.38, -0.17] |
+| 43 | 0.06 [0.01, 0.11] | -0.15 [-0.25, -0.08] | -0.33 [-0.48, -0.21] | -0.29 [-0.37, -0.21] |
+| 44 | -0.00 [-0.01, 0.00] | -0.40 [-0.48, -0.34] | -0.20 [-0.33, -0.08] | -0.28 [-0.38, -0.18] |
+
+Registered readings: ResNet-18 — **direction not established**; EfficientNet-B4 —
+**attribution retained less than detection**. Threshold-free, attribution separability is lost faster than detection
+separability in all six models.
+
+- **Fine-grained attribution is fragile.** Telling five closely related generators apart falls to chance
+  by JPEG Q60. At Q20 the reference-trained models assign almost every fake to one or two generators.
+  This is the opposite of FF++, where coarse method differences survived.
+- **Controls:**
+  - The compression-history probe (block-DCT statistics, detection only) reaches
+    84.0 [80.6, 87.9]% detection BA at ref. It is **material**: DFDM detection results carry
+    a compression-history caveat, because the real faces carry an earlier MPEG-4 encode.
+  - The face-masked probe is exactly at chance, so backgrounds carry no signal.
+- **JPEG augmentation** keeps detection high under compression. It improves Q20 attribution, but costs
+  8–17 points of reference attribution.
+- **Frozen DINOv2 and CLIP probes** detect well but cannot attribute DFDM generators, even at ref.
+
+**Synthesis with FF++.** Whether method evidence survives compression depends on how fine the attribution
+task is:
+- coarse method differences survive (FF++ four-way, and Deepfakes vs. FaceSwap);
+- fine distinctions collapse first (Face2Face vs. NeuralTextures within FF++, and DFDM's five autoencoder
+  variants).
+
+### External detection test E10 (FF++ Amendment 6)
+
+Frozen FF++ detectors on the 518 official Celeb-DF v2 test videos (124 identity groups). Detection AUROC,
+seed means, percent:
+
+| FF++ model | Ref | Q95 | Q80 | Q60 | Q40 | Q20 |
+|---|---:|---:|---:|---:|---:|---:|
+| ResNet-18, reference (F1) | 63.32 | 63.66 | 63.42 | 58.53 | 56.87 | 56.11 |
+| ResNet-18, augmentation (F2) | 71.95 | 72.60 | 73.28 | 73.01 | 71.52 | 62.58 |
+| ResNet-18, paired (F3) | 68.00 | 68.18 | 69.82 | 68.21 | 66.06 | 60.78 |
+| EfficientNet-B4, reference | 65.99 | 66.46 | 65.44 | 61.26 | 58.12 | 53.43 |
+| EfficientNet-B4, augmentation | 72.08 | 71.98 | 72.36 | 73.20 | 72.70 | 64.96 |
+
+Transfer is weak, as is typical across datasets. JPEG augmentation improves both external AUROC and its
+robustness to compression.
 
 ## Validation: main RGB results at JPEG Q40
 
@@ -515,7 +633,8 @@ Its losses come from family separation and from Face2Face vs. NeuralTextures.
   - the frozen CLIP probe reverses the sign at its operating point;
   - the FFT and DCT descriptors retain attribution worse even without a threshold.
 
-  The defensible claim is representation- and codec-specific.
+  The defensible claim is representation-, codec- and granularity-specific. On DFDM's fine-grained generator
+  attribution the direction does not hold: attribution collapses before detection.
 - No reference-trained probe contrast survives Holm correction, and several probes are close to
   chance even on reference test crops. The probe track does not establish a representation ranking.
 - JPEG augmentation is the clear compression-aware gain. Paired training shows no reliable
@@ -541,15 +660,14 @@ Its losses come from family separation and from Face2Face vs. NeuralTextures.
    including null and negative ones, with validation and test kept separate.
 2. Any further error analysis (for example the Q20 detection score shift) is
    exploratory and must be labelled as such; it cannot change registered readings.
-3. Second dataset (Tier 3): DFDM is downloaded and inventoried (6,450 videos, identity-disjoint
-   split by identity components). Celeb-DF real videos are needed for its detection arm; a new
-   register must be written before any DFDM fitting.
+3. Second dataset (DFDM + Celeb-DF) and external test E10 are complete; integrate their results
+   into the paper as a separately registered replication.
 4. Recompression history (E06) and other extensions are outside the frozen core;
    each needs a register amendment written before its own test scoring.
 5. Refresh the literature/novelty assessment, write the manuscript and revise
    its claims against the test evidence.
 
-Whole-video H.264/H.265 was added as post-freeze extension X5; external datasets are in preparation.
+Whole-video H.264/H.265 was added as post-freeze extension X5. DFDM + Celeb-DF were added as a separately registered study.
 
 ## Measured environment and feasibility
 
@@ -573,7 +691,8 @@ The current environment is recorded in
 - [Registered test results](research/main_results_test.json)
 - [Model-freeze manifest](research/model_freeze_manifest.json)
 - [Post-freeze extension results](research/main_results_extensions.json), with the
-  [extension](research/extension_freeze_manifest.json) and [CLIP](research/clip_freeze_manifest.json) freeze manifests
+  [extension](research/extension_freeze_manifest.json), [CLIP](research/clip_freeze_manifest.json) and
+  [I-JEPA](research/jepa_freeze_manifest.json) freeze manifests
 - [Aggregate validation milestone](research/main_results_validation.json)
 - [Current module tracker](research/module_tracker.md)
 - [Frozen comparison register](research/comparison_register.md)
